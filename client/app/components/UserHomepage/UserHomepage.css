@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+}
+
+.outer-box {
+  border: 5px solid black;
+  margin: auto;
+  width: 75%;
+  padding: 20px;
+  overflow: auto;
+}
+
+.center-me{
+  text-align: center;
+}
+
+.middle-box {
+  height: 200px;
+  margin:auto;
+  width: 60%;
+}
+
+.settings-box{
+  float:right;
+}
+
+.business-box{
+  float:left;
+}
+
+.button-box{
+  float: left;
+  padding: 20px;
+  width:50%;
+}
+
+.float-right{
+  float: right;
+  margin:auto;
+  width: 30%;
+}
+
+.float-left{
+  float:left;
+  margin:auto;
+  width: 30%;
+}

@@ -1,0 +1,21 @@
+.LoginCard {
+    text-align: center;
+}
+
+.LoginCardHeader {
+    text-align: center;
+    font-size: 30px;
+}
+
+.LoginCard .forgot-password {
+    font-size: 10px;
+}
+
+.test-list{
+  width:100%;
+}
+
+.menu-box{
+  float: left;
+  padding: 10px;
+}
