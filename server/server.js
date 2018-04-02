@@ -1,18 +1,27 @@
-const bodyParser = require('body-parser');
-const express = require('express');
-const fs = require('fs');
-const historyApiFallback = require('connect-history-api-fallback');
-const mongoose = require('mongoose');
-const path = require('path');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+const bodyParser            = require('body-parser');
+const express               = require('express');
+const historyApiFallback    = require('connect-history-api-fallback');
+const mongoose              = require('mongoose');
+const flash                 = require('connect-flash');
+const session               = require('express-session')
+const app                   = express();
 
-const config = require('../config/config');
-const webpackConfig = require('../webpack.config');
+const fs                    = require('fs');
+const path                  = require('path');
 
-const isDev = process.env.NODE_ENV !== 'production';
-const port  = process.env.PORT || 8080;
+const webpack               = require('webpack');
+const webpackDevMiddleware  = require('webpack-dev-middleware');
+const webpackHotMiddleware  = require('webpack-hot-middleware');
+const morgan                = require('morgan');
+
+const passport              = require('passport');
+const LocalStrategy         = require('passport-local').Strategy;
+
+const config                = require('../config/config');
+const webpackConfig         = require('../webpack.config');
+
+const isDev                 = process.env.NODE_ENV !== 'production';
+const port                  = process.env.PORT || 8080;
 
 
 // Configuration
@@ -24,16 +33,28 @@ mongoose.connect(isDev ? config.db_dev : config.db, {
 });
 mongoose.Promise = global.Promise;
 
-const app = express();
+// Initialize modules
+app.use(express.static('public'))
+app.use(session({
+  secret: config.secret_key,
+  resave: false,
+  saveUninitialized: false,
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash()); 
 
-// API routes
+// Files required
+require('../auth/passport-init')(passport);
 require('./routes')(app);
+
 
 if (isDev) {
   const compiler = webpack(webpackConfig);
 
+  app.use(morgan('dev'));
   app.use(historyApiFallback({
     verbose: false
   }));

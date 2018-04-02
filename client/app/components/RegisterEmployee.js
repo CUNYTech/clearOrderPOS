@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPopup from '../App';
+import axios from 'axios';
 
 
 class EmployeePopup extends Component {
@@ -13,19 +14,43 @@ class EmployeePopup extends Component {
         super();        
         this.state = {
             open: true,
-            message : "",
+            hasErrors : false,
+            hasMultiple : false,
+            redirect : false,
+            message : {},
+            fname : '',
+            lname : '',
+            email : '',
+            business_id : '',
+            password : '',
+            confirm_password : ''
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
     }
-    handleSubmit(event) {
-        fetch('/user/register', {
-            method: 'POST',
-        })
-        .then((result) => result.json())
-        .then(result => this.setState({message: result.message}))
-        event.preventDefault();
+    onChange = (event) => {
+        const state = this.state
+        state[event.target.name] = event.target.value;
+        this.setState(state);
+    }
 
+    onSubmit(event) {
+        event.preventDefault();
+        const {fname, lname, email, business_id, password, confirm_password, message} = this.state;
+        
+        axios.post('/user/register', { fname, lname, email, business_id, password, confirm_password })
+            .then((response) => {
+                const message = response.data.message; 
+                const hasErrors = false;
+                const redirect = true;
+                this.setState ({message, hasErrors, redirect});
+            })
+            .catch((error) => {
+                const message = error.response.data.message;
+                const hasMultiple = (error.response.data.hasMultiple != null ? true : false);
+                const hasErrors = true;
+                this.setState({message, hasErrors, hasMultiple});
+            })
     }
 
     handleOpen = () => {
@@ -37,7 +62,9 @@ class EmployeePopup extends Component {
     };
 
     render() {
-        const message = this.state.message;
+        const { fname, lname, email, business_id, password, confirm_password, message, redirect, hasErrors, hasMultiple} = this.state;
+        if(redirect)
+            return (<Redirect to={{pathname : '/UserHomepage', state : {message : message}}} />)
         return (
             <div>
                 <RaisedButton
@@ -64,32 +91,44 @@ class EmployeePopup extends Component {
                         >
                             Employee Registration
                         </div>
+                        {hasErrors ? 
+                            (hasMultiple ? 
+                                Object.keys(this.state.message).map((index)=>{
+                                    return <div key={index}>{this.state.message[index].msg}</div>})
+                                : <div>{message}</div> )
+                            : ''}
 
-                        <div>{message.length > 0 ? message : "Debugging: No errors"}</div>  
-
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.onSubmit}>
                             <TextField
                                 floatingLabelText="First Name"
                                 floatingLabelFixed={false}
                                 name='fname'
+                                value={fname}
+                                onChange={this.onChange}
                             /><br />
 
                             <TextField
                                 floatingLabelText="Last Name"
                                 floatingLabelFixed={false}
                                 name='lname'
+                                value={lname}
+                                onChange={this.onChange}
                             /><br />
 
                             <TextField
                                 floatingLabelText="Company ID or Company Name"
                                 floatingLabelFixed={false}
                                 name='business_id'
+                                value={business_id}
+                                onChange={this.onChange}
                             /><br />
 
                             <TextField
                                 floatingLabelText="Email"
                                 floatingLabelFixed={false}
                                 name='email'
+                                value={email}
+                                onChange={this.onChange}
                             /><br />
                             
                             <TextField
@@ -97,6 +136,8 @@ class EmployeePopup extends Component {
                                 floatingLabelText="Password"
                                 floatingLabelFixed={false}
                                 name='password'
+                                value={password}
+                                onChange={this.onChange}
                             /><br />
 
                             <TextField
@@ -104,6 +145,8 @@ class EmployeePopup extends Component {
                                 floatingLabelText="Confirm Password"
                                 floatingLabelFixed={false}
                                 name='confirm_password'
+                                value={confirm_password}
+                                onChange={this.onChange}
                             /><br />
 
                             <RaisedButton type="submit" label="Register" primary={true} />

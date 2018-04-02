@@ -5,15 +5,15 @@ const Schema          = mongoose.Schema;
 var userRegistration = new Schema({
     fname : {
         type : String,
-        required : true
+        required : [true, 'First Name is Required']
     },
     lname : {
         type : String,
-        required : true
+        required : [true, 'Last Name is Required']
     },
     business_id : {
         type : String,
-        required : true
+        required : [true, 'Business ID is Required']
     },
     business_position : {
         type : String,
@@ -22,15 +22,24 @@ var userRegistration = new Schema({
     },
     email : {
         type : String,
-        required : true,
+        required : [true, 'Email is Required'],
         index: { unique: true }
     },
     password : {
         type : String,
-        required : true
+        required : [true, 'Password is Required']
     },
     isDeleted : {type: Boolean, default: false},
 });
+
+userRegistration.methods.verifyPassword = function(password, callback)
+{
+    return bcrypt.compare(password, this.password, function(error, isMatch) {
+        if(error)
+            return callback(error);
+        return callback(null, isMatch);
+    });
+}
 
 var User = module.exports = mongoose.model('Users', userRegistration);
 
@@ -52,12 +61,4 @@ module.exports.getUserByEmail = function(email, callBack){
 
 module.exports.getUserById = function(id, callBack){
     User.findById(id, callBack);
-}
-
-module.exports.verifyPassword = function(password, dbPassword, callback)
-{
-    bcrypt.compare(password, dbPassword, function(error, isMatch) {
-        if(error) throw err;
-        callback(null, isMatch);
-    });
 }

@@ -3,6 +3,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-router-dom";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import axios from 'axios';
 
 import './UserSettings.css';
 
@@ -11,6 +12,18 @@ import AddBusiness from './AddBusiness';
 import UserHomepage from '../UserHomepage/UserHomepage';
 
 class UserSettings extends Component {
+
+  componentDidMount(){
+    axios.get('/auth-test')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  }
+
+
   render() {
 
     return(

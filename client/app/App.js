@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './App.css';
 
 import Footer from './components/Footer/Footer.js';
@@ -13,6 +14,7 @@ import BusinessSettings from "./components/BusinessSettings/BusinessSettings";
 import UserSettings from './components/UserSettings/UserSettings';
 import ChangePassword from './components/UserSettings/ChangePassword';
 import AddBusiness from './components/UserSettings/AddBusiness';
+import { Redirect, Switch } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -61,7 +63,7 @@ class App extends Component {
           <Link to='/AddBusiness'> <MenuItem primaryText="AddBusiness" /> </Link>
         </IconMenu>
 
-        <div>
+        <Switch>
           <Route path="/Home" component={Home} />
           <Route path="/Screen" component={Screen} />
           <Route path="/UserHomepage" component={UserHomepage} />
@@ -69,7 +71,7 @@ class App extends Component {
           <Route path="/UserSettings" component={UserSettings} />
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/AddBusiness" component={AddBusiness} />
-        </div>
+        </Switch>
 
         <Footer style={{position: 'absolute', bottom: 0, flex: 1, alignSelf: 'stretch', right: 0, left: 0}} />
 
@@ -85,10 +87,18 @@ const mainApp = {
 }
 
 class LoginPopup extends Component {
-
-  state = {
-    open: false,
-  };
+  constructor(){
+    super();
+    this.state = {
+      open: false,
+      message : '',
+      email : '',
+      password : '',
+      hasMultiple : false,
+      redirect : false
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -98,7 +108,36 @@ class LoginPopup extends Component {
     this.setState({ open: false });
   };
 
+  onChange = (event) => {
+    const state = this.state
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    const {email, password, redirect} = this.state;
+    
+    axios.post('/user/login', { email, password })
+        .then((response) => {
+            const message = response.message;
+            const redirect = true;
+            this.setState ({message, redirect});
+        })
+        .catch((error) => {
+          console.log(error.response);
+          const message = error.response.data.message;
+          const hasMultiple = (error.response.data.hasMultiple != null ? true : false);
+          this.setState({message, hasMultiple});          
+        })
+  }
+
   render() {
+    const {message, email, password, hasMultiple, redirect} = this.state;
+    if(redirect)
+    {
+      return <Redirect from="/" to="/UserHomepage" />
+    }
     return (
       <div>
         <div>
@@ -129,23 +168,30 @@ class LoginPopup extends Component {
             >
               Sign In To Your POS Account
             </div>
-
-            <div>
+            {hasMultiple ? 
+                    Object.keys(this.state.message).map((index)=>{
+                        return <div key={index}>{this.state.message[index].msg}</div>})
+                    : <div>{message}</div>  }
+            <form onSubmit={this.onSubmit}>
               <TextField
-                floatingLabelText="login_email"
+                floatingLabelText="Email"
                 floatingLabelFixed={false}
                 name='email'
+                value={email}
+                onChange={this.onChange}
               /><br />
 
               <TextField
                 type={"password"}
                 floatingLabelText="Password"
                 floatingLabelFixed={false}
-                name='login_password'
+                name='password'
+                value={password}
+                onChange={this.onChange}
               /><br /><br />
 
-              <RaisedButton label="Sign In" primary={true} />
-            </div>
+              <RaisedButton type="submit" label="Sign In" primary={true} />
+            </form>
 
             <div className={"LoginCardFootter"}>
 
