@@ -3,5 +3,5 @@
 module.exports = {
   db: 'mongodb://username:password@url:port/db',
   db_dev: 'mongodb://url:port/db',
+  secret_key : '%SeU&bgxTC%*~N7'
 };
-secret_key : '%SeU&bgxTC%*~N7'

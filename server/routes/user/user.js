@@ -121,11 +121,7 @@ module.exports = (app) => {
           return res.status(409).send({message : "The specified business id was not found"});
         }
         // If everything is right, then account is created and we send this message 
-        //return res.status(200).send({message: 'Account has been created! You may now log in'});
-        req.logIn(user, function(err) {
-          if(err) { return res.status(400).send({message : "An unexpected error has occured when creating a user, please try again or contact an administrator"}); }
-          return res.status(200).send({message: 'Account has been created! You are now logged in as ' + user.email});
-        });
+        return res.status(200).send({message: 'Account has been created! You may now log in'});
       })(req, res, next);
   });
 };
