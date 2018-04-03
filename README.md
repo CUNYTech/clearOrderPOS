@@ -8,7 +8,7 @@ Server+ (ServerPlus) is a Point of Sales System that aims to make POS customizab
 
 ## Team Member
 Sashary Morel
-
+John Solano
 
 ## Requirements
 
