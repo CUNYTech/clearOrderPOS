@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-router-dom";
 
-import UserSettings from './UserSettings';
+import UserSettings from './UserSettings.jsx';
 
 export default class ChangePassword extends Component {
   render() {

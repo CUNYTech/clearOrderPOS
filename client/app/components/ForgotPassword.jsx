@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
-import LoginPopup from '../App';
+import LoginPopup from '../App.jsx';
 
 
 class ForgotPasswordPopup extends Component {
@@ -43,7 +43,7 @@ class ForgotPasswordPopup extends Component {
             </div>
 
             <div>
-              
+
               <TextField
                 floatingLabelText="Email"
                 floatingLabelFixed={false}
