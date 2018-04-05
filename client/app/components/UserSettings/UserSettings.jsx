@@ -7,9 +7,9 @@ import axios from 'axios';
 
 import './UserSettings.css';
 
-import ChangePassword from './ChangePassword'
-import AddBusiness from './AddBusiness';
-import UserHomepage from '../UserHomepage/UserHomepage';
+import ChangePassword from './ChangePassword.jsx'
+import AddBusiness from './AddBusiness.jsx';
+import UserHomepage from '../UserHomepage/UserHomepage.jsx';
 
 class UserSettings extends Component {
 

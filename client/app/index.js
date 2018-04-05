@@ -8,8 +8,8 @@ import {amber900} from 'material-ui/styles/colors';
 
 
 import './index.css';
-import App from './App';
-import LoginButton from './App';
+import App from './App.jsx';
+import LoginButton from './App.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 

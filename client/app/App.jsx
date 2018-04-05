@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './App.css';
 
-import Footer from './components/Footer/Footer.js';
-import ForgotPasswordPopup from "./components/ForgotPassword";
-import RegisterPopup from "./components/RegisterBusiness";
-import EmployeePopup from "./components/RegisterEmployee";
-import Home from './components/extra/Home';
-import Screen from './components/extra/Screen'
-import UserHomepage from "./components/UserHomepage/UserHomepage.js";
-import BusinessSettings from "./components/BusinessSettings/BusinessSettings";
-import UserSettings from './components/UserSettings/UserSettings';
-import ChangePassword from './components/UserSettings/ChangePassword';
-import AddBusiness from './components/UserSettings/AddBusiness';
+import Footer from './components/Footer/Footer.jsx';
+import ForgotPasswordPopup from './components/ForgotPassword.jsx';
+import RegisterPopup from './components/RegisterBusiness.jsx';
+import EmployeePopup from './components/RegisterEmployee.jsx';
+import Home from './components/extra/Home.jsx';
+import Screen from './components/extra/Screen.jsx'
+import UserHomepage from './components/UserHomepage/UserHomepage.jsx';
+import BusinessSettings from './components/BusinessSettings/BusinessSettings.jsx';
+import UserSettings from './components/UserSettings/UserSettings.jsx';
+import ChangePassword from './components/UserSettings/ChangePassword.jsx';
+import AddBusiness from './components/UserSettings/AddBusiness.jsx';
 import { Redirect, Switch } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
@@ -43,7 +43,7 @@ class App extends Component {
         <header>
           <AppBar
             showMenuIconButton={false}
-            title={<span>Serve+</span>}
+            title={<span>ModularPOS</span>}
             iconElementLeft={<IconButton><NavigationClose /></IconButton>}
             iconElementRight={<LoginPopup />}
           />
@@ -117,7 +117,7 @@ class LoginPopup extends Component {
   onSubmit(event) {
     event.preventDefault();
     const {email, password, redirect} = this.state;
-    
+
     axios.post('/user/login', { email, password })
         .then((response) => {
             const message = response.message;
@@ -128,7 +128,7 @@ class LoginPopup extends Component {
           console.log(error.response);
           const message = error.response.data.message;
           const hasMultiple = (error.response.data.hasMultiple != null ? true : false);
-          this.setState({message, hasMultiple});          
+          this.setState({message, hasMultiple});
         })
   }
 
@@ -168,7 +168,7 @@ class LoginPopup extends Component {
             >
               Sign In To Your POS Account
             </div>
-            {hasMultiple ? 
+            {hasMultiple ?
                     Object.keys(this.state.message).map((index)=>{
                         return <div key={index}>{this.state.message[index].msg}</div>})
                     : <div>{message}</div>  }

@@ -5,8 +5,8 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-router-dom";
 
-import UserSettings from '../UserSettings/UserSettings';
-import BusinessSettings from '../BusinessSettings/BusinessSettings';
+import UserSettings from '../UserSettings/UserSettings.jsx';
+import BusinessSettings from '../BusinessSettings/BusinessSettings.jsx';
 
 import './UserHomepage.css';
 

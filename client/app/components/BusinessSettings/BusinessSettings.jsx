@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import Bleft from './Bleft.js';
-import Bmid from './Bmid.js';
-import Bright from './Bright.js';
+import Bleft from './Bleft.jsx';
+import Bmid from './Bmid.jsx';
+import Bright from './Bright.jsx';
 
 class BusinessSettings extends Component {
   render() {
