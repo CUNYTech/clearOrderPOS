@@ -39,7 +39,8 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-route
 class App extends Component {
   render() {
     return (
-      <div style={mainApp}>
+      //<div style={mainApp}>
+      <body class="Site">
         <header>
           <AppBar
             showMenuIconButton={false}
@@ -72,20 +73,23 @@ class App extends Component {
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/AddBusiness" component={AddBusiness} />
         </Switch>
+        
+        <main class="Site-content">
+          {/*page content*/}
+        </main>
 
-        <Footer style={{position: 'absolute', bottom: 0, flex: 1, alignSelf: 'stretch', right: 0, left: 0}} />
-
-      </div>
+        <Footer style={{position: 'absolute', bottom: 0,flex: 1, alignSelf: 'stretch', right: 0, left: 0}} />
+      </body>
     );
   }
 }
-
+/*
 const mainApp = {
   height: '100%',
   maxHeight: '100%',
   overflow: 'auto',
 }
-
+*/
 class LoginPopup extends Component {
   constructor(){
     super();
