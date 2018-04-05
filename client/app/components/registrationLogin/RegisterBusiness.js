@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
-import LoginPopup from '../App';
+import LoginPopup from './loginPopUp';
 import axios from 'axios';
 
 
@@ -39,10 +39,10 @@ class RegisterPopup extends Component {
   onSubmit(event) {
     event.preventDefault();
     const {fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password, message} = this.state;
-    
+
     axios.post('/business/register', { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password })
       .then((response) => {
-        const message = response.data.message; 
+        const message = response.data.message;
         const hasErrors = false;
         this.setState ({message, hasErrors});
       })
@@ -62,7 +62,7 @@ class RegisterPopup extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-  
+
 
   render() {
     const { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password, hasErrors, message, hasMultiple} = this.state;
@@ -88,13 +88,13 @@ class RegisterPopup extends Component {
             >
               Register Your Business
             </div>
-            {hasErrors ? 
-                (hasMultiple ? 
+            {hasErrors ?
+                (hasMultiple ?
                     Object.keys(this.state.message).map((index)=>{
                         return <div key={index}>{this.state.message[index].msg}</div>})
                     : <div>{message}</div> )
                 : (message.length > 0 ? <div>{message}</div> : '')}
-                
+
             <form onSubmit={this.onSubmit}>
               <TextField
                   floatingLabelText="First Name"
@@ -126,7 +126,7 @@ class RegisterPopup extends Component {
                   name='business_phone'
                   value={business_phone}
                   onChange={this.onChange}
-              /><br />             
+              /><br />
 
               <TextField
                   floatingLabelText="Business Address"
@@ -151,7 +151,7 @@ class RegisterPopup extends Component {
                   value={email}
                   onChange={this.onChange}
               /><br />
-              
+
               <TextField
                   type={"password"}
                   floatingLabelText="Password"
@@ -176,14 +176,14 @@ class RegisterPopup extends Component {
 
             <div className={"LoginCardFootter"}>
               <br />
-              <Link to="../App">
+              <Link to=".../App">
                 <RaisedButton
                   label="Back"
                   onClick={this.handleClose} />
               </Link>
             </div>
             <div>
-              <Route path="/App.js" component={LoginPopup} />
+              <Route path=".../App.js" component={LoginPopup} />
             </div>
           </div>
         </Dialog>

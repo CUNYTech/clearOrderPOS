@@ -4,14 +4,14 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
-import LoginPopup from '../App';
+import LoginPopup from './loginPopUp';
 import axios from 'axios';
 
 
 class EmployeePopup extends Component {
     constructor()
     {
-        super();        
+        super();
         this.state = {
             open: true,
             hasErrors : false,
@@ -37,10 +37,10 @@ class EmployeePopup extends Component {
     onSubmit(event) {
         event.preventDefault();
         const {fname, lname, email, business_id, password, confirm_password, message} = this.state;
-        
+
         axios.post('/user/register', { fname, lname, email, business_id, password, confirm_password })
             .then((response) => {
-                const message = response.data.message; 
+                const message = response.data.message;
                 const hasErrors = false;
                 const redirect = true;
                 this.setState ({message, hasErrors, redirect});
@@ -91,8 +91,8 @@ class EmployeePopup extends Component {
                         >
                             Employee Registration
                         </div>
-                        {hasErrors ? 
-                            (hasMultiple ? 
+                        {hasErrors ?
+                            (hasMultiple ?
                                 Object.keys(this.state.message).map((index)=>{
                                     return <div key={index}>{this.state.message[index].msg}</div>})
                                 : <div>{message}</div> )
@@ -130,7 +130,7 @@ class EmployeePopup extends Component {
                                 value={email}
                                 onChange={this.onChange}
                             /><br />
-                            
+
                             <TextField
                                 type={"password"}
                                 floatingLabelText="Password"
@@ -152,9 +152,9 @@ class EmployeePopup extends Component {
                             <RaisedButton type="submit" label="Register" primary={true} />
                         </form>
 
-                        <div className={"LoginCardFootter"}>
+                        <div className={"LoginCardFooter"}>
                             <br />
-                            <Link to="../App">
+                            <Link to=".../App">
                                 <RaisedButton
                                     label="Back"
                                     onClick={this.handleClose} />
@@ -162,7 +162,7 @@ class EmployeePopup extends Component {
                         </div>
 
                         <div>
-                            <Route path="/App.js" component={LoginPopup} />
+                            <Route path=".../App.js" component={LoginPopup} />
 
                         </div>
                     </div>

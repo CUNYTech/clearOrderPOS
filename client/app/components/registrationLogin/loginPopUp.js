@@ -7,8 +7,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 //Custom Components
-import EmployeePopup from "../RegisterEmployee";
-import RegisterPopup from "../RegisterBusiness";
+import EmployeePopup from "./RegisterEmployee";
+import RegisterPopup from "./RegisterBusiness";
 
 export class LoginPopup extends Component {
   constructor(){

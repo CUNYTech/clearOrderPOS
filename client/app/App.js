@@ -4,14 +4,11 @@ import axios from 'axios';
 import './App.css';
 
 import Footer from './components/Footer/Footer.js';
-import ForgotPasswordPopup from "./components/ForgotPassword";
-import RegisterPopup from "./components/RegisterBusiness";
-import EmployeePopup from "./components/RegisterEmployee";
 import Home from './components/extra/Home';
 import Screen from './components/extra/Screen'
 import UserHomepage from "./components/UserHomepage/UserHomepage.js";
 
-import { LoginPopup, RegisterBusinessButton, RegisterEmployeeButton} from './components/registrationLogin/loginPopUp';
+import { LoginPopup, RegisterBusinessButton, RegislinkterEmployeeButton} from './components/registrationLogin/loginPopUp';
 import BusinessSettings from "./components/BusinessSettings/BusinessSettings";
 import UserSettings from './components/UserSettings/UserSettings';
 import ChangePassword from './components/UserSettings/ChangePassword';
