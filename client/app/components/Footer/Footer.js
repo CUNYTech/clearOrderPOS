@@ -24,8 +24,9 @@ export default class Footer extends Component {
     return (
       <div style={outerBox}>
         <Paper
-          zDepth={100}
           style={bar}
+          zDepth={5}
+          rounded={false}
           >
           <BottomNavigation selectedIndex={this.state.selectedIndex}>
             <BottomNavigationItem
@@ -44,7 +45,7 @@ export default class Footer extends Component {
               onClick={() => this.select(2)}
             />
           </BottomNavigation>
-        </Paper>
+          </ Paper>
       </div>
     );
   }
@@ -58,4 +59,6 @@ const outerBox = {
   overflow: 'auto',
 };
 
-const bar = {}
+const bar = {
+  border: '1px solid gray'
+}
