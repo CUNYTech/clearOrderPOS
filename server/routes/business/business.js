@@ -4,8 +4,11 @@ const { matchedData, sanitize }     = require('express-validator/filter');
 const passport                      = require('passport');
 const LocalStrategy                 = require('passport-local').Strategy;
 
-const BusinessModel                   = require('../../models/BusinessRegistrationSchema');
+const BusinessModel                 = require('../../models/BusinessRegistrationSchema');
+const UserModel                     = require('../../models/UserRegistrationSchema');
 const sharedFunctions               = require('../sharedFunctions.js');
+
+const mongoose                      = require('mongoose');
 
 module.exports = (app) => {
 
@@ -19,7 +22,17 @@ module.exports = (app) => {
     const validationErrors = validationResult(req);
 
     if(!validationErrors.isEmpty())
-      return res.status(400).send({message: validationErrors.mapped(), hasMultiple : true});
+      return res.status(400).send({message: validationErrors.mapped()});
+    
+    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
+      if(err) req.status(500);
+
+      BusinessModel.findOneAndUpdate({'business_id' : person.business_id}, {business_address : req.body.name}, (bsnsError, result)=> {
+        if(bsnsError) req.status(500);
+        res.send(result);
+      });
+      
+    })
   });
 
   app.post('/business/register', [
