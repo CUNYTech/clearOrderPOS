@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
-
+import widgetCard from './widget';
 const gridStyle = {
   backgroundColor:'#C0C0C0',
   border: '1px solid black',
@@ -11,6 +11,8 @@ const ReactGridLayout = WidthProvider(RGL);
 // First time grid mounted,
 // dont know size, dispatch resize event
 //
+// this belongs inside render inside reactgridlayout {this.generateDOM()}
+
 export default class BasicLayout extends React.PureComponent {
   static defaultProps = {
     className: "layout",
@@ -60,6 +62,7 @@ export default class BasicLayout extends React.PureComponent {
     this.props.onLayoutChange(layout);
   }
 
+  /* widgetCard - Does not work. Widgets need to be injected into grid w/ redux */
   render() {
     return (
         <div>
@@ -70,6 +73,7 @@ export default class BasicLayout extends React.PureComponent {
           onLayoutChange={this.onLayoutChange}
           {...this.props}
         >
+          <widgetCard />
           {this.generateDOM()}
         </ReactGridLayout>
       </div>
