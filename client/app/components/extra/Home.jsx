@@ -15,9 +15,7 @@ const Home = () => (
   <div>
     <h1>Deploy Serve+ in Your Business</h1>
     <h4>A web based POS system to optimize your work enviornment!</h4>
-    <HorizontalTransition />
-
-    
+    <HorizontalTransition />    
   </div>
 );
 

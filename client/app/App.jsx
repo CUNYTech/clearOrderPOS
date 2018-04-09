@@ -14,6 +14,9 @@ import BusinessSettings from './components/BusinessSettings/BusinessSettings.jsx
 import UserSettings from './components/UserSettings/UserSettings.jsx';
 import ChangePassword from './components/UserSettings/ChangePassword.jsx';
 import AddBusiness from './components/UserSettings/AddBusiness.jsx';
+
+import Extra from './components/extra/Extra.jsx';
+
 import { Redirect, Switch } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
@@ -62,6 +65,8 @@ class App extends Component {
           <Link to='/UserSettings'> <MenuItem primaryText="UserSettings" /> </Link>
           <Link to='/ChangePassword'> <MenuItem primaryText="ChangePassword" /> </Link>
           <Link to='/AddBusiness'> <MenuItem primaryText="AddBusiness" /> </Link>
+
+          <Link to='/Extra'> <MenuItem primaryText="Extra" /> </Link>
         </IconMenu>
 
         <Switch>
@@ -72,6 +77,8 @@ class App extends Component {
           <Route path="/UserSettings" component={UserSettings} />
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/AddBusiness" component={AddBusiness} />
+
+          <Route path="/Extra" component={Extra} />
         </Switch>
         
         <main class="Site-content">
