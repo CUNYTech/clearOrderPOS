@@ -20,13 +20,18 @@ module.exports = (app) => {
     }
   }
 
+  app.get('/user-auth', isAuthenticated, (req, res, next) => {
+    return res.status(200).send({message : 'auth'});
+  });
+
+  app.get('/user-logout', isAuthenticated, (req, res, next) => {
+    req.logout();
+    res.status(200).send({message : 'sucessfully logged out'});
+  });
+
   //===============
   // USER LOGIN ROUTE =========================
   //====================
-  app.get('/auth-test', isAuthenticated, (req, res, next) => {
-    console.log("you are allowed to");
-  });
-
   app.post('/user/login', [
     check('email')
       .trim()
@@ -58,7 +63,7 @@ module.exports = (app) => {
         //
         req.logIn(user, function(err) {
           if(err) { return res.status(400).send({message : "An unexpected error has occured when creating a user, please try again or contact an administrator"}); }
-          return res.status(200).send({message: 'You are now logged in as ' + user.username});
+          return res.status(200).send({message: 'You are now logged in as ' + req.user.email});
         });
       })(req, res, next);
   });

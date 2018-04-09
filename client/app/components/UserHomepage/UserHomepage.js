@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-router-dom";
+import axios from 'axios';
+import {Redirect} from 'react-router-dom'
 
 import UserSettings from '../UserSettings/UserSettings';
 import BusinessSettings from '../BusinessSettings/BusinessSettings';
@@ -11,14 +13,30 @@ import BusinessSettings from '../BusinessSettings/BusinessSettings';
 import './UserHomepage.css';
 
 class UserHomepage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: 1};
+  constructor() {
+    super();
+    this.state = {
+      value: 1,
+      redirect : false
+    };
+  }
+
+  componentDidMount(){
+    axios.get('/user-auth')
+      .then((response) => {
+        this.setState({redirect : false});
+      })
+      .catch((error) => {
+        this.setState({redirect : true});
+      })
   }
 
   handleChange = (event, index, value) => this.setState({value});
 
   render() {
+    const redirect = this.state;
+    if(redirect === true)
+      return <Redirect to="/" />
     return (
       <div className='outer-box' >
 

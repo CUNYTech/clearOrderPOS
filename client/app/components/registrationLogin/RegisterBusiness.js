@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPopup from './loginPopUp';
 import axios from 'axios';
+import {Card, CardHeader} from 'material-ui/Card';
 
 
 class RegisterPopup extends Component {
@@ -14,7 +15,6 @@ class RegisterPopup extends Component {
     this.state = {
       open: true,
       hasErrors : false,
-      hasMultiple : false,
       message : {},
       fname : '',
       lname : '',
@@ -42,16 +42,14 @@ class RegisterPopup extends Component {
 
     axios.post('/business/register', { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password })
       .then((response) => {
-        const message = response.data.message;
-        const hasErrors = false;
-        this.setState ({message, hasErrors});
+        this.setState ({
+          message : response.data.message, 
+          hasErrors : false });
       })
       .catch((error) => {
-        const message = error.response.data.message;
-        const hasMultiple = (error.response.data.hasMultiple != null ? true : false);
-        const hasErrors = true;
-        console.log(message);
-        this.setState({message, hasErrors, hasMultiple});
+        this.setState({
+          message : error.response.data.message,
+          hasErrors : true});
       })
   }
 
@@ -63,9 +61,20 @@ class RegisterPopup extends Component {
     this.setState({ open: false });
   };
 
+  printMessage = (hasErrors, message) => {
+    if(hasErrors)
+      if(message instanceof Object)
+        return Object.keys(message).map(index => <div key={index}>{message[index].msg}</div>)
+      else
+        return <div>{message}</div>
+    else if(message.length > 0)
+      return <div>{message}</div>
+    else
+      return <div>''</div>
+  }
 
   render() {
-    const { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password, hasErrors, message, hasMultiple} = this.state;
+    const { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password, hasErrors, message} = this.state;
     return (
       <div>
         <RaisedButton
@@ -81,19 +90,15 @@ class RegisterPopup extends Component {
         >
 
           <div className={"LoginCard"}>
-            <div
+            <CardHeader
               className={"LoginCardHeader"}
               actAsExpander={true}
               showExpandableButton={false}
             >
               Register Your Business
-            </div>
-            {hasErrors ?
-                (hasMultiple ?
-                    Object.keys(this.state.message).map((index)=>{
-                        return <div key={index}>{this.state.message[index].msg}</div>})
-                    : <div>{message}</div> )
-                : (message.length > 0 ? <div>{message}</div> : '')}
+            </CardHeader>
+
+            {this.printMessage(hasErrors, message)}
 
             <form onSubmit={this.onSubmit}>
               <TextField

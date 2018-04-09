@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPopup from './loginPopUp';
 import axios from 'axios';
+import {Card, CardHeader} from 'material-ui/Card';
 
 
 class EmployeePopup extends Component {
@@ -15,7 +16,6 @@ class EmployeePopup extends Component {
         this.state = {
             open: true,
             hasErrors : false,
-            hasMultiple : false,
             redirect : false,
             message : {},
             fname : '',
@@ -38,19 +38,36 @@ class EmployeePopup extends Component {
         event.preventDefault();
         const {fname, lname, email, business_id, password, confirm_password, message} = this.state;
 
-        axios.post('/user/register', { fname, lname, email, business_id, password, confirm_password })
+        axios.post('/user/register', { fname, lname, email, business_id, password, confirm_password, hasErrors })
             .then((response) => {
-                const message = response.data.message;
-                const hasErrors = false;
-                const redirect = true;
-                this.setState ({message, hasErrors, redirect});
+                this.setState ({
+                    message : response.data.message,
+                    hasErrors : false,
+                    redirect : true});
             })
             .catch((error) => {
                 const message = error.response.data.message;
-                const hasMultiple = (error.response.data.hasMultiple != null ? true : false);
                 const hasErrors = true;
-                this.setState({message, hasErrors, hasMultiple});
+                const redirect = false;
+                this.setState({
+                    message : error.response.data.message, 
+                    hasErrors : true, 
+                    redirect : false
+                });
             })
+    }
+
+    printMessage = (hasErrors, message) => {
+        if(hasErrors)
+          if(message instanceof Object)
+            return Object.keys(message).map(index => <div key={index}>{message[index].msg}</div>)
+          else
+            return <div>{message}</div>
+        // no errors, but a message included most likely implies success
+        else if(message.length > 0)
+          return <div>{message}</div>
+        else
+          return ''
     }
 
     handleOpen = () => {
@@ -62,9 +79,9 @@ class EmployeePopup extends Component {
     };
 
     render() {
-        const { fname, lname, email, business_id, password, confirm_password, message, redirect, hasErrors, hasMultiple} = this.state;
+        const { fname, lname, email, business_id, password, confirm_password, message, redirect, hasErrors} = this.state;
         if(redirect)
-            return (<Redirect to={{pathname : '/UserHomepage', state : {message : message}}} />)
+            return <Redirect to='/UserHomepage' />
         return (
             <div>
                 <RaisedButton
@@ -84,19 +101,15 @@ class EmployeePopup extends Component {
 
 
                     <div className={"LoginCard"}>
-                        <div
+                        <CardHeader
                             className={"LoginCardHeader"}
                             actAsExpander={true}
                             showExpandableButton={false}
                         >
                             Employee Registration
-                        </div>
-                        {hasErrors ?
-                            (hasMultiple ?
-                                Object.keys(this.state.message).map((index)=>{
-                                    return <div key={index}>{this.state.message[index].msg}</div>})
-                                : <div>{message}</div> )
-                            : ''}
+                        </CardHeader>
+
+                        {this.printMessage(hasErrors, message)}
 
                         <form onSubmit={this.onSubmit}>
                             <TextField

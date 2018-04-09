@@ -9,6 +9,19 @@ const sharedFunctions               = require('../sharedFunctions.js');
 
 module.exports = (app) => {
 
+  app.post('/business/add_category', [
+    check('name')
+      .trim()
+      .isLength({min : 1})
+      .withMessage("A name must be provided")
+  ], 
+  function (req, res, next) {
+    const validationErrors = validationResult(req);
+
+    if(!validationErrors.isEmpty())
+      return res.status(400).send({message: validationErrors.mapped(), hasMultiple : true});
+  });
+
   app.post('/business/register', [
     check('fname')
         .trim()

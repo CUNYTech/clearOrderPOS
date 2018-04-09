@@ -27,19 +27,17 @@ module.exports = function(passport) {
         passwordField : 'password',
         passReqToCallback : true
     }, function(req, email, password, done) {
-        process.nextTick(function() {
-            UserModel.findOne({'email' : email}, function(err, user) {
-                if(err)
-                    done(null, false);
-                if(!user)
+        UserModel.findOne({email : email}, function(err, user) {
+            if(err)
+                done(err);
+            if(!user)
+                return done(null, false);
+            user.verifyPassword(password, function(error, isMatch) {
+                if(error)
+                    return done(err);
+                if(!isMatch)
                     return done(null, false);
-                user.verifyPassword(password, function(error, isMatch) {
-                    if(error)
-                        return done(err);
-                    if(!isMatch)
-                        return done(null, false);
-                    return done(null, user);
-                });
+                return done(null, user);
             });
         });
     }));
@@ -75,6 +73,8 @@ module.exports = function(passport) {
                     UserModel.createUser(user, function(userModelError, result){
                         if(userModelError)
                             return done(userModelError);
+
+                        BusinessModel.update({'business_id' :  req.body.business_id}, {$push : {'user_id' : user._id}}).exec();
                         return done(null, user);
                     });
                 } else {

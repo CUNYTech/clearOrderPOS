@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import AddCategory from './AddCategory.js';
+
 export default class Bmid extends Component {
   render () {
     return (
@@ -10,7 +12,7 @@ export default class Bmid extends Component {
 
         <section style={middleSections}>
           <div style={box}>
-            <RaisedButton label='Add a category' className='button-style'/>
+            <AddCategory />
           </div>
           <div style={box}>
             <RaisedButton label='Remove category' className='button-style'/>

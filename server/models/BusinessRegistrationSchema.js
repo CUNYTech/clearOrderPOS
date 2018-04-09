@@ -19,6 +19,10 @@ var businessRegistration = new Schema({
         type: String,
         required: true
     },
+    business_admins : {
+        type : [Schema.ObjectId],
+        ref : 'Users'
+    },
     isDeleted : {type: Boolean, default: false},
     isiPaid : {type: Boolean, default: true},
 });
