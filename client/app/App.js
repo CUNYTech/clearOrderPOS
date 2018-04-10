@@ -42,7 +42,7 @@ class App extends Component {
         <header>
           <AppBar
             showMenuIconButton={false}
-            title={<span>ModularPOS</span>}
+            title={<span>Serve+</span>}
             iconElementLeft={<IconButton><NavigationClose /></IconButton>}
             iconElementRight={<LoginPopup />}
           />
