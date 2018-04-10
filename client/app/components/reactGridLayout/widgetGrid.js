@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
 import widgetCard from './widget';
+
 const gridStyle = {
   backgroundColor:'#C0C0C0',
   border: '1px solid black',
