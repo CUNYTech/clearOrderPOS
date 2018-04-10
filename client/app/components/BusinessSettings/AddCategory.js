@@ -14,6 +14,8 @@ export class AddCategory extends Component {
     this.state = {
       open: false,
       name : '',
+      message : {},
+      hasError : false,
       redirect : false
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -25,7 +27,9 @@ export class AddCategory extends Component {
     this.setState(state);
   }
 
-  componentDidMount(){
+  componentWillMount(){
+    const redirect = this.state;
+
     axios.get('/user-auth')
       .then((response) => {
         this.setState({redirect : false});
@@ -37,25 +41,34 @@ export class AddCategory extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    const {name} = this.state;
+    const {name, message} = this.state;
 
-    axios.post('/business/add_category', { name, redirect })
+    axios.post('/business/add_category', { name, message })
         .then((response) => {
           console.log(response);
-            const message = response.message;
-            const redirect = true;
-            this.setState ({message, redirect});
+            this.setState ({
+              message : response.data.message,
+              hasError : false
+            });
         })
         .catch((error) => {
-          if(error.response)
-            console.log(error.response);
-          else 
-            console.log('yikes');
+          this.setState({
+            message : error.response.data.message,
+            hasError : true
+          })
         })
   }
 
+  printMessage = (hasError, message) => {
+    if(hasError)
+      if(message instanceof Object)
+        return Object.keys(message).map(index => <div key={index}>{message[index].msg}</div>)
+      else
+        return {message}
+  }
+
   render() {
-    const {name, redirect} = this.state;
+    const {name, redirect, message, hasError} = this.state;
     if(redirect)
       return <Redirect to="/" />
     

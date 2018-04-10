@@ -7,7 +7,11 @@ Server+ (ServerPlus) is a Point of Sales System that aims to make POS customizab
 - [Webpack](https://webpack.github.io/) for compilation & testing
 
 ## Team Member
-Sashary Morel
+- Sashary Morel
+- John Solano
+- Daniyal
+- Zhi Huang
+- Dinsdale Lee
 
 
 ## Requirements
