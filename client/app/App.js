@@ -10,6 +10,7 @@ import Home from './components/extra/Home';
 import Screen from './components/extra/Screen'
 import UserHomepage from './components/UserHomepage/UserHomepage';
 import BasicLayout from './components/reactGridLayout/widgetGrid';
+import Extra from './components/extra/Extra.js';
 
 //Login Related
 import { LoginPopup, RegisterBusinessButton, RegisterEmployeeButton} from './components/registrationLogin/loginPopUp';
@@ -60,6 +61,8 @@ class App extends Component {
           <Link to='/UserSettings'> <MenuItem primaryText="UserSettings" /> </Link>
           <Link to='/ChangePassword'> <MenuItem primaryText="ChangePassword" /> </Link>
           <Link to='/AddBusiness'> <MenuItem primaryText="AddBusiness" /> </Link>
+        
+          <Link to='/Extra'> <MenuItem primaryText="Extra" /> </Link>
         </IconMenu>
 
         <Switch>
@@ -70,6 +73,9 @@ class App extends Component {
           <Route path="/UserSettings" component={UserSettings} />
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/AddBusiness" component={AddBusiness} />
+          
+          <Route path="/Extra" component={Extra} />
+
         </Switch>
 
         <BasicLayout />
