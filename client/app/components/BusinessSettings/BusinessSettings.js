@@ -13,19 +13,12 @@ class BusinessSettings extends Component {
 
         <div style={outside}>
 
-          <div style={pane}>
-            <h1>L L L</h1>
+          <div style={listingPane}>
             <Bleft />
           </div>
 
-          <div style={pane}>
-            <h1>middle info</h1>
+          <div style={settingsPane}>
             <Bmid />
-          </div>
-
-          <div style={pane}>
-            <h1>R R R</h1>
-            <Bright />
           </div>
 
         </div>
@@ -46,12 +39,24 @@ const outside = {
   overflow: 'auto',
 }
 
-const pane = {
+const listingPane = {
   alignItems: 'center',
   textAlign: 'center',
   float: 'left',
   height: '100%',
   minHeight: '500px',
-  width: '33%',
+  width: '50%',
+  marginRight: '10px',
+  overflow: 'auto',
+}
+
+const settingsPane = {
+  alignItems: 'center',
+  textAlign: 'center',
+  float: 'left',
+  height: '100%',
+  minHeight: '500px',
+  marginLeft: '15px',
+  width: '30%',
   overflow: 'auto',
 }

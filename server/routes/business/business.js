@@ -12,6 +12,28 @@ const mongoose                      = require('mongoose');
 
 module.exports = (app) => {
 
+  function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    }
+  }
+
+  app.get('/business/get-categories', isAuthenticated, function(req,res,next) {
+    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
+      if(err){
+         return req.status(500);
+      }
+
+      BusinessModel.find().where('business_id').equals(person.business_id)
+        .select('business_items')
+        .find(function(err, array){
+          if(err)
+            return;
+          res.status(200).send(array);
+        });
+    })
+  });
+
   app.post('/business/add_category', [
     check('name')
       .trim()
@@ -25,13 +47,23 @@ module.exports = (app) => {
       return res.status(400).send({message: validationErrors.mapped()});
     
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
-      if(err) req.status(500);
+      if(err){
+         return req.status(500);
+      }
 
-      BusinessModel.findOneAndUpdate({'business_id' : person.business_id}, {business_address : req.body.name}, (bsnsError, result)=> {
-        if(bsnsError) req.status(500);
-        res.send(result);
-      });
-      
+
+      BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
+        {
+          $push : {
+            business_items : {"category": req.body.name, "items": {"name": "Pizza", "price": 10}}
+          } 
+        },{upsert:true, new : true}, (bsnsError, result) => {
+          if(bsnsError){
+            return res.status(500);
+          }
+          return res.status(200);
+        }
+      )
     })
   });
 

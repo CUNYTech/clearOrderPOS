@@ -21,12 +21,12 @@ module.exports = (app) => {
   }
 
   app.get('/user-auth', isAuthenticated, (req, res, next) => {
-    return res.status(200).send({message : 'auth'});
+    return res.status(200);
   });
 
   app.get('/user-logout', isAuthenticated, (req, res, next) => {
     req.logout();
-    res.status(200).send({message : 'sucessfully logged out'});
+    return res.status(200);
   });
 
   //===============

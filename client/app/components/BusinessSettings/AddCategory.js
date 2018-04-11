@@ -41,11 +41,10 @@ export class AddCategory extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    const {name, message} = this.state;
+    const {name} = this.state;
 
-    axios.post('/business/add_category', { name, message })
+    axios.post('/business/add_category', { name })
         .then((response) => {
-          console.log(response);
             this.setState ({
               message : response.data.message,
               hasError : false
@@ -57,6 +56,7 @@ export class AddCategory extends Component {
             hasError : true
           })
         })
+        
   }
 
   printMessage = (hasError, message) => {

@@ -23,6 +23,10 @@ var businessRegistration = new Schema({
         type : [Schema.ObjectId],
         ref : 'Users'
     },
+    business_items : [{
+        category : String,
+        items : [{name: String, price: Number}]
+    }],
     isDeleted : {type: Boolean, default: false},
     isiPaid : {type: Boolean, default: true},
 });

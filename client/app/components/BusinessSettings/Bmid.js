@@ -8,20 +8,14 @@ export default class Bmid extends Component {
   render () {
     return (
       <div>
-        <h1>middle info</h1>
+        <h1>Settings</h1>
 
         <section style={middleSections}>
           <div style={box}>
             <AddCategory />
           </div>
           <div style={box}>
-            <RaisedButton label='Remove category' className='button-style'/>
-          </div>
-          <div style={box}>
             <RaisedButton label='Add an item' className='button-style'/>
-          </div>
-          <div style={box}>
-            <RaisedButton label='remove an item' className='button-style'/>
           </div>
         </section>
 
@@ -43,7 +37,7 @@ export default class Bmid extends Component {
 
         <section style={middleSections}>
           <article>
-            Lorem Ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups
+            Welcome to the settings page. In here, you can edit your restaurant information, add or remove users from your restaurant, and configure your categories and items.
           </article>
         </section>
       </div>
