@@ -18,6 +18,9 @@ import BusinessSettings from "./components/BusinessSettings/BusinessSettings";
 import UserSettings from './components/UserSettings/UserSettings';
 import ChangePassword from './components/UserSettings/ChangePassword';
 import AddBusiness from './components/UserSettings/AddBusiness';
+import RegisterEmployee from './components/registrationLogin/RegisterEmployee';
+import RegisterBusiness from './components/registrationLogin/RegisterBusiness';
+
 //Material
 import AppBar from 'material-ui/AppBar';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -37,16 +40,41 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
 
 class App extends Component {
+
+  state = {
+    isAuth : false
+  }
+
+  componentDidMount() {
+    // axios.post('/user-auth', { })
+    // .then((response) => {
+    //   this.setState({
+    //     isAuth : true
+    //   })
+    // })
+    // .catch((error) => {
+    //   this.setState({
+    //     isAuth : false
+    //   })
+    // })
+  }
+
   render() {
+
+    const isAuth = this.state;
+
     return (
       <div style={mainApp}>
         <header>
-          <AppBar
-            showMenuIconButton={false}
-            title={<span>Serve+</span>}
-            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-            iconElementRight={<LoginPopup />}
-          />
+          
+        <AppBar
+          showMenuIconButton={false}
+          title={<span>Serve+</span>}
+          iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+          
+          iconElementRight={<Link to="/user/homepage"> <MenuItem primaryText="My Homepage" /> </Link>}
+        /> 
+
         </header>
 
         <IconMenu
@@ -54,28 +82,36 @@ class App extends Component {
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
-          <Link to='/Home'> <MenuItem primaryText="Home" /> </Link>
-          <Link to='/Screen'> <MenuItem primaryText="Screen" /> </Link>
-          <Link to='/UserHomepage'> <MenuItem primaryText="UserHomepage" /> </Link>
-          <Link to='/BusinessSettings'> <MenuItem primaryText="BusinessSettings" /> </Link>
-          <Link to='/UserSettings'> <MenuItem primaryText="UserSettings" /> </Link>
-          <Link to='/ChangePassword'> <MenuItem primaryText="ChangePassword" /> </Link>
-          <Link to='/AddBusiness'> <MenuItem primaryText="AddBusiness" /> </Link>
-        
+          <Link to='/home'> <MenuItem primaryText="Home" /> </Link>
+          <Link to='/screen'> <MenuItem primaryText="Screen" /> </Link>
+          <Link to="/login"> <MenuItem primaryText="Login" /> </Link>
+
+          <Link to='/user/homepage'> <MenuItem primaryText="User Homepage" /> </Link>
+          <Link to='/user/settings'> <MenuItem primaryText="User Settings" /> </Link>
+          <Link to='/user/password'> <MenuItem primaryText="Change Password" /> </Link>
+          <Link to='/user/register'> <MenuItem primaryText="User Register" /> </Link>
+
+          <Link to='/business/register'> <MenuItem primaryText="Register Business" /> </Link>
+          <Link to='/business/settings'> <MenuItem primaryText="Business Settings" /> </Link>
+
+
           <Link to='/Extra'> <MenuItem primaryText="Extra" /> </Link>
         </IconMenu>
 
         <Switch>
           <Route path="/Home" component={Home} />
-          <Route path="/Screen" component={Screen} />
-          <Route path="/UserHomepage" component={UserHomepage} />
-          <Route path="/BusinessSettings" component={BusinessSettings} />
-          <Route path="/UserSettings" component={UserSettings} />
-          <Route path="/ChangePassword" component={ChangePassword} />
-          <Route path="/AddBusiness" component={AddBusiness} />
-          
-          <Route path="/Extra" component={Extra} />
+          <Route path="/screen" component={Screen} />
+          <Route path="/login" component={LoginPopup} />
 
+          <Route path="/user/homepage" component={UserHomepage} />
+          <Route path="/user/settings" component={UserSettings} />
+          <Route path="/user/password" component={ChangePassword} />
+          <Route path="/user/register" component={RegisterEmployee} />
+
+          <Route path="/business/register" component={RegisterBusiness} />
+          <Route path="/business/settings" component={BusinessSettings} />
+
+          <Route path="/extra" component={Extra} />
         </Switch>
 
         <BasicLayout />

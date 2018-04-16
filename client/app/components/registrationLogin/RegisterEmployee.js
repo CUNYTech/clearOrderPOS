@@ -14,7 +14,6 @@ class EmployeePopup extends Component {
     {
         super();
         this.state = {
-            open: true,
             hasErrors : false,
             redirect : false,
             message : {},
@@ -38,7 +37,7 @@ class EmployeePopup extends Component {
         event.preventDefault();
         const {fname, lname, email, business_id, password, confirm_password, message} = this.state;
 
-        axios.post('/user/register', { fname, lname, email, business_id, password, confirm_password, hasErrors })
+        axios.post('/user/register', { fname, lname, email, business_id, password, confirm_password })
             .then((response) => {
                 this.setState ({
                     message : response.data.message,
@@ -46,9 +45,6 @@ class EmployeePopup extends Component {
                     redirect : true});
             })
             .catch((error) => {
-                const message = error.response.data.message;
-                const hasErrors = true;
-                const redirect = false;
                 this.setState({
                     message : error.response.data.message, 
                     hasErrors : true, 
@@ -70,116 +66,91 @@ class EmployeePopup extends Component {
           return ''
     }
 
-    handleOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
     render() {
         const { fname, lname, email, business_id, password, confirm_password, message, redirect, hasErrors} = this.state;
         if(redirect)
-            return <Redirect to='/UserHomepage' />
+            return <Redirect to='/user/homepage' />
         return (
             <div>
-                <RaisedButton
-                    className={"LoginButton"}
-                    primary={true}
-                    label="Register Business"
-                    onClick={this.handleOpen}
+                <div className={"LoginCard"}>
+                    <CardHeader
+                        className={"LoginCardHeader"}
+                        actAsExpander={true}
+                        showExpandableButton={false}
+                    >
+                        Employee Registration
+                    </CardHeader>
 
-                />
+                    {this.printMessage(hasErrors, message)}
 
-                <Dialog
-                    modal={true}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                    autoScrollBodyContent={true}
-                >
+                    <form onSubmit={this.onSubmit}>
+                        <TextField
+                            floatingLabelText="First Name"
+                            floatingLabelFixed={false}
+                            name='fname'
+                            value={fname}
+                            onChange={this.onChange}
+                        /><br />
 
+                        <TextField
+                            floatingLabelText="Last Name"
+                            floatingLabelFixed={false}
+                            name='lname'
+                            value={lname}
+                            onChange={this.onChange}
+                        /><br />
 
-                    <div className={"LoginCard"}>
-                        <CardHeader
-                            className={"LoginCardHeader"}
-                            actAsExpander={true}
-                            showExpandableButton={false}
-                        >
-                            Employee Registration
-                        </CardHeader>
+                        <TextField
+                            floatingLabelText="Company ID or Company Name"
+                            floatingLabelFixed={false}
+                            name='business_id'
+                            value={business_id}
+                            onChange={this.onChange}
+                        /><br />
 
-                        {this.printMessage(hasErrors, message)}
+                        <TextField
+                            floatingLabelText="Email"
+                            floatingLabelFixed={false}
+                            name='email'
+                            value={email}
+                            onChange={this.onChange}
+                        /><br />
 
-                        <form onSubmit={this.onSubmit}>
-                            <TextField
-                                floatingLabelText="First Name"
-                                floatingLabelFixed={false}
-                                name='fname'
-                                value={fname}
-                                onChange={this.onChange}
-                            /><br />
+                        <TextField
+                            type={"password"}
+                            floatingLabelText="Password"
+                            floatingLabelFixed={false}
+                            name='password'
+                            value={password}
+                            onChange={this.onChange}
+                        /><br />
 
-                            <TextField
-                                floatingLabelText="Last Name"
-                                floatingLabelFixed={false}
-                                name='lname'
-                                value={lname}
-                                onChange={this.onChange}
-                            /><br />
+                        <TextField
+                            type={"password"}
+                            floatingLabelText="Confirm Password"
+                            floatingLabelFixed={false}
+                            name='confirm_password'
+                            value={confirm_password}
+                            onChange={this.onChange}
+                        /><br />
 
-                            <TextField
-                                floatingLabelText="Company ID or Company Name"
-                                floatingLabelFixed={false}
-                                name='business_id'
-                                value={business_id}
-                                onChange={this.onChange}
-                            /><br />
+                        <RaisedButton type="submit" label="Register" primary={true} />
+                    </form>
 
-                            <TextField
-                                floatingLabelText="Email"
-                                floatingLabelFixed={false}
-                                name='email'
-                                value={email}
-                                onChange={this.onChange}
-                            /><br />
-
-                            <TextField
-                                type={"password"}
-                                floatingLabelText="Password"
-                                floatingLabelFixed={false}
-                                name='password'
-                                value={password}
-                                onChange={this.onChange}
-                            /><br />
-
-                            <TextField
-                                type={"password"}
-                                floatingLabelText="Confirm Password"
-                                floatingLabelFixed={false}
-                                name='confirm_password'
-                                value={confirm_password}
-                                onChange={this.onChange}
-                            /><br />
-
-                            <RaisedButton type="submit" label="Register" primary={true} />
-                        </form>
-
-                        <div className={"LoginCardFooter"}>
-                            <br />
-                            <Link to=".../App">
-                                <RaisedButton
-                                    label="Back"
-                                    onClick={this.handleClose} />
-                            </Link>
-                        </div>
-
-                        <div>
-                            <Route path=".../App.js" component={LoginPopup} />
-
-                        </div>
+                    <div className={"LoginCardFooter"}>
+                        <br />
+                        <Link to="/business/register">
+                            <RaisedButton
+                                label="Registering a business?"
+                                onClick={this.handleClose} />
+                        </Link>
                     </div>
-                </Dialog>
+
+                    <div>
+                        <Route path=".../App.js" component={LoginPopup} />
+
+                    </div>
+                </div>
             </div>
         )
     }
