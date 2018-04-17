@@ -99,6 +99,7 @@ const outerBox = {
   height: 'auto',
   padding: '20px',
   overflow: 'auto',
+  boxSizing: 'border-box',
 };
 
 const cardStyle = {
