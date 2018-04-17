@@ -18,7 +18,6 @@ export class LoginPopup extends Component {
   constructor(){
     super();
     this.state = {
-      open: false,
       message : {},
       email : '',
       password : '',
@@ -27,14 +26,6 @@ export class LoginPopup extends Component {
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   onChange = (event) => {
     const state = this.state
@@ -79,136 +70,59 @@ export class LoginPopup extends Component {
   render() {
     const {message, email, password, hasErrors, redirect} = this.state;
     if(redirect)
-      return <Redirect to="/UserHomepage" />
+      return <Redirect to="/user/homepage" />
 
     return (
       <div>
-        <div>
-          <RaisedButton
-            label="Login"
-            primary={true}
-            onClick={this.handleOpen}
-          />
-          <RaisedButton
-            label="extra"
-            primary={true}
-            onClick={this.handleOpen}
-          />
-        </div>
+        <div className={"LoginCard"}>
+          <CardHeader
+            className={"LoginCardHeader"}
+            actAsExpander={true}
+            showExpandableButton={false}
+          >
+            Server+ Login
+          </CardHeader>
 
-        <Dialog
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
+          {this.printMessage(hasErrors, message)}
 
+          <form onSubmit={this.onSubmit}>
+            <TextField
+              floatingLabelText="Email"
+              floatingLabelFixed={false}
+              name='email'
+              value={email}
+              onChange={this.onChange}
+            /><br />
 
-          <div className={"LoginCard"}>
-            <CardHeader
-              className={"LoginCardHeader"}
-              actAsExpander={true}
-              showExpandableButton={false}
-            >
-              Sign In To Your POS Account
-            </CardHeader>
+            <TextField
+              type={"password"}
+              floatingLabelText="Password"
+              floatingLabelFixed={false}
+              name='password'
+              value={password}
+              onChange={this.onChange}
+            /><br /><br />
 
-            {this.printMessage(hasErrors, message)}
+            <RaisedButton type="submit" label="Sign In" primary={true} />
+          </form>
 
-            <form onSubmit={this.onSubmit}>
-              <TextField
-                floatingLabelText="Email"
-                floatingLabelFixed={false}
-                name='email'
-                value={email}
-                onChange={this.onChange}
-              /><br />
+          <div className={"LoginCardFooter"}>
 
-              <TextField
-                type={"password"}
-                floatingLabelText="Password"
-                floatingLabelFixed={false}
-                name='password'
-                value={password}
-                onChange={this.onChange}
-              /><br /><br />
-
-              <RaisedButton type="submit" label="Sign In" primary={true} />
-            </form>
-
-            <div className={"LoginCardFooter"}>
-
-              <br /><br />
-              Do you not have an account? Register now!
-              <br /><br />
-              <RegisterBusinessButton />
-              <br />
-              <RegisterEmployeeButton />
-            </div>
+            <br /><br />
+            Don't have an account? Register Now!
+            <br /><br />
+            <Link to="/business/register">
+              <RaisedButton
+                label="Register Business"
+              />
+            </Link>
+            <br />
+            <Link to="/user/register">
+              <RaisedButton
+                label="Register Account"
+              />
+            </Link>
           </div>
-        </Dialog>
-      </div>
-    )
-  }
-}
-
-
-export class RegisterBusinessButton extends Component {
-  state = {
-    open: false
-  };
-
-  handleOpen = () => {
-    this.setState({ open: true })
-  };
-
-  handleClose = () => {
-    this.setState({ open: false })
-  };
-  render() {
-    return (
-      <div>
-        <div>
-          <Link to="/RegisterBusiness">
-            <RaisedButton
-              label="Register Business"
-              onClick = {this.handleOpen}
-            />
-          </Link>
-        </div>
-        <div>
-          <Route path="/RegisterBusiness" component={RegisterPopup} />
-        </div>
-      </div>
-    )
-  }
-}
-
-
-export class RegisterEmployeeButton extends Component {
-  state = {
-    open: false
-  };
-
-  handleOpen = () => {
-    this.setState({ open: true })
-  };
-
-  handleClose = () => {
-    this.setState({ open: false })
-  };
-  render() {
-    return (
-      <div>
-        <div>
-          <Link to="/RegisterEmployee">
-            <RaisedButton
-              label="Register Employee"
-              onClick = {this.handleOpen}
-            />
-          </Link>
-        </div>
-        <div>
-          <Route path="/RegisterEmployee" component={EmployeePopup} />
         </div>
       </div>
     )

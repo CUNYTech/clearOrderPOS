@@ -7,6 +7,7 @@ const LocalStrategy                 = require('passport-local').Strategy;
 const BusinessModel                 = require('../../models/BusinessRegistrationSchema');
 const UserModel                     = require('../../models/UserRegistrationSchema');
 const sharedFunctions               = require('../sharedFunctions.js');
+const constants                     = require('../../constants.js');
 
 const mongoose                      = require('mongoose');
 
@@ -14,58 +15,96 @@ module.exports = (app) => {
 
   function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        next();
+        next()
     }
   }
 
-  app.get('/business/get-categories', isAuthenticated, function(req,res,next) {
-    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
-      if(err){
-         return req.status(500);
-      }
+  /*
 
+    CATEGORIES (ADDING / REMOVING / RECEIVING)
+  
+  */
+
+  app.get('/business/get-categories', isAuthenticated, function(req, res) {
+    // User is auth, so we'll get the business via his business id
+    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
+      if(err)
+         return req.status(500).send({state : constants.USER_NOT_FOUND})
+      // Find business id, then select business items - that contains the categories and items
       BusinessModel.find().where('business_id').equals(person.business_id)
         .select('business_items')
         .find(function(err, array){
           if(err)
-            return;
-          res.status(200).send(array);
+            return req.status(500).send({state : constants.COMPANY_NOT_FOUND})
+          res.status(200).send(array)
         });
     })
   });
 
-  app.post('/business/add_category', [
-    check('name')
+  app.post('/business/add_category', isAuthenticated, [
+    check('category_name')
       .trim()
       .isLength({min : 1})
       .withMessage("A name must be provided")
   ], 
   function (req, res, next) {
-    const validationErrors = validationResult(req);
-
+    const validationErrors = validationResult(req)
+    // Validate that the user has given us some input
     if(!validationErrors.isEmpty())
-      return res.status(400).send({message: validationErrors.mapped()});
-    
+      return res.status(400).send({state : constants.VALID_NOT_APPROVED ,message: validationErrors.mapped()})
+    // As before, we'll get the business id through the user
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
-      if(err){
-         return req.status(500);
-      }
-
-
+      if(err)
+         return req.status(500).send({state : constants.USER_NOT_FOUND})
+      // We're looking for a specific business id and adding in a new category
       BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
         {
           $push : {
-            business_items : {"category": req.body.name, "items": {"name": "Pizza", "price": 10}}
+            business_items : {"category": req.body.category_name, "items": {"name": "Pizza", "price": 10}}
           } 
-        },{upsert:true, new : true}, (bsnsError, result) => {
-          if(bsnsError){
-            return res.status(500);
-          }
-          return res.status(200);
+        },{upsert:true, new : true}, (bError, result) => {
+          if(bError)
+            return res.status(500).send({state : constants.BUSINESS_NOT_FOUND})
+
+          return res.status(200).send({state : constants.SUCCESS})
         }
       )
     })
   });
+
+  app.post('/business/remove_category', function (req, res, next) {
+    // As before, we'll get the business id through the user
+    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
+      if(err)
+         return req.status(500).send({state : constants.USER_NOT_FOUND})
+      // Now we want to delete a specific category entry, and we're provided with the category name
+      BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
+        {
+          $pull : {
+            business_items : {"category": req.body.category_name }
+          } 
+        }, { safe: true, upsert: true }, (bError, result) => {
+          if(bError)
+            return res.status(500).send({state : constants.BUSINESS_NOT_FOUND})
+
+          return res.status(200).send({state : constants.SUCCESS})
+        }
+      )
+    })
+  });
+
+  /*
+
+    ITEMS (ADDING / REMOVING / RECEIVING)
+  
+  */
+
+
+  /*
+
+    REGISTERING A BUSINESS
+  
+  */
 
   app.post('/business/register', [
     check('fname')
@@ -110,16 +149,16 @@ module.exports = (app) => {
     check("confirm_password", "Passwords do not match")
         .custom((value, {req, loc, path}) => {
             if (value !== req.body.password) 
-                throw new Error("Passwords do not match");
+                throw new Error("Passwords do not match")
             else
                 return value;
         })
     ],
     function (req, res, next) {
-      const validationErrors = validationResult(req);
+      const validationErrors = validationResult(req)
 
       if(!validationErrors.isEmpty())
-        return res.status(400).send({message: validationErrors.mapped(), hasMultiple : true});
+        return res.status(400).send({state : constants.VALID_NOT_APPROVED, message: validationErrors.mapped()})
       // Define a new business
       const business = new BusinessModel({
         business_id : req.body.business_id,
@@ -130,31 +169,28 @@ module.exports = (app) => {
       // Begin business registration
       BusinessModel.createBusiness(business, function(error, result){
         if(error){
-          if ((error.name === 'BulkWriteError' || error.name === "MongoError") && error.code === 11000) {
-            return res.status(400).send({ message : 'Business ID is already in use' });           
-          } else {
+          if ((error.name === 'BulkWriteError' || error.name === "MongoError") && error.code === 11000) 
+            return res.status(400).send({state : constants.VALID_NOT_APPROVED, message : 'Business ID is already in use' })    
+          else 
             console.log(error);
-            return res.status(500).send({ message: 'An unexpected error has occured when creating a business, please try again or contact an administrator' });
-          }
+            return res.status(500).send({state : constants.UNKNOWN_ERROR, message: 'An unexpected error has occured when creating a business, please try again or contact an administrator' })
         }
         // Begin passport authentication - Local signup, found in passport-init.js
         passport.authenticate('local-user-signup', (err, businesId, info) => {
           if(err)
           {
             BusinessModel.findOneAndRemove({'_id' : business._id}).exec();
-            if ((err.name === 'BulkWriteError' || err.name == "MongoError") && err.code === 11000) {
-              return res.status(409).send({ message : 'Email is already in use' });           
-            } else {
-              console.log("An error occured that could not be identified: " + err);
-              return res.status(400).send({ message: "An unexpected error has occured creating the business, please try again or contact an administrator" });
-            }
+            if ((err.name === 'BulkWriteError' || err.name == "MongoError") && err.code === 11000) 
+              return res.status(409).send({state : constants.VALID_NOT_APPROVED, message : 'Email is already in use' })
+            else 
+              console.log("An error occured that could not be identified: " + err)
+              return res.status(400).send({state : constants.UNKNOWN_ERROR, message: "An unexpected error has occured creating the business, please try again or contact an administrator" })
           }
           // if ID was found, then the business is valid, and the user account is created
           if(businesId)
-          {
-            return res.status(200).send({message: 'Business has been created! You may now log in'});
-          }
-        })(req, res, next);
+            return res.status(200).send({state : constants.SUCCESS, message: 'Business has been created! You may now log in'})
+          
+        })(req, res, next)
       });
   });
 };
