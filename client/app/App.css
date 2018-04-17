@@ -1,21 +1,71 @@
-.LoginCard {
-    text-align: center;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
-.LoginCardHeader {
-    text-align: center;
-    font-size: 30px;
+html {
+  font-size: 100%;
 }
 
-.LoginCard .forgot-password {
-    font-size: 10px;
+html,
+body {
+  min-height: 100%;
+  min-height: 100vh;
+  font: 16px 'Roboto', Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  background: #f6f6f6;
 }
 
-.test-list{
-  width:100%;
+.app {
+  box-sizing: border-box;
+  overflow: auto;
+  max-width: 100%;
+  width: 100%;
+  background: darkslategrey;
+  padding: 1rem;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  min-height: 100vh;
 }
 
-.menu-box{
-  float: left;
-  padding: 10px;
+.header {
+  width: 100%;
+  text-align: center;
+  transition: 200ms;
+  display: block;
+  text-transform: uppercase;
+}
+
+.header:hover{
+  box-shadow: 0 0 2rem white;
+}
+
+.main {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0rem;
+  text-align: center;
+  transition: 200ms;
+
+  flex: 1 1 auto;
+  color: white;
+  background: darkgrey;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  transition: 200ms;
+}
+
+.footer:hover{
+  box-shadow: 0 0 2rem white;
 }

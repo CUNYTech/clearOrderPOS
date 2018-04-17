@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import ReactDom from 'react-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -9,8 +10,6 @@ import {Redirect} from 'react-router-dom'
 
 import UserSettings from '../UserSettings/UserSettings';
 import BusinessSettings from '../BusinessSettings/BusinessSettings';
-
-import './UserHomepage.css';
 
 class UserHomepage extends Component {
   constructor() {
@@ -38,15 +37,23 @@ class UserHomepage extends Component {
     if(redirect === true)
       return <Redirect to="/" />
     return (
-      <div className='outer-box' >
+      <div >
+        <Card style={outside}>
+          <CardHeader
+            title=""
+            subtitle=""
+            aactAsExpander={false}
+            showExpandableButton={false}
+           >
+           <div style={heading}>
+             User Homepage
+           </div>
+         </CardHeader>
 
-        <h1 className='center-me'>User Homepage</h1>
-        <br />
+        <div style={middleBox}>
 
-        <div className='middle-box'>
-
-          <div className='settings-box'>
-            <Link to='/UserSettings' >
+          <div style={right}>
+            <Link to='/user/settings' >
               <RaisedButton
                 label='settings'
                 secondary={true}
@@ -54,7 +61,7 @@ class UserHomepage extends Component {
             </Link>
           </div>
 
-          <div className='business-box'>
+          <div style={left}>
             <h3>Business Name </h3>
             <DropDownMenu
               value={this.state.value}
@@ -73,18 +80,18 @@ class UserHomepage extends Component {
 
         <div >
 
-          <div className='button-box'>
+          <div style={buttonBox}>
             <RaisedButton
-              className='float-right'
+              style={right}
               label="GO"
               primary={true}
               />
           </div>
 
-          <div className='button-box' >
-            <Link to='BusinessSettings'>
+          <div style={buttonBox} >
+            <Link to='business/settings'>
               <RaisedButton
-                className='float-left'
+                style={left}
                 label="Edit"
                 secondary={true}
               />
@@ -94,9 +101,10 @@ class UserHomepage extends Component {
         </div>
 
         <div>
-          <Route path="/UserSettings" component={UserSettings} />
-          <Route path='BusinessSettings' component={BusinessSettings} />
+          <Route path="/user/settings" component={UserSettings} />
+          <Route path='business/settings' component={BusinessSettings} />
         </div>
+      </Card>
 
       </div>
     );
@@ -104,3 +112,37 @@ class UserHomepage extends Component {
 }
 
 export default UserHomepage;
+
+const outside = {
+  margin: 'auto',
+  width: '75%',
+  overflow: 'auto',
+  boxSizing: 'border-box',
+  padding: '20px',
+}
+const heading = {
+  textAlign: 'center',
+  fontSize: '40px',
+}
+
+const middleBox = {
+  height: '200px',
+  margin: 'auto',
+  width: '60%',
+}
+
+const left = {
+  float: 'left',
+  margin: 'auto',
+}
+
+const right = {
+  float: 'right',
+  margin: 'auto',
+}
+
+const buttonBox = {
+  float: 'left',
+  padding: '20px',
+  width: '50%',
+}
