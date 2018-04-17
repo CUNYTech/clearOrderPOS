@@ -40,8 +40,8 @@ export class LoginPopup extends Component {
     axios.post('/user/login', { email, password })
         .then((response) => {
             this.setState({
-              message : response.data.message, 
-              redirect : true, 
+              message : response.data.message,
+              redirect : true,
               hasErrors : false
             });
         })
@@ -73,38 +73,38 @@ export class LoginPopup extends Component {
       return <Redirect to="/user/homepage" />
 
     return (
-      <div>
-        <div className={"LoginCard"}>
+      <div style={outerBox}>
+        <Card style={cardStyle}>
           <CardHeader
-            className={"LoginCardHeader"}
+            title="Serve+ Login"
             actAsExpander={true}
             showExpandableButton={false}
-          >
-            Server+ Login
-          </CardHeader>
+          />
 
           {this.printMessage(hasErrors, message)}
 
-          <form onSubmit={this.onSubmit}>
-            <TextField
-              floatingLabelText="Email"
-              floatingLabelFixed={false}
-              name='email'
-              value={email}
-              onChange={this.onChange}
-            /><br />
+          <div >
+            <form onSubmit={this.onSubmit}>
+              <TextField
+                floatingLabelText="Email"
+                floatingLabelFixed={false}
+                name='email'
+                value={email}
+                onChange={this.onChange}
+              /><br />
 
-            <TextField
-              type={"password"}
-              floatingLabelText="Password"
-              floatingLabelFixed={false}
-              name='password'
-              value={password}
-              onChange={this.onChange}
-            /><br /><br />
+              <TextField
+                type={"password"}
+                floatingLabelText="Password"
+                floatingLabelFixed={false}
+                name='password'
+                value={password}
+                onChange={this.onChange}
+              /><br /><br />
 
-            <RaisedButton type="submit" label="Sign In" primary={true} />
-          </form>
+              <RaisedButton type="submit" label="Sign In" primary={true} />
+            </form>
+          </div>
 
           <div className={"LoginCardFooter"}>
 
@@ -123,9 +123,26 @@ export class LoginPopup extends Component {
               />
             </Link>
           </div>
-        </div>
+        </Card>
       </div>
-    )
+    );
   }
 }
 // ================================================
+
+
+
+const outerBox = {
+  margin: 'auto',
+  width: '75%',
+  height: '90%',
+  padding: '20px',
+  overflow: 'auto',
+};
+
+const cardStyle = {
+  height: '100%',
+  padding: '20px',
+  textAlign: 'center',
+  backgroundColor: 'beige',
+}

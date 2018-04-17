@@ -5,8 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 
-import './UserSettings.css';
-
 import ChangePassword from './ChangePassword'
 import AddBusiness from './AddBusiness';
 import UserHomepage from '../UserHomepage/UserHomepage';
@@ -27,8 +25,8 @@ class UserSettings extends Component {
   render() {
 
     return(
-      <div className='USETT-outer-box'>
-        <Card className='card-padding'>
+      <div style={outerBox}>
+        <Card style={cardStyle}>
           <CardHeader
             title="Update User Settings"
             subtitle=""
@@ -36,8 +34,8 @@ class UserSettings extends Component {
             showExpandableButton={false}
           />
 
-        <div >
-          <div  className='USETT-float-left'>
+        <CardText style={flexColumn}>
+          <div style={column}>
             <TextField
               hintText="First Name"
               /><br />
@@ -52,11 +50,9 @@ class UserSettings extends Component {
               hintText="Phone #"
               /><br />
             <br />
-
           </div>
 
-          <div className='USETT-float-right'>
-
+          <div style={column}>
             <TextField
               hintText="Email"
               /><br />
@@ -67,22 +63,22 @@ class UserSettings extends Component {
               /><br />
             <br />
           </div>
-        </div>
+        </CardText>
 
-          <CardActions>
-            <Link to='/UserHomepage'>
-              <RaisedButton label="OK"  primary={true}/>
-            </Link>
-            <Link to='/UserHomepage'>
-              <RaisedButton label="Cancel" primary={true} />
-            </Link>
-            <Link to="/ChangePassword">
-              <RaisedButton label="Change Password" primary={true} />
-            </Link>
-            <Link to='/AddBusiness'>
-              <RaisedButton label="Add a business" primary={true} />
-            </Link>
-          </CardActions>
+        <CardActions >
+          <Link to='/UserHomepage'>
+            <RaisedButton label="OK"  primary={true}/>
+          </Link>
+          <Link to='/UserHomepage'>
+            <RaisedButton label="Cancel" primary={true} />
+          </Link>
+          <Link to="/ChangePassword">
+            <RaisedButton label="Change Password" secondary={true} />
+          </Link>
+          <Link to='/AddBusiness'>
+            <RaisedButton label="Add a business" secondary={true} />
+          </Link>
+        </CardActions>
         </Card>
 
         <div>
@@ -96,3 +92,27 @@ class UserSettings extends Component {
 }
 
 export default UserSettings;
+
+const outerBox = {
+  margin: 'auto',
+  width: '75%',
+  height: 'auto',
+  padding: '20px',
+  overflow: 'auto',
+};
+
+const cardStyle = {
+  height: 'auto',
+  padding: '20px',
+  textAlign: 'center',
+  backgroundColor: 'beige',
+}
+
+const flexColumn = {
+  display: 'flex',
+  flexDirection: 'row',
+}
+
+const column = {
+  margin: 'auto',
+}

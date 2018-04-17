@@ -13,7 +13,6 @@ export default class ChangePassword extends Component {
         <Card style={cardStyle}>
           <CardHeader
             title="Change Password"
-            subtitle=""
             actAsExpander={false}
             showExpandableButton={false}
           />
@@ -56,13 +55,15 @@ export default class ChangePassword extends Component {
 
 const outerBox = {
   margin: 'auto',
-  width: '50%',
-  height: '90%',
+  width: '75%',
+  height: 'auto',
   padding: '20px',
   overflow: 'auto',
 };
 
 const cardStyle = {
+  height: 'auto',
   padding: '20px',
   textAlign: 'center',
+  backgroundColor: 'beige',
 }

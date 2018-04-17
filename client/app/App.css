@@ -25,7 +25,7 @@ body {
   overflow: auto;
   max-width: 100%;
   width: 100%;
-  background: darkcyan;
+  background: beige;
   padding: 1rem;
   font-size: 1rem;
   display: flex;
@@ -44,7 +44,7 @@ body {
 }
 
 .header:hover{
-  box-shadow: 0 0 2rem white;
+  box-shadow: 0 0 2rem black;
 }
 
 .main {
@@ -53,11 +53,26 @@ body {
   padding: 1rem;
   margin: 1rem 0rem;
   text-align: center;
+  justify-content: center;
   transition: 200ms;
 
   flex: 1 1 auto;
   color: white;
-  background: darkslategrey;
+  background: burlywood;
+
+  position: relative;
+
+}
+.main:hover{
+  box-shadow: 0 0 2rem black;
+}
+
+.main > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .footer {
@@ -67,5 +82,5 @@ body {
 }
 
 .footer:hover{
-  box-shadow: 0 0 2rem white;
+  box-shadow: 0 0 2rem black;
 }
