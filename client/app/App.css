@@ -25,7 +25,7 @@ body {
   overflow: auto;
   max-width: 100%;
   width: 100%;
-  background: darkslategrey;
+  background: darkcyan;
   padding: 1rem;
   font-size: 1rem;
   display: flex;
@@ -57,7 +57,7 @@ body {
 
   flex: 1 1 auto;
   color: white;
-  background: darkgrey;
+  background: darkslategrey;
 }
 
 .footer {
