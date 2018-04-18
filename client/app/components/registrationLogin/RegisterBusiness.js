@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPopup from './loginPopUp';
 import axios from 'axios';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 
 class RegisterPopup extends Component {
@@ -43,7 +43,7 @@ class RegisterPopup extends Component {
     axios.post('/business/register', { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password })
       .then((response) => {
         this.setState ({
-          message : response.data.message, 
+          message : response.data.message,
           hasErrors : false,
           redirect : true
         });
@@ -71,111 +71,113 @@ class RegisterPopup extends Component {
 
   render() {
     const { fname, lname, email, business_name, business_phone, business_address, business_id, password, confirm_password, hasErrors, redirect, message} = this.state;
-    
+
     if(redirect)
       return <Redirect to='/business/settings' />
-    
+
     return (
-      <div>
-        <div className={"LoginCard"}>
+      <div style={outerBox}>
+        <Card style={cardStyle}>
           <CardHeader
-            className={"LoginCardHeader"}
-            actAsExpander={true}
+            title="Register Business"
+            actAsExpander={false}
             showExpandableButton={false}
-          >
-            Business Registration
-          </CardHeader>
+          />
 
           {this.printMessage(hasErrors, message)}
 
           <form onSubmit={this.onSubmit}>
-            <TextField
-                floatingLabelText="First Name"
-                floatingLabelFixed={false}
-                name='fname'
-                value={fname}
-                onChange={this.onChange}
-            /><br />
+            <CardText style={flexColumn}>
+              <div style={column}>
+                <TextField
+                    floatingLabelText="First Name"
+                    floatingLabelFixed={false}
+                    name='fname'
+                    value={fname}
+                    onChange={this.onChange}
+                /><br />
 
-            <TextField
-                floatingLabelText="Last Name"
-                floatingLabelFixed={false}
-                name='lname'
-                value={lname}
-                onChange={this.onChange}
-            /><br />
+                <TextField
+                    floatingLabelText="Last Name"
+                    floatingLabelFixed={false}
+                    name='lname'
+                    value={lname}
+                    onChange={this.onChange}
+                /><br />
 
-            <TextField
-                floatingLabelText="Business Name"
-                floatingLabelFixed={false}
-                name='business_name'
-                value={business_name}
-                onChange={this.onChange}
-            /><br />
+                <TextField
+                    floatingLabelText="Business Name"
+                    floatingLabelFixed={false}
+                    name='business_name'
+                    value={business_name}
+                    onChange={this.onChange}
+                /><br />
 
-              <TextField
-                floatingLabelText="Business Phone Number"
-                floatingLabelFixed={false}
-                name='business_phone'
-                value={business_phone}
-                onChange={this.onChange}
-            /><br />
+                  <TextField
+                    floatingLabelText="Business Phone Number"
+                    floatingLabelFixed={false}
+                    name='business_phone'
+                    value={business_phone}
+                    onChange={this.onChange}
+                /><br />
 
-            <TextField
-                floatingLabelText="Business Address"
-                floatingLabelFixed={false}
-                name='business_address'
-                value={business_address}
-                onChange={this.onChange}
-            /><br />
+                <TextField
+                    floatingLabelText="Business Address"
+                    floatingLabelFixed={false}
+                    name='business_address'
+                    value={business_address}
+                    onChange={this.onChange}
+                /><br />
+              </div>
 
-            <TextField
-                floatingLabelText="Business Code"
-                floatingLabelFixed={false}
-                name='business_id'
-                value={business_id}
-                onChange={this.onChange}
-            /><br />
+              <div style={column}>
+                <TextField
+                    floatingLabelText="Business Code"
+                    floatingLabelFixed={false}
+                    name='business_id'
+                    value={business_id}
+                    onChange={this.onChange}
+                /><br />
 
-            <TextField
-                floatingLabelText="Email"
-                floatingLabelFixed={false}
-                name='email'
-                value={email}
-                onChange={this.onChange}
-            /><br />
+                <TextField
+                    floatingLabelText="Email"
+                    floatingLabelFixed={false}
+                    name='email'
+                    value={email}
+                    onChange={this.onChange}
+                /><br />
 
-            <TextField
-                type={"password"}
-                floatingLabelText="Password"
-                floatingLabelFixed={false}
-                name='password'
-                value={password}
-                onChange={this.onChange}
-            /><br />
+                <TextField
+                    type={"password"}
+                    floatingLabelText="Password"
+                    floatingLabelFixed={false}
+                    name='password'
+                    value={password}
+                    onChange={this.onChange}
+                /><br />
 
-            <TextField
-                type={"password"}
-                floatingLabelText="Confirm Password"
-                floatingLabelFixed={false}
-                name='confirm_password'
-                value={confirm_password}
-                onChange={this.onChange}
-            /><br />
+                <TextField
+                    type={"password"}
+                    floatingLabelText="Confirm Password"
+                    floatingLabelFixed={false}
+                    name='confirm_password'
+                    value={confirm_password}
+                    onChange={this.onChange}
+                /><br />
+              </div>
+            </CardText>
 
-            <RaisedButton type="submit" label="Register" primary={true} />
+            <CardActions>
+              <RaisedButton type="submit" label="Register" primary={true} />
+              <Link to="/user/register">
+                <RaisedButton
+                  label="Registering as a User?"
+                  secondary={true}
+                  onClick={this.handleClose} />
+              </Link>
+            </CardActions>
           </form>
-
-
-          <div className={"LoginCardFootter"}>
-            <br />
-            <Link to="/user/register">
-              <RaisedButton
-                label="Registering as a User?"
-                onClick={this.handleClose} />
-            </Link>
-          </div>
-        </div>
+        </Card>
       </div>
     )
   }
@@ -183,3 +185,31 @@ class RegisterPopup extends Component {
 
 
 export default RegisterPopup;
+
+
+
+const outerBox = {
+  margin: 'auto',
+  width: '75%',
+  height: 'auto',
+  maxHeight: '100%',
+  padding: '20px',
+  overflow: 'auto',
+  boxSizing: 'border-box',
+};
+
+const cardStyle = {
+  height: 'auto',
+  padding: '20px',
+  textAlign: 'center',
+  backgroundColor: 'beige',
+}
+
+const flexColumn = {
+  display: 'flex',
+  flexDirection: 'row',
+}
+
+const column = {
+  margin: 'auto',
+}
