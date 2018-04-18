@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPopup from './loginPopUp';
 import axios from 'axios';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 
 class EmployeePopup extends Component {
@@ -46,8 +46,8 @@ class EmployeePopup extends Component {
             })
             .catch((error) => {
                 this.setState({
-                    message : error.response.data.message, 
-                    hasErrors : true, 
+                    message : error.response.data.message,
+                    hasErrors : true,
                     redirect : false
                 });
             })
@@ -71,43 +71,45 @@ class EmployeePopup extends Component {
         if(redirect)
             return <Redirect to='/user/homepage' />
         return (
-            <div>
-                <div className={"LoginCard"}>
-                    <CardHeader
-                        className={"LoginCardHeader"}
-                        actAsExpander={true}
-                        showExpandableButton={false}
-                    >
-                        Employee Registration
-                    </CardHeader>
+            <div style={outerBox}>
+              <Card style={cardStyle}>
+                <CardHeader
+                  title="Employee Registration"
+                    actAsExpander={true}
+                    showExpandableButton={false}
+                />
 
-                    {this.printMessage(hasErrors, message)}
+                {this.printMessage(hasErrors, message)}
 
-                    <form onSubmit={this.onSubmit}>
-                        <TextField
-                            floatingLabelText="First Name"
-                            floatingLabelFixed={false}
-                            name='fname'
-                            value={fname}
-                            onChange={this.onChange}
-                        /><br />
+                <form onSubmit={this.onSubmit}>
+                  <CardText style={flexColumn}>
+                    <div style={column}>
+                      <TextField
+                          floatingLabelText="First Name"
+                          floatingLabelFixed={false}
+                          name='fname'
+                          value={fname}
+                          onChange={this.onChange}
+                      /><br />
 
-                        <TextField
-                            floatingLabelText="Last Name"
-                            floatingLabelFixed={false}
-                            name='lname'
-                            value={lname}
-                            onChange={this.onChange}
-                        /><br />
+                      <TextField
+                          floatingLabelText="Last Name"
+                          floatingLabelFixed={false}
+                          name='lname'
+                          value={lname}
+                          onChange={this.onChange}
+                      /><br />
 
-                        <TextField
-                            floatingLabelText="Company ID or Company Name"
-                            floatingLabelFixed={false}
-                            name='business_id'
-                            value={business_id}
-                            onChange={this.onChange}
-                        /><br />
+                      <TextField
+                          floatingLabelText="Company ID or Company Name"
+                          floatingLabelFixed={false}
+                          name='business_id'
+                          value={business_id}
+                          onChange={this.onChange}
+                      /><br />
+                    </div>
 
+                    <div style={column}>
                         <TextField
                             floatingLabelText="Email"
                             floatingLabelFixed={false}
@@ -133,27 +135,53 @@ class EmployeePopup extends Component {
                             value={confirm_password}
                             onChange={this.onChange}
                         /><br />
-
-                        <RaisedButton type="submit" label="Register" primary={true} />
-                    </form>
-
-                    <div className={"LoginCardFooter"}>
-                        <br />
-                        <Link to="/business/register">
-                            <RaisedButton
-                                label="Registering a business?"
-                                onClick={this.handleClose} />
-                        </Link>
                     </div>
+                  </CardText>
 
-                    <div>
-                        <Route path=".../App.js" component={LoginPopup} />
+                  <CardActions>
+                    <RaisedButton type="submit" label="Register" primary={true} />
+                    <Link to="/business/register">
+                        <RaisedButton
+                            label="Registering a business?"
+                            secondary={true}
+                            onClick={this.handleClose} />
+                    </Link>
+                  </CardActions>
+                </form>
 
-                    </div>
+                <div>
+                    <Route path=".../App.js" component={LoginPopup} />
                 </div>
+              </Card>
             </div>
         )
     }
 }
 
 export default EmployeePopup;
+
+const outerBox = {
+  margin: 'auto',
+  width: '75%',
+  height: 'auto',
+  maxHeight: '100%',
+  padding: '20px',
+  overflow: 'auto',
+  boxSizing: 'border-box',
+};
+
+const cardStyle = {
+  height: 'auto',
+  padding: '20px',
+  textAlign: 'center',
+  backgroundColor: 'beige',
+}
+
+const flexColumn = {
+  display: 'flex',
+  flexDirection: 'row',
+}
+
+const column = {
+  margin: 'auto',
+}
