@@ -13,6 +13,7 @@ import Home from './components/extra/Home';
 import Screen from './components/extra/Screen'
 import UserHomepage from './components/UserHomepage/UserHomepage';
 import BasicLayout from './components/reactGridLayout/widgetGrid';
+import WidgetsGrid from './components/reactGridLayout/WidgetsGrid';
 import Extra from './components/extra/Extra.js';
 
 //Login Related
@@ -113,7 +114,7 @@ class App extends Component {
             <Route path="/extra" component={Extra} />
           </Switch>
         </div>
-
+        <WidgetsGrid />
         <div className="footer">
           <Footer />
         </div>
