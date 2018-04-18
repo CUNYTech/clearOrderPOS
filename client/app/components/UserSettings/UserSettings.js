@@ -29,7 +29,6 @@ class UserSettings extends Component {
         <Card style={cardStyle}>
           <CardHeader
             title="Update User Settings"
-            subtitle=""
             actAsExpander={false}
             showExpandableButton={false}
           />
@@ -97,6 +96,7 @@ const outerBox = {
   margin: 'auto',
   width: '75%',
   height: 'auto',
+  maxHeight: '100%',
   padding: '20px',
   overflow: 'auto',
   boxSizing: 'border-box',
