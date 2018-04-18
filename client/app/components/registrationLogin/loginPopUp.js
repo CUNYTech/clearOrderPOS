@@ -132,7 +132,7 @@ export class LoginPopup extends Component {
 
           <CardText actAsExpander={true}>
             <h3>
-              Don't have an account? Register Now!
+              Don't have an account? Click Here!
             </h3>
           </CardText>
 
