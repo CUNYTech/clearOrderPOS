@@ -5,15 +5,10 @@ export default class FirstWidget extends Component {
     render() {
       return (
         <Card >
-          <CardHeader title="The Dins Widget" subtitle="HolySHIEEEEET" />
+          <CardHeader title="The Dins Widget" subtitle="A Useless Widget" />
           <CardText>
-          Hi, my name is Dinsdale Lee.
+            Hi, my name is Dinsdale Lee.
           </CardText>
-          <div>
-            <h6>
-              <span>Wow I cant believe this works</span>
-            </h6>
-          </div>
         </Card>
       );
     }

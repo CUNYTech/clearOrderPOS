@@ -4,7 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-router-dom";
 
 const outerBox = {
   margin: 'auto',
@@ -31,7 +30,7 @@ const dividePad = {
   backgroundColor: 'blue',
 };
 
-export default class pizzaMaker extends Component {
+export default class PizzaMaker extends Component {
   render() {
     return (
       <div style={outerBox} >

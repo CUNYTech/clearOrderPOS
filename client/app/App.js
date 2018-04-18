@@ -12,9 +12,9 @@ import Footer from './components/Footer/Footer';
 import Home from './components/extra/Home';
 import Screen from './components/extra/Screen'
 import UserHomepage from './components/UserHomepage/UserHomepage';
-import BasicLayout from './components/reactGridLayout/widgetGrid';
-import WidgetsGrid from './components/reactGridLayout/WidgetsGrid';
+//import BasicLayout from './components/reactGridLayout/widgetGrid';
 import Extra from './components/extra/Extra.js';
+import dashBoard from './components/dashboard/dashboard';
 
 //Login Related
 import { LoginPopup, RegisterBusinessButton, RegisterEmployeeButton} from './components/registrationLogin/loginPopUp';
@@ -96,6 +96,8 @@ class App extends Component {
             <Link to='/business/settings'> <MenuItem primaryText="Business Settings" /> </Link>
 
             <Link to='/extra'> <MenuItem primaryText="Extra" /> </Link>
+            <Link to='/dashboard'> <MenuItem primaryText="Dashboard" /> </Link>
+
           </IconMenu>
 
           <Switch>
@@ -112,9 +114,9 @@ class App extends Component {
             <Route path="/business/settings" component={BusinessSettings} />
 
             <Route path="/extra" component={Extra} />
+            <Route path="/dashboard" component={dashBoard} />
           </Switch>
         </div>
-        <WidgetsGrid />
         <div className="footer">
           <Footer />
         </div>

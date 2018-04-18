@@ -42,7 +42,7 @@ class UserHomepage extends Component {
           <CardHeader
             title=""
             subtitle=""
-            aactAsExpander={false}
+            actAsExpander={false}
             showExpandableButton={false}
            >
            <div style={heading}>
