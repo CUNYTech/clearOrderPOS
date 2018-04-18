@@ -7,7 +7,8 @@ import {Redirect} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Toggle from 'material-ui/Toggle';
 
 //Custom Components
 import EmployeePopup from "./RegisterEmployee";
@@ -15,17 +16,34 @@ import RegisterPopup from "./RegisterBusiness";
 import UserHomepage from "../UserHomepage/UserHomepage";
 
 export class LoginPopup extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       message : {},
       email : '',
       password : '',
       hasErrors : false,
-      redirect : false
+      redirect : false,
+      expanded: false
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  handleExpandChange = (expanded) => {
+    this.setState({expanded: expanded});
+  };
+
+  handleToggle = (event, toggle) => {
+    this.setState({expanded: toggle});
+  };
+
+  handleExpand = () => {
+    this.setState({expanded: true});
+  };
+
+  handleReduce = () => {
+    this.setState({expanded: false});
+  };
 
   onChange = (event) => {
     const state = this.state
@@ -74,17 +92,21 @@ export class LoginPopup extends Component {
 
     return (
       <div style={outerBox}>
-        <Card style={cardStyle}>
+        <Card
+          expanded={this.state.expanded}
+          onExpandChange={this.handleExpandChange}
+          style={cardStyle}
+          >
           <CardHeader
             title="Serve+ Login"
-            actAsExpander={true}
+            actAsExpander={false}
             showExpandableButton={false}
           />
 
           {this.printMessage(hasErrors, message)}
 
-          <div >
-            <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit}>
+            <CardText>
               <TextField
                 floatingLabelText="Email"
                 floatingLabelFixed={false}
@@ -101,48 +123,85 @@ export class LoginPopup extends Component {
                 value={password}
                 onChange={this.onChange}
               /><br /><br />
+            </CardText>
 
+            <CardActions>
               <RaisedButton type="submit" label="Sign In" primary={true} />
-            </form>
-          </div>
+            </CardActions>
+          </form>
 
-          <div className={"LoginCardFooter"}>
+          <CardText actAsExpander={true}>
+            <h3>
+              Don't have an account? Register Now!
+            </h3>
+          </CardText>
 
-            <br /><br />
-            Don't have an account? Register Now!
-            <br /><br />
+          <CardActions expandable={true}>
             <Link to="/business/register">
               <RaisedButton
                 label="Register Business"
-              />
+                secondary={true}
+                />
             </Link>
-            <br />
             <Link to="/user/register">
               <RaisedButton
                 label="Register Account"
-              />
+                secondary={true}
+                />
             </Link>
-          </div>
+          </CardActions>
         </Card>
       </div>
     );
   }
 }
 // ================================================
-
-
-
 const outerBox = {
   margin: 'auto',
   width: '75%',
-  height: '90%',
+  height: 'auto',
   padding: '20px',
   overflow: 'auto',
+  boxSizing: 'border-box',
 };
 
 const cardStyle = {
-  height: '100%',
+  height: 'auto',
   padding: '20px',
   textAlign: 'center',
   backgroundColor: 'beige',
 }
+
+const flexColumn = {
+  display: 'flex',
+  flexDirection: 'row',
+}
+
+const column = {
+  margin: 'auto',
+}
+
+// ================================================
+const styles = {
+  block: {
+    maxWidth: 250,
+  },
+  toggle: {
+    marginBottom: 16,
+  },
+  thumbOff: {
+    backgroundColor: '#ffcccc',
+  },
+  trackOff: {
+    backgroundColor: '#ff9d9d',
+  },
+  thumbSwitched: {
+    backgroundColor: 'red',
+  },
+  trackSwitched: {
+    backgroundColor: '#ff9d9d',
+  },
+  labelStyle: {
+    color: 'red',
+  },
+};
