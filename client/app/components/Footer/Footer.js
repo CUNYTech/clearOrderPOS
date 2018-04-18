@@ -26,6 +26,10 @@ export default class Footer extends Component {
       <div style={outerBox}>
         <AppBar
           showMenuIconButton={false}
+          style ={
+            {border: '0px solid transparent'},
+            {borderRadius: '25px'}
+          }
         />
       </div>
     );

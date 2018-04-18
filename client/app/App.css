@@ -41,6 +41,9 @@ body {
   transition: 200ms;
   display: block;
   text-transform: uppercase;
+
+  border: 0px solid transparent;
+  border-radius: 25px;
 }
 
 .header:hover{
@@ -62,6 +65,9 @@ body {
 
   position: relative;
 
+  border: 0px solid transparent;
+  border-radius: 25px;
+
 }
 .main:hover{
   box-shadow: 0 0 2rem black;
@@ -79,6 +85,9 @@ body {
   width: 100%;
   text-align: center;
   transition: 200ms;
+
+  border: 0px solid transparent;
+  border-radius: 25px;
 }
 
 .footer:hover{

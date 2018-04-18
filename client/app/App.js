@@ -71,8 +71,11 @@ class App extends Component {
             showMenuIconButton={false}
             title={<span>Serve+</span>}
             iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-
             iconElementRight={<Link to="/user/homepage"> <MenuItem primaryText="My Homepage" /> </Link>}
+            style={
+              {border: '5px solid black'},
+              {borderRadius: '25px'}
+            }
           />
         </div>
 
