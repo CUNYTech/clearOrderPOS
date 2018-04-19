@@ -18,8 +18,8 @@ import { Provider } from 'react-redux';
 //colors
 const muiTheme = getMuiTheme({
 	palette: {
-		primary1Color: amber900,
-		accent1Color: deepOrangeA700
+		primary1Color: '#204B75',
+		accent1Color: '#356089'
 	}
 });
 

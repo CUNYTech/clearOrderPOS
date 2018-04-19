@@ -117,7 +117,9 @@ const cardStyle = {
   height: 'auto',
   padding: '20px',
   textAlign: 'center',
-  backgroundColor: 'beige',
+  backgroundColor: '#C2D0DE',
+  border: '5px solid transparent',
+  borderRadius: '15px',
 }
 
 const flexColumn = {

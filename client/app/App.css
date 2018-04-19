@@ -25,7 +25,7 @@ body {
   overflow: auto;
   max-width: 100%;
   width: 100%;
-  background: beige;
+  background: #C2D0DE;
   padding: 1rem;
   font-size: 1rem;
   display: flex;
@@ -35,6 +35,12 @@ body {
   min-height: 100vh;
 }
 
+.header:hover,
+.main:hover,
+.footer:hover{
+  box-shadow: 0 0 2rem black;
+}
+
 .header {
   width: 100%;
   transition: 200ms;
@@ -42,11 +48,7 @@ body {
   text-transform: uppercase;
 
   border: 0px solid transparent;
-  border-radius: 25px;
-}
-
-.header:hover{
-  box-shadow: 0 0 2rem black;
+  border-radius: 15px;
 }
 
 .main {
@@ -60,16 +62,12 @@ body {
 
   flex: 1 1 auto;
   color: white;
-  background: burlywood;
+  background: #51799F;
 
   position: relative;
 
   border: 0px solid transparent;
-  border-radius: 25px;
-
-}
-.main:hover{
-  box-shadow: 0 0 2rem black;
+  border-radius: 15px;
 }
 
 .main > * {
@@ -86,9 +84,5 @@ body {
   transition: 200ms;
 
   border: 0px solid transparent;
-  border-radius: 25px;
-}
-
-.footer:hover{
-  box-shadow: 0 0 2rem black;
+  border-radius: 15px;
 }

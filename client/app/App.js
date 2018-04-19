@@ -74,7 +74,7 @@ class App extends Component {
             iconElementRight={<Link to="/user/homepage"> <MenuItem primaryText="My Homepage" /> </Link>}
             style={
               {border: '5px solid black'},
-              {borderRadius: '25px'}
+              {borderRadius: '15px'}
             }
           />
         </div>

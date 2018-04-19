@@ -28,7 +28,7 @@ export default class Footer extends Component {
           showMenuIconButton={false}
           style ={
             {border: '0px solid transparent'},
-            {borderRadius: '25px'}
+            {borderRadius: '15px'}
           }
         />
       </div>
