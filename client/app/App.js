@@ -71,7 +71,14 @@ class App extends Component {
             showMenuIconButton={false}
             title={<span>Serve+</span>}
             iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-            iconElementRight={<Link to="/user/homepage"> <MenuItem primaryText="My Homepage" /> </Link>}
+            iconElementRight={
+              <Link to="/user/homepage">
+                <MenuItem
+                  primaryText="My Homepage"
+                  style={{color: 'white'}}
+                  />
+              </Link>
+            }
             style={
               {border: '5px solid black'},
               {borderRadius: '15px'}
@@ -89,10 +96,10 @@ class App extends Component {
             <Link to='/screen'> <MenuItem primaryText="Screen" /> </Link>
             <Link to="/login"> <MenuItem primaryText="Login" /> </Link>
 
+            <Link to='/user/register'> <MenuItem primaryText="User Register" /> </Link>
             <Link to='/user/homepage'> <MenuItem primaryText="User Homepage" /> </Link>
             <Link to='/user/settings'> <MenuItem primaryText="User Settings" /> </Link>
             <Link to='/user/password'> <MenuItem primaryText="Change Password" /> </Link>
-            <Link to='/user/register'> <MenuItem primaryText="User Register" /> </Link>
 
             <Link to='/business/register'> <MenuItem primaryText="Register Business" /> </Link>
             <Link to='/business/settings'> <MenuItem primaryText="Business Settings" /> </Link>
@@ -105,10 +112,11 @@ class App extends Component {
             <Route path="/screen" component={Screen} />
             <Route path="/login" component={LoginPopup} />
 
+            <Route path="/user/register" component={RegisterEmployee}/>
             <Route path="/user/homepage" component={UserHomepage} />
             <Route path="/user/settings" component={UserSettings} />
-            <Route path="/user/password" component={ChangePassword} />
-            <Route path="/user/register" component={RegisterEmployee} />
+            <Route path="/user/password" component={ChangePassword}/>
+            <Route path="/user/addBusiness" component={AddBusiness}/>
 
             <Route path="/business/register" component={RegisterBusiness} />
             <Route path="/business/settings" component={BusinessSettings} />
@@ -127,9 +135,3 @@ class App extends Component {
 }
 
 export default App;
-
-const mainApp = {
-  height: '100%',
-  maxHeight: '100%',
-  overflow: 'auto',
-}

@@ -12,6 +12,8 @@ import UserSettings from '../UserSettings/UserSettings';
 import BusinessSettings from '../BusinessSettings/BusinessSettings';
 import Home from '../extra/Home';
 
+import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
+
 class UserHomepage extends Component {
   constructor() {
     super();
@@ -81,53 +83,17 @@ class UserHomepage extends Component {
               primary={true}
               />
           </Link>
-          <Link to='business/settings'>
+          <Link to='/business/settings'>
               <RaisedButton
                 label="Edit"
                 secondary={true}
               />
           </Link>
         </CardActions>
-
-        <div>
-          <Route path="/user/settings" component={UserSettings} />
-          <Route path='business/settings' component={BusinessSettings} />
-          <Route path="/home" component={Home} />
-        </div>
       </Card>
-
       </div>
     );
   }
 }
 
 export default UserHomepage;
-
-//
-const outerBox = {
-  margin: 'auto',
-  width: '75%',
-  height: 'auto',
-  padding: '20px',
-  overflow: 'auto',
-  boxSizing: 'border-box',
-};
-
-const cardStyle = {
-  height: 'auto',
-  padding: '20px',
-  textAlign: 'center',
-  backgroundColor: '#C2D0DE',
-  border: '5px solid transparent',
-  borderRadius: '15px',
-}
-
-const flexColumn = {
-  display: 'flex',
-  flexDirection: 'row',
-}
-
-const column = {
-  margin: 'auto',
-}
-//

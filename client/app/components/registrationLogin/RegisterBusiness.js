@@ -8,6 +8,8 @@ import LoginPopup from './loginPopUp';
 import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
+import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
+
 
 class RegisterPopup extends Component {
   constructor(){
@@ -185,31 +187,3 @@ class RegisterPopup extends Component {
 
 
 export default RegisterPopup;
-
-
-
-const outerBox = {
-  margin: 'auto',
-  width: '75%',
-  height: 'auto',
-  maxHeight: '100%',
-  padding: '20px',
-  overflow: 'auto',
-  boxSizing: 'border-box',
-};
-
-const cardStyle = {
-  height: 'auto',
-  padding: '20px',
-  textAlign: 'center',
-  backgroundColor: 'beige',
-}
-
-const flexColumn = {
-  display: 'flex',
-  flexDirection: 'row',
-}
-
-const column = {
-  margin: 'auto',
-}

@@ -9,6 +9,8 @@ import ChangePassword from './ChangePassword'
 import AddBusiness from './AddBusiness';
 import UserHomepage from '../UserHomepage/UserHomepage';
 
+import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
+
 class UserSettings extends Component {
 
   componentDidMount(){
@@ -65,55 +67,23 @@ class UserSettings extends Component {
         </CardText>
 
         <CardActions >
-          <Link to='/UserHomepage'>
+          <Link to='/user/homepage'>
             <RaisedButton label="OK"  primary={true}/>
           </Link>
-          <Link to='/UserHomepage'>
+          <Link to='/user/homepage'>
             <RaisedButton label="Cancel" primary={true} />
           </Link>
-          <Link to="/ChangePassword">
+          <Link to="/user/password">
             <RaisedButton label="Change Password" secondary={true} />
           </Link>
-          <Link to='/AddBusiness'>
+          <Link to='/user/addBusiness'>
             <RaisedButton label="Add a business" secondary={true} />
           </Link>
         </CardActions>
         </Card>
-
-        <div>
-          <Route path="/UserHomepage" component={UserHomepage} />
-          <Route path="/ChangePassword" component={ChangePassword} />
-          <Route path='/AddBusiness' component={AddBusiness} />
-        </div>
       </div>
     );
   }
 }
 
 export default UserSettings;
-
-const outerBox = {
-  margin: 'auto',
-  width: '75%',
-  height: 'auto',
-  maxHeight: '100%',
-  padding: '20px',
-  overflow: 'auto',
-  boxSizing: 'border-box',
-};
-
-const cardStyle = {
-  height: 'auto',
-  padding: '20px',
-  textAlign: 'center',
-  backgroundColor: 'beige',
-}
-
-const flexColumn = {
-  display: 'flex',
-  flexDirection: 'row',
-}
-
-const column = {
-  margin: 'auto',
-}

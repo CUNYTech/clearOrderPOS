@@ -15,6 +15,8 @@ import EmployeePopup from "./RegisterEmployee";
 import RegisterPopup from "./RegisterBusiness";
 import UserHomepage from "../UserHomepage/UserHomepage";
 
+import {outerBox, cardStyle} from '../../styles/cardStyle';
+
 export class LoginPopup extends Component {
   constructor(props){
     super(props);
@@ -156,27 +158,3 @@ export class LoginPopup extends Component {
   }
 }
 // ================================================
-const outerBox = {
-  margin: 'auto',
-  width: '75%',
-  height: 'auto',
-  padding: '20px',
-  overflow: 'auto',
-  boxSizing: 'border-box',
-};
-
-const cardStyle = {
-  height: 'auto',
-  padding: '20px',
-  textAlign: 'center',
-  backgroundColor: 'beige',
-}
-
-const flexColumn = {
-  display: 'flex',
-  flexDirection: 'row',
-}
-
-const column = {
-  margin: 'auto',
-}
