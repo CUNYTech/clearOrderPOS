@@ -14,13 +14,7 @@ import UserHomepage from '../UserHomepage/UserHomepage';
 class UserSettings extends Component {
 
   componentDidMount(){
-    axios.get('/auth-test')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error.response)
-      })
+
   }
 
 
@@ -70,17 +64,17 @@ class UserSettings extends Component {
         </div>
 
           <CardActions>
-            <Link to='/UserHomepage'>
+            <Link to='/user/homepage'>
               <RaisedButton label="OK"  primary={true}/>
             </Link>
-            <Link to='/UserHomepage'>
+            <Link to='/user/homepage'>
               <RaisedButton label="Cancel" primary={true} />
             </Link>
-            <Link to="/ChangePassword">
+            <Link to="/user/password">
               <RaisedButton label="Change Password" primary={true} />
             </Link>
-            <Link to='/AddBusiness'>
-              <RaisedButton label="Add a business" primary={true} />
+            <Link to='/business/add_business'>
+              <RaisedButton disabled={true} label="Add a business" primary={true} />
             </Link>
           </CardActions>
         </Card>

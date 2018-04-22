@@ -18,6 +18,22 @@ module.exports = (app) => {
         next()
     }
   }
+  /*
+
+    GET BUSINESSES
+
+  */
+
+ app.get('/business/get-businesses', isAuthenticated, function(req, res) {
+  // User is auth, so we'll get the business via his business id
+  UserModel.findOne({'email' : req.user.email}, '-_id business_id', (err, business) => {
+    if(err)
+       return req.status(500).send({state : constants.USER_NOT_FOUND})
+    // Find business id, then select business items - that contains the categories and items
+    res.status(200).send(business)
+  })
+});
+
 
   /*
 
@@ -25,6 +41,7 @@ module.exports = (app) => {
   
   */
 
+  // Get categories will also give us items
   app.get('/business/get-categories', isAuthenticated, function(req, res) {
     // User is auth, so we'll get the business via his business id
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
@@ -99,6 +116,36 @@ module.exports = (app) => {
   
   */
 
+    app.post('/business/add_item', isAuthenticated, [
+    check('category_name')
+      .trim()
+      .isLength({min : 1})
+      .withMessage("A name must be provided")
+  ], 
+  function (req, res, next) {
+    const validationErrors = validationResult(req)
+    // Validate that the user has given us some input
+    if(!validationErrors.isEmpty())
+      return res.status(400).send({state : constants.VALID_NOT_APPROVED ,message: validationErrors.mapped()})
+    // As before, we'll get the business id through the user
+    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
+      if(err)
+         return req.status(500).send({state : constants.USER_NOT_FOUND})
+      // We're looking for a specific business id and adding in a new category
+      BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
+        {
+          $push : {
+            business_items : {"category": req.body.category_name, "items": {"name": "Pizza", "price": 10}}
+          } 
+        },{upsert:true, new : true}, (bError, result) => {
+          if(bError)
+            return res.status(500).send({state : constants.BUSINESS_NOT_FOUND})
+
+          return res.status(200).send({state : constants.SUCCESS})
+        }
+      )
+    })
+  });
 
   /*
 

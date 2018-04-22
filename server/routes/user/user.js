@@ -1,4 +1,5 @@
 const bodyParser                    = require('body-parser');
+const bcrypt                        = require('bcrypt');
 
 const { check, validationResult }   = require('express-validator/check');
 const { matchedData, sanitize }     = require('express-validator/filter');
@@ -8,7 +9,9 @@ const LocalStrategy                 = require('passport-local').Strategy;
 
 const UserReg                       = require('../../models/UserRegistrationSchema');
 const BusinessReg                   = require('../../models/BusinessRegistrationSchema');
-const sharedFunctions               = require('../sharedFunctions.js');
+const sharedFunctions               = require('../sharedFunctions');
+
+const constants                     = require('../../constants');
 
 module.exports = (app) => {
   // Midleware - is user logged in?
@@ -28,6 +31,46 @@ module.exports = (app) => {
     req.logout();
     return res.status(200);
   });
+
+  app.post('/user/change_password', isAuthenticated,
+  [ 
+    check('old_password', 'Please enter your correct old password')
+      .trim()
+      .isLength({min: 4}),
+    check('new_password', 'Please enter a new valid password with 4 characters')
+      .trim()
+      .isLength({min: 4}),
+    check("confirm_password", "Passwords do not match")
+      .custom((value, {req, loc, path}) => {
+          if (value !== req.body.new_password) 
+              throw new Error("Passwords do not match");
+          else
+              return value;
+      }),
+  ], (req, res, next) => {
+    const validationErrors = validationResult(req);
+
+    if(!validationErrors.isEmpty())
+      return res.status(400).send({message: validationErrors.mapped()});
+    
+    UserReg.findOne({'email' : req.user.email}, (error, user) => {
+      if(user.verifyPassword(req.body.old_password, (error, isMatch) => {
+        if(error || !isMatch)
+          return res.status(500).send({message : 'The previous password is not correct', state : constants.PASSWORD_NOT_CHANGED})
+          
+        bcrypt.genSalt(10, function(genError, salt){
+          bcrypt.hash(req.body.new_password, salt, function(hashError, hash){
+            UserReg.findOneAndUpdate({'email' : req.user.email}, 
+              {$set: {password : hash }} , (setError, user) => {
+                if(setError || genError || hashError)
+                  return res.status(500).send({state : constants.PASSWORD_NOT_CHANGED})
+                return res.status(200).send({message : 'Password has been changed', state : constants.SUCCESS});
+                })
+              })
+            })
+      }));
+    })
+  })
 
   //===============
   // USER LOGIN ROUTE =========================

@@ -17,24 +17,31 @@ class UserHomepage extends Component {
     super();
     this.state = {
       value: 1,
-      redirect : false
+      redirect : false,
+      businesses : '',
+      business : ''
     };
   }
+  
 
-  componentDidMount(){
-    axios.get('/user-auth')
+  componentWillMount(){
+    axios.get('/business/get-businesses')
       .then((response) => {
-        this.setState({redirect : false});
+        this.setState({
+          businesses : response.data.business_id ,
+          business : response.data.business_id
+        })
       })
       .catch((error) => {
-        this.setState({redirect : true});
       })
   }
+
+  onDropMenuChange = (event, index, value) => this.setState({value});
 
   handleChange = (event, index, value) => this.setState({value});
 
   render() {
-    const redirect = this.state;
+    const {redirect, businesses, business} = this.state;
     if(redirect === true)
       return <Redirect to="/" />
     return (
@@ -42,31 +49,28 @@ class UserHomepage extends Component {
 
         <h1 className='center-me'>User Homepage</h1>
         <br />
-
         <div className='middle-box'>
-
           <div className='settings-box'>
-            <Link to='/UserSettings' >
+            <Link to='/user/settings' >
               <RaisedButton
-                label='settings'
+                label='Edit My Information'
                 secondary={true}
                 />
             </Link>
           </div>
-
           <div className='business-box'>
-            <h3>Business Name </h3>
-            <DropDownMenu
-              value={this.state.value}
-              onChange={this.handleChange}
+          <form onSubmit={this.onSubmit}>
+              <h1>Pick a Business</h1>
+              <DropDownMenu
+              value={this.state.business}
+              onChange={this.onDropMenuChange}
               autoWidth={true}
-            >
-              <MenuItem value={1} primaryText="select a business" />
-              <MenuItem value={2} primaryText="Business I" />
-              <MenuItem value={3} primaryText="Business II" />
-              <MenuItem value={4} primaryText="Business III" />
-              <MenuItem value={5} primaryText="Business III " />
-            </DropDownMenu>
+              >
+                <MenuItem value={business} primaryText={businesses} />
+              </DropDownMenu>
+              <br /><br />
+              <RaisedButton disabled={true} type="submit" label="Add" primary={true} />
+            </form>
           </div>
 
         </div>
@@ -74,15 +78,17 @@ class UserHomepage extends Component {
         <div >
 
           <div className='button-box'>
-            <RaisedButton
-              className='float-right'
-              label="GO"
-              primary={true}
+            <Link to='/screen'>
+              <RaisedButton
+                className='float-right'
+                label="GO"
+                primary={true}
               />
+            </Link>
           </div>
 
           <div className='button-box' >
-            <Link to='BusinessSettings'>
+            <Link to='/business/settings'>
               <RaisedButton
                 className='float-left'
                 label="Edit"

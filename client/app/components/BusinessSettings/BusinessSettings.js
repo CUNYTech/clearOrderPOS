@@ -138,7 +138,7 @@ class BusinessSettings extends Component {
           </div>
 
           <div style={settingsPane}>
-            <h1>Settings</h1>
+            <h1>Add A Category</h1>
             <form onSubmit={this.onSubmit}>
               <TextField
                 floatingLabelText="Category Name"
@@ -150,6 +150,7 @@ class BusinessSettings extends Component {
               <br /><br />
               <RaisedButton type="submit" label="Add" primary={true} />
             </form>
+            <h1>Add An Item</h1>
             <form onSubmit={this.onSubmit}>
               <TextField
                 floatingLabelText="Item Name"
