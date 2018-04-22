@@ -25,7 +25,7 @@ body {
   overflow: auto;
   max-width: 100%;
   width: 100%;
-  background: darkslategrey;
+  background: 'yellow';
   padding: 1rem;
   font-size: 1rem;
   display: flex;
@@ -35,16 +35,20 @@ body {
   min-height: 100vh;
 }
 
+.header:hover,
+.main:hover,
+.footer:hover{
+  box-shadow: 0 0 2rem black;
+}
+
 .header {
   width: 100%;
-  text-align: center;
   transition: 200ms;
   display: block;
   text-transform: uppercase;
-}
 
-.header:hover{
-  box-shadow: 0 0 2rem white;
+  border: 0px solid transparent;
+  border-radius: 15px;
 }
 
 .main {
@@ -53,21 +57,34 @@ body {
   padding: 1rem;
   margin: 1rem 0rem;
   text-align: center;
+  justify-content: center;
   transition: 200ms;
 
   flex: 1 1 auto;
   color: white;
-  background: darkgrey;
+  background: #51799F;
+
+  position: relative;
+
+  border: 0px solid transparent;
+  border-radius: 15px;
+}
+
+.main > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .footer {
   width: 100%;
   text-align: center;
   transition: 200ms;
-}
 
-.footer:hover{
-  box-shadow: 0 0 2rem white;
+  border: 0px solid transparent;
+  border-radius: 15px;
 }
 
 /* RGL styles */

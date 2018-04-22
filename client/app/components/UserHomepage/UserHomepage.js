@@ -10,6 +10,9 @@ import {Redirect} from 'react-router-dom'
 
 import UserSettings from '../UserSettings/UserSettings';
 import BusinessSettings from '../BusinessSettings/BusinessSettings';
+import Home from '../extra/Home';
+
+import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
 
 class UserHomepage extends Component {
   constructor() {
@@ -37,32 +40,19 @@ class UserHomepage extends Component {
     if(redirect === true)
       return <Redirect to="/" />
     return (
-      <div >
-        <Card style={outside}>
+      <div style={outerBox} >
+        <Card style={cardStyle}>
           <CardHeader
-            title=""
+            title="User Homepage"
             subtitle=""
             actAsExpander={false}
             showExpandableButton={false}
            >
-           <div style={heading}>
-             User Homepage
-           </div>
          </CardHeader>
 
-        <div style={middleBox}>
-
-          <div style={right}>
-            <Link to='/user/settings' >
-              <RaisedButton
-                label='settings'
-                secondary={true}
-                />
-            </Link>
-          </div>
-
-          <div style={left}>
-            <h3>Business Name </h3>
+        <CardText style={flexColumn}>
+          <div style={column}>
+            <h3>Business Name</h3>
             <DropDownMenu
               value={this.state.value}
               onChange={this.handleChange}
@@ -76,73 +66,34 @@ class UserHomepage extends Component {
             </DropDownMenu>
           </div>
 
-        </div>
+          <div style={column}>
+            <Link to='/user/settings' >
+              <RaisedButton
+                label='settings'
+                secondary={true}
+                />
+            </Link>
+          </div>
+        </CardText>
 
-        <div >
-
-          <div style={buttonBox}>
+        <CardActions >
+          <Link to='/home' >
             <RaisedButton
-              style={right}
-              label="GO"
+              label="HOME"
               primary={true}
               />
-          </div>
-
-          <div style={buttonBox} >
-            <Link to='business/settings'>
+          </Link>
+          <Link to='/business/settings'>
               <RaisedButton
-                style={left}
                 label="Edit"
                 secondary={true}
               />
           </Link>
-          </div>
-
-        </div>
-
-        <div>
-          <Route path="/user/settings" component={UserSettings} />
-          <Route path='business/settings' component={BusinessSettings} />
-        </div>
+        </CardActions>
       </Card>
-
       </div>
     );
   }
 }
 
 export default UserHomepage;
-
-const outside = {
-  margin: 'auto',
-  width: '75%',
-  overflow: 'auto',
-  boxSizing: 'border-box',
-  padding: '20px',
-}
-const heading = {
-  textAlign: 'center',
-  fontSize: '40px',
-}
-
-const middleBox = {
-  height: '200px',
-  margin: 'auto',
-  width: '60%',
-}
-
-const left = {
-  float: 'left',
-  margin: 'auto',
-}
-
-const right = {
-  float: 'right',
-  margin: 'auto',
-}
-
-const buttonBox = {
-  float: 'left',
-  padding: '20px',
-  width: '50%',
-}

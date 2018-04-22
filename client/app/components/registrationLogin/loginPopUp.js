@@ -7,25 +7,45 @@ import {Redirect} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Toggle from 'material-ui/Toggle';
 
 //Custom Components
 import EmployeePopup from "./RegisterEmployee";
 import RegisterPopup from "./RegisterBusiness";
 import UserHomepage from "../UserHomepage/UserHomepage";
 
+import {outerBox, cardStyle} from '../../styles/cardStyle';
+
 export class LoginPopup extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       message : {},
       email : '',
       password : '',
       hasErrors : false,
-      redirect : false
+      redirect : false,
+      expanded: false
     };
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  handleExpandChange = (expanded) => {
+    this.setState({expanded: expanded});
+  };
+
+  handleToggle = (event, toggle) => {
+    this.setState({expanded: toggle});
+  };
+
+  handleExpand = () => {
+    this.setState({expanded: true});
+  };
+
+  handleReduce = () => {
+    this.setState({expanded: false});
+  };
 
   onChange = (event) => {
     const state = this.state
@@ -40,8 +60,8 @@ export class LoginPopup extends Component {
     axios.post('/user/login', { email, password })
         .then((response) => {
             this.setState({
-              message : response.data.message, 
-              redirect : true, 
+              message : response.data.message,
+              redirect : true,
               hasErrors : false
             });
         })
@@ -73,59 +93,68 @@ export class LoginPopup extends Component {
       return <Redirect to="/user/homepage" />
 
     return (
-      <div>
-        <div className={"LoginCard"}>
-          <CardHeader
-            className={"LoginCardHeader"}
-            actAsExpander={true}
-            showExpandableButton={false}
+      <div style={outerBox}>
+        <Card
+          expanded={this.state.expanded}
+          onExpandChange={this.handleExpandChange}
+          style={cardStyle}
           >
-            Server+ Login
-          </CardHeader>
+          <CardHeader
+            title="Serve+ Login"
+            actAsExpander={false}
+            showExpandableButton={false}
+          />
 
           {this.printMessage(hasErrors, message)}
 
           <form onSubmit={this.onSubmit}>
-            <TextField
-              floatingLabelText="Email"
-              floatingLabelFixed={false}
-              name='email'
-              value={email}
-              onChange={this.onChange}
-            /><br />
+            <CardText>
+              <TextField
+                floatingLabelText="Email"
+                floatingLabelFixed={false}
+                name='email'
+                value={email}
+                onChange={this.onChange}
+              /><br />
 
-            <TextField
-              type={"password"}
-              floatingLabelText="Password"
-              floatingLabelFixed={false}
-              name='password'
-              value={password}
-              onChange={this.onChange}
-            /><br /><br />
+              <TextField
+                type={"password"}
+                floatingLabelText="Password"
+                floatingLabelFixed={false}
+                name='password'
+                value={password}
+                onChange={this.onChange}
+              /><br /><br />
+            </CardText>
 
-            <RaisedButton type="submit" label="Sign In" primary={true} />
+            <CardActions>
+              <RaisedButton type="submit" label="Sign In" primary={true} />
+            </CardActions>
           </form>
 
-          <div className={"LoginCardFooter"}>
+          <CardText actAsExpander={true}>
+            <h3>
+              Don't have an account? Click Here!
+            </h3>
+          </CardText>
 
-            <br /><br />
-            Don't have an account? Register Now!
-            <br /><br />
+          <CardActions expandable={true}>
             <Link to="/business/register">
               <RaisedButton
                 label="Register Business"
-              />
+                secondary={true}
+                />
             </Link>
-            <br />
             <Link to="/user/register">
               <RaisedButton
                 label="Register Account"
-              />
+                secondary={true}
+                />
             </Link>
-          </div>
-        </div>
+          </CardActions>
+        </Card>
       </div>
-    )
+    );
   }
 }
 // ================================================
