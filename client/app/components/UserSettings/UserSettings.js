@@ -14,13 +14,7 @@ import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
 class UserSettings extends Component {
 
   componentDidMount(){
-    axios.get('/auth-test')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error.response)
-      })
+
   }
 
 
@@ -76,8 +70,8 @@ class UserSettings extends Component {
           <Link to="/user/password">
             <RaisedButton label="Change Password" secondary={true} />
           </Link>
-          <Link to='/user/addBusiness'>
-            <RaisedButton label="Add a business" secondary={true} />
+          <Link to='/user/add_business'>
+            <RaisedButton disabled={true} label="Add a business" secondary={true} />
           </Link>
         </CardActions>
         </Card>

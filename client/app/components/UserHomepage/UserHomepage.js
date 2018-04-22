@@ -19,24 +19,31 @@ class UserHomepage extends Component {
     super();
     this.state = {
       value: 1,
-      redirect : false
+      redirect : false,
+      businesses : '',
+      business : ''
     };
   }
+  
 
-  componentDidMount(){
-    axios.get('/user-auth')
+  componentWillMount(){
+    axios.get('/business/get-businesses')
       .then((response) => {
-        this.setState({redirect : false});
+        this.setState({
+          businesses : response.data.business_id ,
+          business : response.data.business_id
+        })
       })
       .catch((error) => {
-        this.setState({redirect : true});
       })
   }
+
+  onDropMenuChange = (event, index, value) => this.setState({value});
 
   handleChange = (event, index, value) => this.setState({value});
 
   render() {
-    const redirect = this.state;
+    const {redirect, businesses, business} = this.state;
     if(redirect === true)
       return <Redirect to="/" />
     return (
@@ -52,18 +59,18 @@ class UserHomepage extends Component {
 
         <CardText style={flexColumn}>
           <div style={column}>
+            <form onSubmit={this.onSubmit}>
             <h3>Business Name</h3>
             <DropDownMenu
               value={this.state.value}
               onChange={this.handleChange}
               autoWidth={true}
-            >
-              <MenuItem value={1} primaryText="select a business" />
-              <MenuItem value={2} primaryText="Business I" />
-              <MenuItem value={3} primaryText="Business II" />
-              <MenuItem value={4} primaryText="Business III" />
-              <MenuItem value={5} primaryText="Business III " />
-            </DropDownMenu>
+              >
+                <MenuItem value={business} primaryText={businesses} />
+              </DropDownMenu>
+              <br /><br />
+              <RaisedButton disabled={true} type="submit" label="Add" primary={true} />
+            </form>
           </div>
 
           <div style={column}>
