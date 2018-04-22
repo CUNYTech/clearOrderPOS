@@ -15,11 +15,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
   //for <Provider store={store} to be used below.
 
+import {colorOne, colorTwo, colorThree, colorFour} from './styles/colorPalette';
+
 //colors
 const muiTheme = getMuiTheme({
 	palette: {
-		primary1Color: '#204B75',
-		accent1Color: '#356089'
+		primary1Color: colorOne,
+		accent1Color: colorTwo,
 	}
 });
 

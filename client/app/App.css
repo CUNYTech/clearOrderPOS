@@ -25,7 +25,7 @@ body {
   overflow: auto;
   max-width: 100%;
   width: 100%;
-  background: #C2D0DE;
+  background: 'yellow';
   padding: 1rem;
   font-size: 1rem;
   display: flex;

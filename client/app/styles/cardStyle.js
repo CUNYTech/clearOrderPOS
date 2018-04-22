@@ -65,6 +65,11 @@ const wideButton ={
   width: '75%',
 }
 
+const appBarStyle = {
+  border: '0px solid transparent',
+  borderRadius: '15px',
+}
+
 export {
   outerBox,
   cardStyle,
@@ -73,4 +78,5 @@ export {
   outerBusiness,
   pane,
   wideButton,
+  appBarStyle,
 }
