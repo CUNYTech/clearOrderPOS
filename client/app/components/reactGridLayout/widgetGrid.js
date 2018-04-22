@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
 import widgetCard from '../reactGridLayout/widgets/widget';
+import HelloWorld from './helloWorld';
 
 const gridStyle = {
   backgroundColor:'#C0C0C0',
@@ -34,7 +35,7 @@ export default class BasicLayout extends React.PureComponent {
 
   }
 
-// key correlates to each tile key 
+// key correlates to each tile key
   generateDOM() {
     return _.map(_.range(this.props.items), function(i) {
       return (
@@ -63,7 +64,7 @@ export default class BasicLayout extends React.PureComponent {
     this.props.onLayoutChange(layout);
   }
 
-  // widgetCard - Does not work. Widgets need to be injected into grid w/ redux 
+  // widgetCard - Does not work. Widgets need to be injected into grid w/ redux
   render() {
     return (
         <div>

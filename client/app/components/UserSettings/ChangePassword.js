@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-route
 
 import UserSettings from './UserSettings';
 import Axios from 'axios';
+import {outerBox, cardStyle} from '../../styles/cardStyle';
 
 export default class ChangePassword extends Component {
 
@@ -66,7 +67,6 @@ export default class ChangePassword extends Component {
         <Card style={cardStyle}>
           <CardHeader
             title="Change Password"
-            subtitle=""
             actAsExpander={false}
             showExpandableButton={false}
           />
@@ -105,32 +105,14 @@ export default class ChangePassword extends Component {
             </div>
             <RaisedButton type="submit" label="Confirm"  primary={true}/>
             
-            <Link to='/user/homepage' >
-              <RaisedButton label="Return" secondary={true} />
+            <CardActions>
+            <Link to='/user/settings' >
+              <RaisedButton label="Cancel" secondary={true} />
             </Link>
+          </CardActions>
           </form>
-
-
-
         </Card>
-
-        <div>
-          <Route path="/UserSettings" component={UserSettings} />
-        </div>
       </div>
     );
   }
-}
-
-const outerBox = {
-  margin: 'auto',
-  width: '50%',
-  height: '90%',
-  padding: '20px',
-  overflow: 'auto',
-};
-
-const cardStyle = {
-  padding: '20px',
-  textAlign: 'center',
 }

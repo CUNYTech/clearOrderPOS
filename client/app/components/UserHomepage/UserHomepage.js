@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import ReactDom from 'react-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -9,8 +10,9 @@ import {Redirect} from 'react-router-dom'
 
 import UserSettings from '../UserSettings/UserSettings';
 import BusinessSettings from '../BusinessSettings/BusinessSettings';
+import Home from '../extra/Home';
 
-import './UserHomepage.css';
+import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
 
 class UserHomepage extends Component {
   constructor() {
@@ -45,25 +47,23 @@ class UserHomepage extends Component {
     if(redirect === true)
       return <Redirect to="/" />
     return (
-      <div className='outer-box' >
+      <div style={outerBox} >
+        <Card style={cardStyle}>
+          <CardHeader
+            title="User Homepage"
+            subtitle=""
+            actAsExpander={false}
+            showExpandableButton={false}
+           >
+         </CardHeader>
 
-        <h1 className='center-me'>User Homepage</h1>
-        <br />
-        <div className='middle-box'>
-          <div className='settings-box'>
-            <Link to='/user/settings' >
-              <RaisedButton
-                label='Edit My Information'
-                secondary={true}
-                />
-            </Link>
-          </div>
-          <div className='business-box'>
-          <form onSubmit={this.onSubmit}>
-              <h1>Pick a Business</h1>
-              <DropDownMenu
-              value={this.state.business}
-              onChange={this.onDropMenuChange}
+        <CardText style={flexColumn}>
+          <div style={column}>
+            <form onSubmit={this.onSubmit}>
+            <h3>Business Name</h3>
+            <DropDownMenu
+              value={this.state.value}
+              onChange={this.handleChange}
               autoWidth={true}
               >
                 <MenuItem value={business} primaryText={businesses} />
@@ -73,37 +73,31 @@ class UserHomepage extends Component {
             </form>
           </div>
 
-        </div>
-
-        <div >
-
-          <div className='button-box'>
-            <Link to='/screen'>
+          <div style={column}>
+            <Link to='/user/settings' >
               <RaisedButton
-                className='float-right'
-                label="GO"
-                primary={true}
-              />
+                label='settings'
+                secondary={true}
+                />
             </Link>
           </div>
+        </CardText>
 
-          <div className='button-box' >
-            <Link to='/business/settings'>
+        <CardActions >
+          <Link to='/home' >
+            <RaisedButton
+              label="HOME"
+              primary={true}
+              />
+          </Link>
+          <Link to='/business/settings'>
               <RaisedButton
-                className='float-left'
                 label="Edit"
                 secondary={true}
               />
           </Link>
-          </div>
-
-        </div>
-
-        <div>
-          <Route path="/UserSettings" component={UserSettings} />
-          <Route path='BusinessSettings' component={BusinessSettings} />
-        </div>
-
+        </CardActions>
+      </Card>
       </div>
     );
   }

@@ -5,11 +5,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 
-import './UserSettings.css';
-
 import ChangePassword from './ChangePassword'
 import AddBusiness from './AddBusiness';
 import UserHomepage from '../UserHomepage/UserHomepage';
+
+import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
 
 class UserSettings extends Component {
 
@@ -21,17 +21,16 @@ class UserSettings extends Component {
   render() {
 
     return(
-      <div className='USETT-outer-box'>
-        <Card className='card-padding'>
+      <div style={outerBox}>
+        <Card style={cardStyle}>
           <CardHeader
             title="Update User Settings"
-            subtitle=""
             actAsExpander={false}
             showExpandableButton={false}
           />
 
-        <div >
-          <div  className='USETT-float-left'>
+        <CardText style={flexColumn}>
+          <div style={column}>
             <TextField
               hintText="First Name"
               /><br />
@@ -46,11 +45,9 @@ class UserSettings extends Component {
               hintText="Phone #"
               /><br />
             <br />
-
           </div>
 
-          <div className='USETT-float-right'>
-
+          <div style={column}>
             <TextField
               hintText="Email"
               /><br />
@@ -61,29 +58,23 @@ class UserSettings extends Component {
               /><br />
             <br />
           </div>
-        </div>
+        </CardText>
 
-          <CardActions>
-            <Link to='/user/homepage'>
-              <RaisedButton label="OK"  primary={true}/>
-            </Link>
-            <Link to='/user/homepage'>
-              <RaisedButton label="Cancel" primary={true} />
-            </Link>
-            <Link to="/user/password">
-              <RaisedButton label="Change Password" primary={true} />
-            </Link>
-            <Link to='/business/add_business'>
-              <RaisedButton disabled={true} label="Add a business" primary={true} />
-            </Link>
-          </CardActions>
+        <CardActions >
+          <Link to='/user/homepage'>
+            <RaisedButton label="OK"  primary={true}/>
+          </Link>
+          <Link to='/user/homepage'>
+            <RaisedButton label="Cancel" primary={true} />
+          </Link>
+          <Link to="/user/password">
+            <RaisedButton label="Change Password" secondary={true} />
+          </Link>
+          <Link to='/user/add_business'>
+            <RaisedButton disabled={true} label="Add a business" secondary={true} />
+          </Link>
+        </CardActions>
         </Card>
-
-        <div>
-          <Route path="/UserHomepage" component={UserHomepage} />
-          <Route path="/ChangePassword" component={ChangePassword} />
-          <Route path='/AddBusiness' component={AddBusiness} />
-        </div>
       </div>
     );
   }

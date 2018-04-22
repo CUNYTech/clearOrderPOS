@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FontIcon from 'material-ui/FontIcon';
+import AppBar from 'material-ui/AppBar';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
@@ -23,29 +24,13 @@ export default class Footer extends Component {
   render() {
     return (
       <div style={outerBox}>
-        <Paper
-          style={bar}
-          zDepth={5}
-          rounded={false}
-          >
-          <BottomNavigation selectedIndex={this.state.selectedIndex}>
-            <BottomNavigationItem
-              label="Recents"
-              icon={recentsIcon}
-              onClick={() => this.select(0)}
-            />
-            <BottomNavigationItem
-              label="Favorites"
-              icon={favoritesIcon}
-              onClick={() => this.select(1)}
-            />
-            <BottomNavigationItem
-              label="Nearby"
-              icon={nearbyIcon}
-              onClick={() => this.select(2)}
-            />
-          </BottomNavigation>
-          </ Paper>
+        <AppBar
+          showMenuIconButton={false}
+          style ={
+            {border: '0px solid transparent'},
+            {borderRadius: '15px'}
+          }
+        />
       </div>
     );
   }
