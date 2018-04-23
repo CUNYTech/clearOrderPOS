@@ -32,6 +32,10 @@ module.exports = (app) => {
     return res.status(200);
   });
 
+  //
+  //  USER CHANGE DATA
+  //
+
   app.post('/user/change_password', isAuthenticated,
   [ 
     check('old_password', 'Please enter your correct old password')
@@ -69,6 +73,34 @@ module.exports = (app) => {
               })
             })
       }));
+    })
+  })
+
+  app.post('/user/change_data', isAuthenticated,
+  [ 
+    check('fname', 'Please enter a valid first name')
+      .trim()
+      .isLength({min: 1}),
+    check('lname', 'Please enter a valid last name')
+      .trim()
+      .isLength({min: 1}),
+    check('email', 'Please enter a valid email')
+      .trim()
+      .isEmail(),
+
+  ], (req, res, next) => {
+    const validationErrors = validationResult(req);
+
+    if(!validationErrors.isEmpty())
+      return res.status(400).send({message: validationErrors.mapped()});  
+
+    UserReg.findOneAndUpdate({'email' : req.user.email}, 
+      {$set: {fname : req.body.fname, lname: req.body.lname, email : req.body.email }} , (setError, user) => {
+        if(setError)
+          return res.status(500).send({state : constants.DATA_NOT_CHANGED})
+          req.session.destroy()
+          return res.status(200).send({message: 'Success! Please log in again with your new data'});
+
     })
   })
 

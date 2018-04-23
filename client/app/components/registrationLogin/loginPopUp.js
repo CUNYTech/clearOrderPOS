@@ -75,7 +75,9 @@ export class LoginPopup extends Component {
   }
 
   printMessage = (hasErrors, message) => {
-    if(hasErrors)
+    if(typeof this.props.location.state !== "undefined")
+      return <div>{this.props.location.state.message}</div>
+    else if(hasErrors)
       if(message instanceof Object)
         return Object.keys(message).map(index => <div key={index}>{message[index].msg}</div>)
       else

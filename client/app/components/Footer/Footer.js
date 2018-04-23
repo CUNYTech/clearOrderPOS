@@ -27,8 +27,7 @@ export default class Footer extends Component {
         <AppBar
           showMenuIconButton={false}
           style ={
-            {border: '0px solid transparent'},
-            {borderRadius: '15px'}
+            {border: '0px solid transparent', borderRadius: '15px'}
           }
         />
       </div>

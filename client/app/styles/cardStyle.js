@@ -9,14 +9,11 @@ const outerBox = {
 }
 
 const cardStyle = {
-  boxSizing: 'border-box',
-  border: '5px solid transparent',
-  borderRadius: '15px',
   height: 'auto',
   maxHeight: '100%',
   padding: '20px',
   textAlign: 'center',
-  backgroundColor: '#C2D0DE',
+  backgroundColor: 'white',
   margin: '10px 0px',
   width: '100%',
   overflow: 'auto',
