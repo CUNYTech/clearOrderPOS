@@ -119,7 +119,7 @@ class App extends Component {
             <Route path="/user/homepage" component={UserHomepage} />
             <Route path="/user/settings" component={UserSettings} />
             <Route path="/user/password" component={ChangePassword}/>
-            <Route path="/user/addBusiness" component={AddBusiness}/>
+            <Route path="/user/add_business" component={AddBusiness}/>
 
             <Route path="/business/register" component={RegisterBusiness} />
             <Route path="/business/settings" component={BusinessSettings} />
