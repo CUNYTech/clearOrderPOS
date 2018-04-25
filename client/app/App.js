@@ -41,6 +41,7 @@ import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
+
 class App extends Component {
 
   state = {
@@ -70,8 +71,7 @@ class App extends Component {
         <div className="header">
           <AppBar
             showMenuIconButton={false}
-            title={<span>Serve+</span>}
-            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+            title="Serve+"
             iconElementRight={
               <Link to="/user/homepage">
                 <MenuItem
