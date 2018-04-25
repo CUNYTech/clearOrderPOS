@@ -17,7 +17,7 @@ const dividePad = {
   backgroundColor: 'blue',
 };
 
-export default class PizzaMaker extends Component {
+export default class BurgerMaker extends Component {
   render() {
     return (
       <div style={outerBox} >
@@ -32,46 +32,51 @@ export default class PizzaMaker extends Component {
           <div style={column}>
             <h3>BUN</h3>
             <RaisedButton
-              label='small'
+              label='roll'
               secondary={true}
               />
             <Divider style={dividePad} />
             <RaisedButton
-              label='large'
+              label='flatbread'
+              secondary={true}
+              />
+            <Divider style={dividePad} />
+            <RaisedButton
+              label='sesame'
               secondary={true}
               />
           </div>
           <div style={column}>
-            <h3>MEAT</h3>
+            <h3>BURGER</h3>
             <RaisedButton
-              label='cheese'
+              label='chicked'
               secondary={true}
             />
             <Divider style={dividePad} />
             <RaisedButton
-              label='pepperoni'
+              label='beef'
               secondary={true}
             />
             <Divider style={dividePad} />
             <RaisedButton
-              label='mushrooms'
+              label='turkey'
               secondary={true}
             />
             <Divider style={dividePad} />
             <RaisedButton
-              label='olives'
+              label='mushroom'
               secondary={true}
             />
             <Divider style={dividePad} />
             <RaisedButton
-              label='peppers'
+              label='none'
               secondary={true}
             />
           </div>
           <div style={column}>
             <h3>VEGETABLES</h3>
             <RaisedButton
-              label='cheese'
+              label='tomatoes'
               secondary={true}
             />
             <Divider style={dividePad} />
@@ -98,12 +103,27 @@ export default class PizzaMaker extends Component {
           <div style={column}>
             <h3>CHEESE</h3>
             <RaisedButton
-              label='reg'
+              label='cheddar'
               secondary={true}
               />
             <Divider style={dividePad} />
             <RaisedButton
-              label='cheese'
+              label='gouda'
+              secondary={true}
+              />
+            <Divider style={dividePad} />
+            <RaisedButton
+              label='swiss'
+              secondary={true}
+              />
+            <Divider style={dividePad} />
+            <RaisedButton
+              label='blue'
+              secondary={true}
+              />
+            <Divider style={dividePad} />
+            <RaisedButton
+              label='monterey jack'
               secondary={true}
               />
           </div>
