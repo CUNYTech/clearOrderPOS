@@ -27,13 +27,17 @@ export default class BusinessSettings extends Component {
       item_name : '',
       item_price : '',
       message : {},
-      hasError : false,
+      hasErrors : false,
       redirect : false,
       categories : {},
-      value : '',
+      item_category : '',
+      message : '',
+      isCategoryError : true,
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.addItem = this.addItem.bind(this);
     this.categoryRemove = this.categoryRemove.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   onChange = (event) => {
@@ -50,7 +54,8 @@ export default class BusinessSettings extends Component {
     axios.get('/business/get-categories')
       .then((response) => {
         this.setState({
-          categories : response.data[0].business_items
+          categories : response.data[0].business_items,
+          item_category : response.data[0].business_items[0].category
         })
       })
       .catch((error) => {
@@ -65,9 +70,9 @@ export default class BusinessSettings extends Component {
         .then((response) => {
             this.setState ({
               message : response.data.message,
-              hasError : false,
+              isCategoryError : true,
+              hasErrors : false,
               category_name : '',
-              categories : this.state.categories,
             });
             this.componentWillMount();
 
@@ -75,7 +80,8 @@ export default class BusinessSettings extends Component {
         .catch((error) => {
           this.setState({
             message : error.response.data.message,
-            hasError : true
+            hasErrors : true,
+            isCategoryError : true
           })
         })
   }
@@ -86,16 +92,57 @@ export default class BusinessSettings extends Component {
     axios.post('/business/remove_category', { category_name })
     .then((response) => {
         this.setState ({
-          message : response.data.message,
-          hasError : false,
-          categories : this.state.categories
+          hasErrors : false,
         });
         this.componentWillMount();
     })
     .catch((error) => {
       this.setState({
         message : error.response.data.message,
-        hasError : true
+        hasErrors : true,
+        isCategoryError : true
+      })
+    })
+  }
+
+  addItem(event) {
+    event.preventDefault();
+    const {item_category, item_name, item_price} = this.state;
+    console.log(item_category + '-' + item_name + '-' + item_price);
+    axios.post('/business/add_item', { item_name, item_price, item_category })
+        .then((response) => {
+            this.setState ({
+              message : response.data.message,
+              hasErrors : false,
+              isCategoryError : false
+            });
+            this.componentWillMount();
+
+        })
+        .catch((error) => {
+          this.setState({
+            message : error.response.data.message,
+            hasErrors : true,
+            isCategoryError : false
+          })
+        })
+  }
+
+  removeItem(event) {
+    const item_name = event.currentTarget.name;
+    const item_category = event.currentTarget.getAttribute('category');
+    axios.post('/business/remove_item', { item_category, item_name })
+    .then((response) => {
+        this.setState ({
+          hasErrors : false
+        });
+        this.componentWillMount();
+    })
+    .catch((error) => {
+      this.setState({
+        message : error.response.data.message,
+        hasErrors : true,
+        isCategoryError : false
       })
     })
   }
@@ -108,7 +155,8 @@ export default class BusinessSettings extends Component {
             <div key={index}><h1>{category.category}<IconButton name={category.category} onClick={this.categoryRemove}>
               <ActionClear /></IconButton></h1>{
               category.items.map((item, subIndex) => {
-                return (<div key={subIndex}>{item.name}</div>)
+                return (<div key={subIndex}><p>{item.name}<IconButton name={item.name} category={category.category} onClick={this.removeItem}>
+                  <ActionClear /></IconButton></p></div>)
               })
             }
             </div>
@@ -130,8 +178,21 @@ export default class BusinessSettings extends Component {
     }
   }
 
+  printMessage = (message, hasErrors) => {
+    if(hasErrors)
+      if(message instanceof Object)
+        return Object.keys(message).map(index => <div key={index}>{message[index].msg}</div>)
+      else
+        return <div>{message}</div>
+    // no errors, but a message included most likely implies success
+    else if(message.length > 0)
+      return <div>{message}</div>
+    else
+      return ''
+  }
+
   render() {
-    const {categories, category_name} = this.state;
+    const {isCategoryError, categories, category_name, item_name, item_price, message, hasErrors} = this.state;
 
     return (
       <div style={outerBusiness} >
@@ -139,6 +200,7 @@ export default class BusinessSettings extends Component {
           <Card style={cardStyle}>
             <h2>Add a Category</h2>
             <form onSubmit={this.onSubmit}>
+              {isCategoryError ? this.printMessage(message, hasErrors) : ''}
               <CardText>
                 <TextField
                   floatingLabelText="Category Name"
@@ -161,12 +223,14 @@ export default class BusinessSettings extends Component {
 
           <Card style={cardStyle}>
             <h2>Add an Item</h2>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.addItem}>
+            {isCategoryError ? '' : this.printMessage(message, hasErrors)}
               <CardText>
                 <TextField
                   floatingLabelText="Item Name"
                   floatingLabelFixed={false}
-                  value={name}
+                  value={item_name}
+                  name="item_name"
                   onChange={this.onChange}
                 />
               </CardText>
@@ -174,14 +238,15 @@ export default class BusinessSettings extends Component {
                 <TextField
                   floatingLabelText="Item Price"
                   floatingLabelFixed={false}
-                  value={name}
+                  value={item_price}
+                  name="item_price"
                   onChange={this.onChange}
                 />
               </CardText>
               <CardText>
                 <h4>Select a Category</h4>
                 <DropDownMenu
-                  value={this.state.value}
+                  value={this.state.item_category}
                   onChange={this.onDropMenuChange}
                   autoWidth={true}
                 >

@@ -62,11 +62,11 @@ class UserHomepage extends Component {
             <form onSubmit={this.onSubmit}>
             <h3>Business Name</h3>
             <DropDownMenu
-              value={this.state.value}
+              value={this.state.business}
               onChange={this.handleChange}
               autoWidth={true}
               >
-                <MenuItem value={business} primaryText={businesses} />
+                <MenuItem value={business} primaryText={business} />
               </DropDownMenu>
               <br /><br />
               <RaisedButton disabled={true} type="submit" label="Add" primary={true} />

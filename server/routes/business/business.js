@@ -74,18 +74,25 @@ module.exports = (app) => {
       if(err)
          return req.status(500).send({state : constants.USER_NOT_FOUND})
       // We're looking for a specific business id and adding in a new category
-      BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
+      BusinessModel.findOne({'business_items.category' : req.body.category_name}, (error, result) => {
+        if(!result)
         {
-          $push : {
-            business_items : {"category": req.body.category_name, "items": {"name": "Pizza", "price": 10}}
-          } 
-        },{upsert:true, new : true}, (bError, result) => {
-          if(bError)
-            return res.status(500).send({state : constants.BUSINESS_NOT_FOUND})
-
-          return res.status(200).send({state : constants.SUCCESS})
+          BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
+          {
+            $push : {
+              business_items : {"category": req.body.category_name}
+            } 
+          },{upsert:true, new : true}, (bError, result) => {
+            if(bError)
+              return res.status(500).send({message : 'There was an error confirming the business',  state : constants.BUSINESS_NOT_FOUND})
+  
+            return res.status(200).send({state : constants.SUCCESS, message : req.body.category_name + ' has been added'})
+          })
+        } else {
+          return res.status(500).send({message : 'Category is already in use'});
         }
-      )
+      })
+
     })
   });
 
@@ -102,7 +109,7 @@ module.exports = (app) => {
           } 
         }, { safe: true, upsert: true }, (bError, result) => {
           if(bError)
-            return res.status(500).send({state : constants.BUSINESS_NOT_FOUND})
+            return res.status(500).send({message : 'There was an error confirming the business', state : constants.BUSINESS_NOT_FOUND})
 
           return res.status(200).send({state : constants.SUCCESS})
         }
@@ -117,10 +124,18 @@ module.exports = (app) => {
   */
 
     app.post('/business/add_item', isAuthenticated, [
-    check('category_name')
+    check('item_category')
       .trim()
       .isLength({min : 1})
-      .withMessage("A name must be provided")
+      .withMessage("A category must be provided"),
+    check('item_name')
+      .trim()
+      .isLength({min : 1})
+      .withMessage("An item name must be provided"),
+    check('item_price')
+      .trim()
+      .isLength({min : 1})
+      .withMessage("An item price must be provided")
   ], 
   function (req, res, next) {
     const validationErrors = validationResult(req)
@@ -131,15 +146,36 @@ module.exports = (app) => {
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
       if(err)
          return req.status(500).send({state : constants.USER_NOT_FOUND})
-      // We're looking for a specific business id and adding in a new category
-      BusinessModel.findOneAndUpdate({'business_id' : person.business_id},
+      // We're looking for a specific business id and adding in a new item
+      BusinessModel.update({'business_id' : person.business_id, 'business_items.category' : req.body.item_category},
         {
           $push : {
-            business_items : {"category": req.body.category_name, "items": {"name": "Pizza", "price": 10}}
+            'business_items.$.items' :  {"name": req.body.item_name, "price": req.body.item_price}
           } 
         },{upsert:true, new : true}, (bError, result) => {
           if(bError)
-            return res.status(500).send({state : constants.BUSINESS_NOT_FOUND})
+            return res.status(500).send({message : 'There was an error confirming the business', state : constants.BUSINESS_NOT_FOUND})
+
+          return res.status(200).send({message : req.body.item_name + ' has been added', state : constants.SUCCESS})
+        }
+      )
+    })
+  });
+
+  app.post('/business/remove_item', function (req, res, next) {
+    // As before, we'll get the business id through the user
+    UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
+      if(err)
+         return req.status(500).send({state : constants.USER_NOT_FOUND})
+      // Now we want to delete a specific item entry, and we're provided with the category name
+      BusinessModel.update({'business_id' : person.business_id, 'business_items.category' : req.body.item_category},
+        {
+          $pull : {
+            'business_items.$.items' : {"name": req.body.item_name }
+          } 
+        }, { safe: true, upsert: true }, (bError, result) => {
+          if(bError)
+            return res.status(500).send({message : 'There was an error confirming the business', state : constants.BUSINESS_NOT_FOUND})
 
           return res.status(200).send({state : constants.SUCCESS})
         }
