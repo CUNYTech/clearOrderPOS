@@ -5,18 +5,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
-const outerBox = {
-  margin: 'auto',
-  width: '75%',
-  padding: 20,
-  overflow: 'auto',
-  textAlign: 'center',
-};
-
-const cardStyle = {
-  padding: 20,
-  overflow: 'auto',
-};
+import { outerBox, cardStyle } from '../../styles/cardStyle';
 
 const column = {
   float: 'left',
