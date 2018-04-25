@@ -9,20 +9,25 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import WidgetsGrid from '../reactGridLayout/WidgetsGrid';
 
 const dashboardStyle = {
-  //display: 'flex', /* this makes it a column for some reason */
-  backgroundColor: "#ff6f00",
-  color: "white"
-};
+  backgroundColor: 'darkOrange',
+  color:'white',
+}
+
+const mainGrid = {
+  boxSizing: 'border-box',
+  border: '5px solid white',
+  borderRadius: '15px',
+  width: '98%',
+  height: '98%',
+  overflow: 'auto',
+}
 
 
 export default class dashBoard extends Component {
 
   render() {
     return (
-      <div className="dash_mainGrid" >
-        <Paper zDepth={5} style={dashboardStyle} rounded={true}>
-          <h1 style={dashboardStyle}> Dashboard </h1>
-        </Paper>
+      <div style={mainGrid} >
         <Paper zDepth={5} style={dashboardStyle} rounded={true}>
             <WidgetsGrid />
         </Paper>
