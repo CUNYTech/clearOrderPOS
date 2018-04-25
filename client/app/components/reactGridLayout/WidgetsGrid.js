@@ -71,8 +71,8 @@ export default class WidgetsGrid extends Component {
          <div key="c" data-grid={{x: 3, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
          <div key="d" data-grid={{x: 4, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
          <div key="e" data-grid={{x: 5, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="f" data-grid={{x: 0, y: 0, w: 12, h: 3, maxH: 3}}> <BurgerMaker /> </div>
-         <div key="g" data-grid={{x: 0, y: 0, w: 12, h: 3, maxH: 3}}> <PizzaMaker /> </div>
+         <div key="f" data-grid={{x: 0, y: 0, w: 5, h: 3, maxH: 5}}> <BurgerMaker /> </div>
+         <div key="g" data-grid={{x: 5, y: 0, w: 5, h: 3, maxH: 5}}> <PizzaMaker /> </div>
        </ResponsiveReactGridLayout>
      );
      /* onLayoutChange={this.onLayoutChange.bind(this)} */
