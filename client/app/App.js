@@ -129,7 +129,7 @@ class App extends Component {
           </Switch>
         </div>
         <div className="footer">
-          {/* <Footer /> */}
+          <Footer />
         </div>
 
       </div>
