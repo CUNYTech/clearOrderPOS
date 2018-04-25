@@ -6,6 +6,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 // Widgets
 import FirstWidget from './FirstWidget';
 import PizzaMaker from '../mods/pizzaMaker.jsx';
+import BurgerMaker from '../mods/BurgerMaker.jsx';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -65,12 +66,13 @@ export default class WidgetsGrid extends Component {
          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
          onResize={this.onResize.bind(this)}
        >
-         <div key="a" data-grid={{x: 1, y: 0, w: 2, h: 3, maxH: 3}}> <FirstWidget /> </div>
-         <div key="b" data-grid={{x: 2, y: 0, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="c" data-grid={{x: 3, y: 0, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="d" data-grid={{x: 4, y: 0, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="e" data-grid={{x: 5, y: 0, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="f" data-grid={{x: 5, y: 3, w: 4, h: 4, maxH: 4}}> <PizzaMaker /> </div>
+         <div key="a" data-grid={{x: 1, y: 4, w: 2, h: 3, maxH: 3}}> <FirstWidget /> </div>
+         <div key="b" data-grid={{x: 2, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
+         <div key="c" data-grid={{x: 3, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
+         <div key="d" data-grid={{x: 4, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
+         <div key="e" data-grid={{x: 5, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
+         <div key="f" data-grid={{x: 0, y: 0, w: 12, h: 3, maxH: 3}}> <BurgerMaker /> </div>
+         <div key="g" data-grid={{x: 0, y: 0, w: 12, h: 3, maxH: 3}}> <PizzaMaker /> </div>
        </ResponsiveReactGridLayout>
      );
      /* onLayoutChange={this.onLayoutChange.bind(this)} */
