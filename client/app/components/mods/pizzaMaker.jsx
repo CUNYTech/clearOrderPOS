@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
 import { outerBox, cardStyle } from '../../styles/cardStyle';
