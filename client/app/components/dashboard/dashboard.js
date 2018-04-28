@@ -36,12 +36,7 @@ export default class dashBoard extends Component {
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         >
-          <div key="receipt" data-grid={{x: 0, y: 0, w: 4, h: 5, maxH: 7, static: true}}>
-            <Paper zDepth={5} style={dashboardStyle} rounded={true}>
-                <WidgetsGrid />
-            </Paper>
-          </div>
-          <div key="wid_grid" data-grid={{x: 5, y: 0, w: 8, h: 5, maxH: 7, static: true}}>
+          <div key="wid_grid" data-grid={{x: 5, y: 0, w:12, h: 5, maxH: 7, static: true}}>
             <Paper zDepth={5} style={dashboardStyle} rounded={true}>
                 <WidgetsGrid />
             </Paper>
