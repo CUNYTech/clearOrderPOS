@@ -80,10 +80,10 @@ class App extends Component {
                   />
               </Link>
             }
-            // style={
-            //   {border: '5px solid black'},
-            //   {borderRadius: '15px'}
-            // }
+            style={
+              {border: '0px solid transparent'},
+              {borderRadius: '15px'}
+            }
           />
         </div>
 
@@ -111,7 +111,7 @@ class App extends Component {
           </IconMenu>
 
           <Switch>
-            <Route path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/screen" component={Screen} />
             <Route path="/login" component={LoginPopup} />
 

@@ -24,7 +24,7 @@ class UserHomepage extends Component {
       business : ''
     };
   }
-  
+
 
   componentWillMount(){
     axios.get('/business/get-businesses')
@@ -84,9 +84,9 @@ class UserHomepage extends Component {
         </CardText>
 
         <CardActions >
-          <Link to='/home' >
+          <Link to='/dashboard' >
             <RaisedButton
-              label="HOME"
+              label="GO"
               primary={true}
               />
           </Link>
