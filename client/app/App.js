@@ -111,7 +111,7 @@ class App extends Component {
           </IconMenu>
 
           <Switch>
-            <Route path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/screen" component={Screen} />
             <Route path="/login" component={LoginPopup} />
 
