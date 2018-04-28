@@ -33,7 +33,7 @@ module.exports = (app) => {
   });
 
   //
-  //  USER CHANGE DATA
+  //  USER CHANGE PASSWORD
   //
 
   app.post('/user/change_password', isAuthenticated,
@@ -75,6 +75,10 @@ module.exports = (app) => {
       }));
     })
   })
+
+    //
+  //  USER CHANGE PERSONAL INFORMATION
+  //
 
   app.post('/user/change_data', isAuthenticated,
   [ 

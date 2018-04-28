@@ -27,6 +27,14 @@ var businessRegistration = new Schema({
         category : String,
         items : [{name: String, price: Number}]
     }],
+    business_tables : [{
+        table_name : String,
+        items : [{name: String, price: Number}]
+    }],
+    business_transactions : [{
+        items : [{name : String, price : Number}],
+        total : Number,
+    }],
     isDeleted : {type: Boolean, default: false},
     isiPaid : {type: Boolean, default: true},
 });

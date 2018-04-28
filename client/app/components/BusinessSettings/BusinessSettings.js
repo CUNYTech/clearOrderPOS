@@ -22,31 +22,21 @@ export default class BusinessSettings extends Component {
   constructor(){
     super();
     this.state = {
-      open: false,
       category_name : '',
+      categories : {},
+      item_category : '',
       item_name : '',
       item_price : '',
       message : {},
+      isCategoryMessage : true,
       hasErrors : false,
       redirect : false,
-      categories : {},
-      item_category : '',
-      message : '',
-      isCategoryError : true,
     };
-    this.onSubmit = this.onSubmit.bind(this);
     this.addItem = this.addItem.bind(this);
-    this.categoryRemove = this.categoryRemove.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.categoryAdd = this.categoryAdd.bind(this);
+    this.categoryRemove = this.categoryRemove.bind(this);
   }
-
-  onChange = (event) => {
-    const state = this.state
-    state[event.target.name] = event.target.value;
-    this.setState(state);
-  }
-
-  onDropMenuChange = (event, index, value) => this.setState({value});
 
   componentWillMount(){
     const categories = this.state;
@@ -62,18 +52,27 @@ export default class BusinessSettings extends Component {
       })
   }
 
-  onSubmit(event) {
+  onChange = (event) => {
+    const state = this.state
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  }
+
+  onDropMenuChange = (event, index, item_category) => this.setState({item_category});
+
+  categoryAdd(event) {
     event.preventDefault();
     const {category_name} = this.state;
 
+    this.setState({isCategoryMessage : true})
     axios.post('/business/add_category', { category_name })
         .then((response) => {
             this.setState ({
               message : response.data.message,
-              isCategoryError : true,
-              hasErrors : false,
               category_name : '',
+              hasErrors : false,
             });
+            // Force component to remount so we can show users the changes
             this.componentWillMount();
 
         })
@@ -81,7 +80,6 @@ export default class BusinessSettings extends Component {
           this.setState({
             message : error.response.data.message,
             hasErrors : true,
-            isCategoryError : true
           })
         })
   }
@@ -89,6 +87,7 @@ export default class BusinessSettings extends Component {
   categoryRemove(event) {
     const category_name = event.currentTarget.name;
 
+    this.setState({isCategoryMessage : true})
     axios.post('/business/remove_category', { category_name })
     .then((response) => {
         this.setState ({
@@ -100,7 +99,6 @@ export default class BusinessSettings extends Component {
       this.setState({
         message : error.response.data.message,
         hasErrors : true,
-        isCategoryError : true
       })
     })
   }
@@ -108,13 +106,13 @@ export default class BusinessSettings extends Component {
   addItem(event) {
     event.preventDefault();
     const {item_category, item_name, item_price} = this.state;
-    console.log(item_category + '-' + item_name + '-' + item_price);
+
+    this.setState({isCategoryMessage : false})
     axios.post('/business/add_item', { item_name, item_price, item_category })
         .then((response) => {
             this.setState ({
               message : response.data.message,
               hasErrors : false,
-              isCategoryError : false
             });
             this.componentWillMount();
 
@@ -123,7 +121,6 @@ export default class BusinessSettings extends Component {
           this.setState({
             message : error.response.data.message,
             hasErrors : true,
-            isCategoryError : false
           })
         })
   }
@@ -131,6 +128,8 @@ export default class BusinessSettings extends Component {
   removeItem(event) {
     const item_name = event.currentTarget.name;
     const item_category = event.currentTarget.getAttribute('category');
+
+    this.setState({isCategoryMessage : true})
     axios.post('/business/remove_item', { item_category, item_name })
     .then((response) => {
         this.setState ({
@@ -142,7 +141,6 @@ export default class BusinessSettings extends Component {
       this.setState({
         message : error.response.data.message,
         hasErrors : true,
-        isCategoryError : false
       })
     })
   }
@@ -192,15 +190,15 @@ export default class BusinessSettings extends Component {
   }
 
   render() {
-    const {isCategoryError, categories, category_name, item_name, item_price, message, hasErrors} = this.state;
+    const {isCategoryMessage, categories, category_name, item_category, item_name, item_price, message, hasErrors} = this.state;
 
     return (
       <div style={outerBusiness} >
         <div style={pane}>
           <Card style={cardStyle}>
             <h2>Add a Category</h2>
-            <form onSubmit={this.onSubmit}>
-              {isCategoryError ? this.printMessage(message, hasErrors) : ''}
+            <form onSubmit={this.categoryAdd}>
+              {isCategoryMessage ? this.printMessage(message, hasErrors) : ''}
               <CardText>
                 <TextField
                   floatingLabelText="Category Name"
@@ -224,7 +222,7 @@ export default class BusinessSettings extends Component {
           <Card style={cardStyle}>
             <h2>Add an Item</h2>
             <form onSubmit={this.addItem}>
-            {isCategoryError ? '' : this.printMessage(message, hasErrors)}
+            {isCategoryMessage ? '' : this.printMessage(message, hasErrors)}
               <CardText>
                 <TextField
                   floatingLabelText="Item Name"
@@ -246,7 +244,7 @@ export default class BusinessSettings extends Component {
               <CardText>
                 <h4>Select a Category</h4>
                 <DropDownMenu
-                  value={this.state.item_category}
+                  value={item_category}
                   onChange={this.onDropMenuChange}
                   autoWidth={true}
                 >
@@ -264,7 +262,7 @@ export default class BusinessSettings extends Component {
             </form>
           </Card>
 
-          <Card style={cardStyle}>
+          {/* <Card style={cardStyle}>
             <h2>Restaurant Actions</h2>
             <CardActions>
               <RaisedButton
@@ -280,7 +278,7 @@ export default class BusinessSettings extends Component {
                 primary={true}
               />
             </CardActions>
-          </Card>
+          </Card> */}
           <Card style={cardStyle}>
             <h2>Go Back</h2>
             <CardActions>

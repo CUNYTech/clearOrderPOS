@@ -18,26 +18,10 @@ module.exports = (app) => {
         next()
     }
   }
-  /*
-
-    GET BUSINESSES
-
-  */
-
- app.get('/business/get-businesses', isAuthenticated, function(req, res) {
-  // User is auth, so we'll get the business via his business id
-  UserModel.findOne({'email' : req.user.email}, '-_id business_id', (err, business) => {
-    if(err)
-       return req.status(500).send({state : constants.USER_NOT_FOUND})
-    // Find business id, then select business items - that contains the categories and items
-    res.status(200).send(business)
-  })
-});
-
 
   /*
 
-    CATEGORIES (ADDING / REMOVING / RECEIVING)
+    CATEGORIES (ADDING / REMOVING / RECEIVING )
   
   */
 
@@ -58,6 +42,7 @@ module.exports = (app) => {
     })
   });
 
+  // Adding a category will get the user business and add a category based on it
   app.post('/business/add_category', isAuthenticated, [
     check('category_name')
       .trim()
@@ -96,6 +81,7 @@ module.exports = (app) => {
     })
   });
 
+  // Removing a category will get the user business and remove a category
   app.post('/business/remove_category', function (req, res, next) {
     // As before, we'll get the business id through the user
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
@@ -119,10 +105,9 @@ module.exports = (app) => {
 
   /*
 
-    ITEMS (ADDING / REMOVING / RECEIVING)
+    ITEMS (ADDING / REMOVING )
   
   */
-
     app.post('/business/add_item', isAuthenticated, [
     check('item_category')
       .trim()
@@ -180,6 +165,22 @@ module.exports = (app) => {
           return res.status(200).send({state : constants.SUCCESS})
         }
       )
+    })
+  });
+
+    /*
+
+    GET BUSINESSES
+
+  */
+
+ app.get('/business/get-businesses', isAuthenticated, function(req, res) {
+  // User is auth, so we'll get the business via his business id
+  UserModel.findOne({'email' : req.user.email}, '-_id business_id', (err, business) => {
+    if(err)
+       return req.status(500).send({state : constants.USER_NOT_FOUND})
+    // Find business id, then select business items - that contains the categories and items
+    res.status(200).send(business)
     })
   });
 
