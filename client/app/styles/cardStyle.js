@@ -22,6 +22,20 @@ const cardStyle = {
   overflow: 'auto',
 }
 
+const receiptStyle = {
+  boxSizing: 'border-box',
+  border: '5px solid transparent',
+  borderRadius: '15px',
+  height: '100%',
+  maxHeight: '100%',
+  padding: '20px',
+  textAlign: 'center',
+  backgroundColor: '#C2D0DE',
+  margin: '0px',
+  width: '100%',
+  overflow: 'auto',
+}
+
 const flexColumn = {
   display: 'flex',
   flexDirection: 'row',
@@ -73,6 +87,7 @@ const appBarStyle = {
 export {
   outerBox,
   cardStyle,
+  receiptStyle,
   flexColumn,
   column,
   outerBusiness,
