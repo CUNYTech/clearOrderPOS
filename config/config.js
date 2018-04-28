@@ -2,6 +2,6 @@
 
 module.exports = {
   db: 'mongodb://root:sqlpass321@ds161539.mlab.com:61539/heroku_4fxnkn24',
-  db_dev: 'mongodb://root:sqlpass321@localhost:27017/pos?authSource=admin',
+  db_dev: 'mongodb://root:sqlpass321@ds161539.mlab.com:61539/heroku_4fxnkn24',
   secret_key : '%SeU&bgxTC%*~N7'
 };
