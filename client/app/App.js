@@ -80,10 +80,10 @@ class App extends Component {
                   />
               </Link>
             }
-            // style={
-            //   {border: '5px solid black'},
-            //   {borderRadius: '15px'}
-            // }
+            style={
+              {border: '0px solid transparent'},
+              {borderRadius: '15px'}
+            }
           />
         </div>
 
