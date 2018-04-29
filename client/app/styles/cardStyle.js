@@ -19,20 +19,8 @@ const cardStyle = {
   backgroundColor: '#C2D0DE',
   margin: '10px 0px',
   width: '100%',
-  overflow: 'auto',
-}
-
-const receiptStyle = {
-  boxSizing: 'border-box',
-  border: '5px solid transparent',
-  borderRadius: '15px',
-  height: '100%',
-  maxHeight: '100%',
-  padding: '20px',
-  textAlign: 'center',
-  backgroundColor: '#C2D0DE',
-  margin: '0px',
-  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
   overflow: 'auto',
 }
 
@@ -84,14 +72,54 @@ const appBarStyle = {
   borderRadius: '15px',
 }
 
+const receiptStyle = {
+  boxSizing: 'border-box',
+  border: '5px solid transparent',
+  borderRadius: '15px',
+  maxHeight: '100%',
+  minHeight: '100%',
+  padding: '5px',
+  textAlign: 'center',
+  backgroundColor: '#C2D0DE',
+  margin: '0px',
+  width: '100%',
+  overflow: 'auto',
+}
+
+const receiptHeader = {
+  boxSizing: 'border-box',
+  padding: '0px',
+  margin: '0px',
+  overflow: 'auto',
+  height: '20%',
+
+}
+const receiptBody = {
+  boxSizing: 'border-box',
+  padding: '0px',
+  margin: '0px',
+  overflow: 'auto',
+  height: '60%',
+}
+const receiptFooter = {
+  boxSizing: 'border-box',
+  padding: '0px',
+  margin: '0px',
+  overflow: 'auto',
+  height: '20%',
+}
+
 export {
   outerBox,
   cardStyle,
-  receiptStyle,
   flexColumn,
   column,
   outerBusiness,
   pane,
   wideButton,
   appBarStyle,
+  receiptStyle,
+  receiptHeader,
+  receiptBody,
+  receiptFooter
 }
