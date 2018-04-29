@@ -41,9 +41,9 @@ const receipt = {
   padding: '5px',
   margin: '0px',
   textAlign: 'center',
-  width: '30%',
-  minWidth: '30%',
-  maxWidth: '30%',
+  width: '25%',
+  minWidth: '25%',
+  maxWidth: '25%',
   overflow: 'auto',
 }
 
@@ -55,9 +55,9 @@ const mods = {
   padding: '0px',
   margin: '0px',
   textAlign: 'center',
-  width: '70%',
-  minWidth: '70%',
-  maxWidth: '70%',
+  width: '75%',
+  minWidth: '75%',
+  maxWidth: '75%',
   overflow: 'auto',
 }
 
