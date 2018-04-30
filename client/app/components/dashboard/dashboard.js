@@ -11,10 +11,11 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import Receipt from '../mods/receipt';
 import axios from 'axios';
 
+import {dashReceipt, receiptStyle, receiptHeader, receiptBody, receiptFooter} from '../../styles/cardStyle';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const dashboardStyle = {
-  backgroundColor: 'darkOrange',
+  backgroundColor: 'white',
   color:'white',
 }
 
@@ -35,17 +36,7 @@ const pos = {
 }
 
 const receipt = {
-  boxSizing: 'border-box',
-  border: '5px solid transparent',
-  borderRadius: '15px',
-  height: 'auto',
-  padding: '5px',
-  margin: '0px',
-  textAlign: 'center',
-  width: '25%',
-  minWidth: '25%',
-  maxWidth: '25%',
-  overflow: 'auto',
+
 }
 
 const mods = {
@@ -88,7 +79,7 @@ export default class dashBoard extends Component {
   render() {
     return (
       <div style={pos} >
-        <div style={receipt}>
+        <div style={dashReceipt}>
           <Receipt />
         </div>
         <div style={mods}>
@@ -97,8 +88,8 @@ export default class dashBoard extends Component {
             breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
             cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
           >
-            <div key="wid_grid" data-grid={{x: 5, y: 0, w:12, h: 5, maxH: 7, static: true}}>
-              <Paper zDepth={5} style={dashboardStyle} rounded={true}>
+            <div key="wid_grid" data-grid={{x: 5, y: 0, w:12, h: 7, static: true}}>
+              <Paper zDepth={5} rounded={true}>
                   <WidgetsGrid />
               </Paper>
             </div>
