@@ -145,7 +145,7 @@ const receiptStyle = {
   minHeight: '100%',
   padding: '5px',
   textAlign: 'center',
-  backgroundColor: '#C2D0DE',
+  backgroundColor: 'white',
   margin: '0px',
   width: '100%',
   overflow: 'auto',
