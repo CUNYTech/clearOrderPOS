@@ -12,8 +12,7 @@ import LoginButton from './App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 // react-grid-layout related imports
-import { Provider } from 'react-redux';
-  //for <Provider store={store} to be used below.
+//for <Provider store={store} to be used below.
 
 import {colorOne, colorTwo, colorThree, colorFour} from './styles/colorPalette';
 
