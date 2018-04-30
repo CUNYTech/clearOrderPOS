@@ -7,6 +7,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import FirstWidget from './FirstWidget';
 import PizzaMaker from '../mods/pizzaMaker.jsx';
 import BurgerMaker from '../mods/BurgerMaker.jsx';
+import {dashStyle} from '../../styles/cardStyle';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -62,17 +63,22 @@ export default class WidgetsGrid extends Component {
        <ResponsiveReactGridLayout
          className="layout"
          layout={layout}
+         style={dashStyle}
          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
          onResize={this.onResize.bind(this)}
        >
-         <div key="a" data-grid={{x: 1, y: 4, w: 2, h: 3, maxH: 3}}> <FirstWidget /> </div>
-         <div key="b" data-grid={{x: 2, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="c" data-grid={{x: 3, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="d" data-grid={{x: 4, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="e" data-grid={{x: 5, y: 4, w: 2, h: 1, maxH: 3}}> <FirstWidget /> </div>
-         <div key="f" data-grid={{x: 0, y: 0, w: 5, h: 3, maxH: 5}}> <BurgerMaker /> </div>
-         <div key="g" data-grid={{x: 5, y: 0, w: 5, h: 3, maxH: 5}}> <PizzaMaker /> </div>
+         <div key="burger" data-grid={{x: 0, y: 0, w: 6, h: 3 }}> <BurgerMaker /> </div>
+         <div key="pizza" data-grid={{x: 6, y: 0, w: 6, h: 3 }}> <PizzaMaker /> </div>
+         <div key="a" data-grid={{x: 0, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="b" data-grid={{x: 3, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="c" data-grid={{x: 6, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="d" data-grid={{x: 9, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="e" data-grid={{x: 0, y: 9, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="f" data-grid={{x: 3, y: 9, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="g" data-grid={{x: 6, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="h" data-grid={{x: 9, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+
        </ResponsiveReactGridLayout>
      );
      /* onLayoutChange={this.onLayoutChange.bind(this)} */

@@ -1,27 +1,46 @@
-const outerBox = {
-  boxSizing: 'border-box',
-  margin: 'auto',
-  width: '75%',
-  height: 'auto',
-  padding: '20px',
-  overflow: 'auto',
-  maxHeight: '100%',
-}
-
-const cardStyle = {
+const dashStyle = {
   boxSizing: 'border-box',
   border: '5px solid transparent',
   borderRadius: '15px',
-  height: 'auto',
   maxHeight: '100%',
-  padding: '20px',
+  minHeight: '100%',
+  padding: '5px',
   textAlign: 'center',
   backgroundColor: '#C2D0DE',
-  margin: '10px 0px',
+  margin: '0px',
+  width: '100%',
+  overflow: 'auto',
+}
+
+const outerBox = {
+  boxSizing: 'border-box',
+  margin: 'auto',
+  width: '100%',
+  height: 'auto',
+  padding: '0vw',
+  overflow: 'auto',
+  maxHeight: '100%',
+} //widget outerbox
+
+const cardStyle = {
+  position: 'absolute',
+  verticalAlign: 'top',
+  boxSizing: 'border-box',
+  border: '1px solid white',
+  borderRadius: '1vw',
+  height: 'auto',
+  maxHeight: '100%',
+  backgroundColor: 'white',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  overflow: 'auto',
+  overflow: 'inherit',
+} //widget cardStyle
+
+const cardContents = {
+  position: 'relative',
+  textAlign: 'center',
+  /* outerBox > cardStyle > cardContents */
 }
 
 const flexColumn = {
@@ -30,7 +49,6 @@ const flexColumn = {
 }
 
 const column = {
-  margin: 'auto',
 }
 
 const outerBusiness = {
@@ -72,6 +90,20 @@ const appBarStyle = {
   borderRadius: '15px',
 }
 
+const dashReceipt = {
+  boxSizing: 'border-box',
+  border: '5px solid transparent',
+  borderRadius: '15px',
+  height: 'auto',
+  padding: '5px',
+  margin: '0px',
+  textAlign: 'center',
+  width: '25%',
+  minWidth: '25%',
+  maxWidth: '25%',
+  overflow: 'auto',
+} // for receipt section on the Dashboard
+
 const receiptStyle = {
   boxSizing: 'border-box',
   border: '5px solid transparent',
@@ -110,8 +142,11 @@ const receiptFooter = {
 }
 
 export {
+  dashStyle,
   outerBox,
   cardStyle,
+  cardContents,
+  dashReceipt,
   flexColumn,
   column,
   outerBusiness,

@@ -12,7 +12,6 @@ import Footer from './components/Footer/Footer';
 import Home from './components/extra/Home';
 import Screen from './components/extra/Screen'
 import UserHomepage from './components/UserHomepage/UserHomepage';
-//import BasicLayout from './components/reactGridLayout/widgetGrid';
 import Extra from './components/extra/Extra.js';
 import dashBoard from './components/dashboard/dashboard';
 
