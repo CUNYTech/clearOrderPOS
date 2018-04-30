@@ -6,7 +6,7 @@ import Divider from 'material-ui/Divider';
 
 import Responsive from 'react-responsive';
 import InlineBlock from 'react-inline-block';
-import { outerBox, cardStyle, cardContents } from '../../styles/cardStyle';
+import { outerBox, cardStyle, cardContents , buttonStyle } from '../../styles/cardStyle';
 
 const Desktop = props => <Responsive {...props} minWidth={992} />;
 const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991}/>;
@@ -31,56 +31,64 @@ export default class BurgerMaker extends Component {
         <div style={outerBox} >
           <Card style={cardStyle}>
             <CardHeader
+              style={{textAlign: 'center',}}
               title="Burger Maker"
-              subtitle="select from the options below"
+              subtitle="Select from the options below"
               actAsExpander={false}
               showExpandableButton={false}
             />
-          <CardActions>
-            <div className="cardContents" style={cardContents}>
+          <CardActions style={cardContents}>
             <InlineBlock>
-            <div style={column}>
-              <h3>BUN</h3>
-              <RaisedButton
-                label='roll'
-                secondary={true}
-                />
-              <Divider style={dividePad} />
-              <RaisedButton
-                label='flatbread'
-                secondary={true}
-                />
-              <Divider style={dividePad} />
-              <RaisedButton
-                label='sesame'
-                secondary={true}
-                />
-            </div>
+              <div style={column}>
+                <h3 style={buttonStyle}>BUN</h3>
+                <RaisedButton
+                  style={buttonStyle}
+                  label='roll'
+                  secondary={true}
+                  />
+                <Divider style={dividePad} />
+                <RaisedButton
+                  style={buttonStyle}
+                  label='flatbread'
+                  secondary={true}
+                  />
+                <Divider style={dividePad} />
+                <RaisedButton
+                  style={buttonStyle}
+                  label='sesame'
+                  secondary={true}
+                  />
+              </div>
             </InlineBlock>
             <InlineBlock>
             <div style={column}>
-              <h3>BURGER</h3>
+              <h3 style={buttonStyle}>BURGER</h3>
               <RaisedButton
-                label='chicked'
+                style={buttonStyle}
+                label='chicken'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='beef'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='turkey'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='mushroom'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='none'
                 secondary={true}
               />
@@ -88,28 +96,33 @@ export default class BurgerMaker extends Component {
             </InlineBlock>
             <InlineBlock>
             <div style={column}>
-              <h3>VEGETABLES</h3>
+              <h3 style={buttonStyle}>VEGETABLES</h3>
               <RaisedButton
+                style={buttonStyle}
                 label='tomatoes'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='pepperoni'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='mushrooms'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='olives'
                 secondary={true}
               />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='peppers'
                 secondary={true}
               />
@@ -117,34 +130,38 @@ export default class BurgerMaker extends Component {
             </InlineBlock>
             <InlineBlock>
             <div style={column}>
-              <h3>CHEESE</h3>
+              <h3 style={buttonStyle}>CHEESE</h3>
               <RaisedButton
+                style={buttonStyle}
                 label='cheddar'
                 secondary={true}
                 />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='gouda'
                 secondary={true}
                 />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='swiss'
                 secondary={true}
                 />
               <Divider style={dividePad} />
               <RaisedButton
+                style={buttonStyle}
                 label='blue'
                 secondary={true}
                 />
               <Divider style={dividePad} />
               <RaisedButton
-                label='monterey jack'
+                style={buttonStyle}
+                label='monterey'
                 secondary={true}
                 />
             </div>
             </InlineBlock>
-          </div>
           </CardActions>
           </Card>
         </div>

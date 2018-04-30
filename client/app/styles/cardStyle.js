@@ -24,7 +24,6 @@ const outerBox = {
 
 const cardStyle = {
   position: 'absolute',
-  verticalAlign: 'top',
   boxSizing: 'border-box',
   border: '1px solid white',
   borderRadius: '1vw',
@@ -40,6 +39,7 @@ const cardStyle = {
 const cardContents = {
   position: 'relative',
   textAlign: 'center',
+  verticalAlign: 'top',
   /* outerBox > cardStyle > cardContents */
 }
 
@@ -49,6 +49,7 @@ const flexColumn = {
 }
 
 const column = {
+  textAlign: 'center',
 }
 
 const outerBusiness = {
@@ -141,6 +142,11 @@ const receiptFooter = {
   height: '20%',
 }
 
+const buttonStyle = {
+  margin: '0px',
+  width: '7vw',
+  borderRadius: '15px',
+}
 export {
   dashStyle,
   outerBox,
@@ -156,5 +162,6 @@ export {
   receiptStyle,
   receiptHeader,
   receiptBody,
-  receiptFooter
+  receiptFooter,
+  buttonStyle,
 }
