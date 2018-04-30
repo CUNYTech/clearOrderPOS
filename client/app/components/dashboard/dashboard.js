@@ -9,6 +9,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import WidgetsGrid from '../reactGridLayout/WidgetsGrid';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import Receipt from '../mods/receipt';
+import axios from 'axios';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -63,6 +64,26 @@ const mods = {
 
 
 export default class dashBoard extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      categories : {},
+    };
+  }
+
+  componentWillMount(){
+    const categories = this.state;
+
+    axios.get('/business/get-categories')
+      .then((response) => {
+        this.setState({
+          categories : response.data[0].business_items,
+        })
+      })
+      .catch((error) => {
+      })
+  }
 
   render() {
     return (

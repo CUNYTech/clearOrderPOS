@@ -61,12 +61,12 @@ class UserHomepage extends Component {
           <div style={column}>
             <form onSubmit={this.onSubmit}>
             <h3>Business Name</h3>
-            <DropDownMenu
-              value={this.state.business}
-              onChange={this.handleChange}
-              autoWidth={true}
+              <DropDownMenu
+                value={this.state.business}
+                onChange={this.handleChange}
+                autoWidth={true}
               >
-                <MenuItem value={business} primaryText={business} />
+                  <MenuItem value={business} primaryText={business} />
               </DropDownMenu>
               <br /><br />
               <RaisedButton disabled={true} type="submit" label="Add" primary={true} />
