@@ -28,10 +28,8 @@ export default class Receipt extends Component {
 
   componentWillMount(){
     const categories = this.state;
-
     axios.get('/business/get-tables')
       .then((response) => {
-        console.log( response.data[0].business_tables);
         if(response.data[0].business_tables.length == 0)
         {
           this.setState({

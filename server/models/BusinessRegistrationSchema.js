@@ -29,7 +29,7 @@ var businessRegistration = new Schema({
     }],
     business_tables : [{
         table_name : String,
-        items : [{name: String, price: Number}]
+        items : [{name: String, price: Number, amount : Number}]
     }],
     business_transactions : [{
         items : [{name : String, price : Number}],

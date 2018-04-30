@@ -107,7 +107,17 @@ module.exports = (app) => {
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
       if(err)
          return req.status(500).send({state : constants.USER_NOT_FOUND})
-      
+      BusinessModel.update({'business_id' : person.business_id, 'business_tables.table_name' : req.body.current_table},
+      {
+        $push : {
+          'business_tables.$.items' :  {"name": req.body.item_name, "price": req.body.item_price, amount : 1}
+        } 
+      },{upsert:true, new : true}, (bError, result) => {
+        if(bError)
+          return res.status(500).send({message : 'There was an error confirming the business', state : constants.BUSINESS_NOT_FOUND})
+
+        return res.status(200).send({state : constants.SUCCESS})
+      })
     })
   });
   
@@ -116,7 +126,18 @@ module.exports = (app) => {
     UserModel.findOne({'email' : req.user.email}, 'business_id', (err, person) => {
       if(err)
          return req.status(500).send({state : constants.USER_NOT_FOUND})
-      
+      BusinessModel.updateOne({'business_id' : person.business_id, 'business_tables.table_name' : req.body.current_table},
+      {
+        $pull : {
+          'business_tables.$.items' : {"name": req.body.item_name }
+        } 
+      }, { safe: true, upsert: true, multi: false }, (bError, result) => {
+        if(bError)
+          return res.status(500).send({message : 'There was an error confirming the business', state : constants.BUSINESS_NOT_FOUND})
+
+        return res.status(200).send({state : constants.SUCCESS})
+      }
+    )
     })
   });
 

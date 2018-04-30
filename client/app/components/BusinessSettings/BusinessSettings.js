@@ -153,7 +153,7 @@ export default class BusinessSettings extends Component {
             <div key={index}><h1>{category.category}<IconButton name={category.category} onClick={this.categoryRemove}>
               <ActionClear /></IconButton></h1>{
               category.items.map((item, subIndex) => {
-                return (<div key={subIndex}><p>{item.name}<IconButton name={item.name} category={category.category} onClick={this.removeItem}>
+                return (<div key={subIndex}><p>{item.name +' $' + item.price}<IconButton name={item.name} category={category.category} onClick={this.removeItem}>
                   <ActionClear /></IconButton></p></div>)
               })
             }
