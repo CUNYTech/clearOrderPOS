@@ -10,7 +10,7 @@ import Divider from 'material-ui/Divider'
 // Widgets
 import FirstWidget from './FirstWidget';
 import PizzaMaker from '../mods/pizzaMaker.jsx';
-import BurgerMaker from '../mods/BurgerMaker.jsx';
+import BurgerMaker from '../mods/burgerMaker.jsx';
 import {dashStyle} from '../../styles/cardStyle';
 
 import axios from 'axios';

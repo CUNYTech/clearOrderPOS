@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-route
 import './App.css';
 
 //Misc
-import Header from './components/Header/header';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home';
 import Screen from './components/extra/Screen';
