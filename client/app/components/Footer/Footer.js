@@ -10,17 +10,7 @@ const recentsIcon = <FontIcon className="material-icons">A</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">B</FontIcon>;
 const nearbyIcon = <IconLocationOn />;
 
-/**
- * A simple example of `BottomNavigation`, with three labels and icons
- * provided. The selected `BottomNavigationItem` is determined by application
- * state (for instance, by the URL).
- */
 export default class Footer extends Component {
-  state = {
-    selectedIndex: 0,
-  };
-
-  select = (index) => this.setState({selectedIndex: index});
 
   render() {
     return (
@@ -34,7 +24,6 @@ export default class Footer extends Component {
     );
   }
 }
-
 const outerBox = {
   margin: 'auto',
   width: '100%',
@@ -42,7 +31,3 @@ const outerBox = {
   padding: '0px',
   overflow: 'auto',
 };
-
-const bar = {
-  border: '1px solid gray'
-}

@@ -3,15 +3,8 @@ import React, {Component} from 'react';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
-
-import Responsive from 'react-responsive';
 import InlineBlock from 'react-inline-block';
 import { outerBox, cardStyle, cardContents , buttonStyle } from '../../styles/cardStyle';
-
-const Desktop = props => <Responsive {...props} minWidth={992} />;
-const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991}/>;
-const Mobile = props => <Responsive {...props} maxWidth={767} />;
-const Default = props => <Responsive {...props} minWidth={768} />;
 
 const column = {
   float: 'left',

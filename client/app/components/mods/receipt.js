@@ -2,15 +2,18 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import items from './items.json';
 
 import {receiptStyle, receiptHeader, receiptBody, receiptFooter} from '../../styles/cardStyle';
+import ScaleText from 'react-scale-text';
 
 export default class Receipt extends Component {
   render() {
     return (
       <Card style={receiptStyle} >
         <CardText style={receiptHeader}>
-          <h1>RECEIPT</h1>
+          <ScaleText maxFontSize={32}>
+          <h1>RECEIPT</h1></ScaleText>
           <div>
             <h4 style={{float: 'left'}}>Current table: 3</h4>
           </div>
@@ -27,6 +30,7 @@ export default class Receipt extends Component {
               <h4>Fries</h4>
               <h4>Sprite</h4>
               <h4>Chips</h4>
+              <h4>{items.title}</h4>
             </div>
             <div style={{float: 'right'}}>
               <h4>3.00</h4>

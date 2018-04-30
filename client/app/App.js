@@ -10,6 +10,7 @@ import './App.css';
 //Misc
 import Footer from './components/Footer/Footer';
 import Home from './components/extra/Home';
+import Header from './components/Header/header';
 import Screen from './components/extra/Screen'
 import UserHomepage from './components/UserHomepage/UserHomepage';
 import Extra from './components/extra/Extra.js';
@@ -41,6 +42,14 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
 
+import Responsive from 'react-responsive';
+
+const Desktop = props => <Responsive {...props} minWidth={992} />;
+const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991}/>;
+const Mobile = props => <Responsive {...props} maxWidth={767} />;
+const Default = props => <Responsive {...props} minWidth={768} />;
+
+
 class App extends Component {
 
   state = {
@@ -59,6 +68,32 @@ class App extends Component {
     //     isAuth : false
     //   })
     // })
+    /*
+      <Mobile>
+        { (matches) => {
+          if(matches) {return null;}
+          else { return <div className="footer"> <Footer /> </div>; }
+        }}
+      </Mobile>
+      <Default>
+        { (matches) => {
+          if(matches) { return
+              <div>
+                <AppBar
+                  showMenuIconButton={false}
+                  title="Serve+"
+                  style={aBarStyle}
+                  iconElementRight={
+                    <Link to="/user/homepage">
+                      <MenuItem primaryText="My Homepage" style={{color: 'white'}} />
+                    </Link>}
+                />
+            </div>;
+          } else { return <h3>NOT Default</h3>; }
+          }
+        }
+      </Default>
+    */
   }
 
   render() {
@@ -66,28 +101,15 @@ class App extends Component {
     const isAuth = this.state;
 
     return (
-      <div className="app">
-        <div className="header">
-          <AppBar
-            showMenuIconButton={false}
-            title="Serve+"
-            iconElementRight={
-              <Link to="/user/homepage">
-                <MenuItem
-                  primaryText="My Homepage"
-                  style={{color: 'white'}}
-                  />
-              </Link>
-            }
-            style={
-              {
-                border:"0px solid transparent",
-                borderRadius:"15px"
-              }
-            }
-          />
-        </div>
 
+      <div className="app">
+        {/* If on a phone, do not render footer and header */}
+        <Default>
+          { (matches) => {
+            if(matches) {return <Header />;}
+            else { return null; }
+          }}
+        </Default>
         <div className="main">
           <IconMenu
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
@@ -129,10 +151,12 @@ class App extends Component {
             <Route path="/dashboard" component={dashBoard} />
           </Switch>
         </div>
-        <div className="footer">
-          <Footer />
-        </div>
-
+        <Default>
+        { (matches) => {
+          if(matches) { return <Footer />; }
+          else { return null; }
+        }}
+        </Default>
       </div>
     );
   }

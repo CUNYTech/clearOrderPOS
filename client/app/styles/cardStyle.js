@@ -1,3 +1,8 @@
+const aBarStyle = {
+  border:"0px solid transparent",
+  borderRadius:"15px"
+} //app bar in app.js
+
 const dashStyle = {
   boxSizing: 'border-box',
   border: '5px solid transparent',
@@ -147,7 +152,9 @@ const buttonStyle = {
   width: '7vw',
   borderRadius: '15px',
 }
+
 export {
+  aBarStyle,
   dashStyle,
   outerBox,
   cardStyle,
