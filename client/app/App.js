@@ -8,10 +8,10 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-route
 import './App.css';
 
 //Misc
-import Footer from './components/Footer/Footer';
-import Home from './components/extra/Home';
 import Header from './components/Header/header';
-import Screen from './components/extra/Screen'
+import Footer from './components/Footer/Footer';
+import Home from './components/Home/Home';
+import Screen from './components/extra/Screen';
 import UserHomepage from './components/UserHomepage/UserHomepage';
 import Extra from './components/extra/Extra.js';
 import dashBoard from './components/dashboard/dashboard';

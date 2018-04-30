@@ -15,7 +15,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
-import {outerBusiness, pane, cardStyle, wideButton} from '../../styles/cardStyle';
+import {outerBusiness, pane, oldCardStyle, wideButton} from '../../styles/cardStyle';
 
 export default class BusinessSettings extends Component {
 
@@ -195,7 +195,7 @@ export default class BusinessSettings extends Component {
     return (
       <div style={outerBusiness} >
         <div style={pane}>
-          <Card style={cardStyle}>
+          <Card style={oldCardStyle}>
             <h2>Add a Category</h2>
             <form onSubmit={this.categoryAdd}>
               {isCategoryMessage ? this.printMessage(message, hasErrors) : ''}
@@ -219,7 +219,7 @@ export default class BusinessSettings extends Component {
             </form>
           </Card>
 
-          <Card style={cardStyle}>
+          <Card style={oldCardStyle}>
             <h2>Add an Item</h2>
             <form onSubmit={this.addItem}>
             {isCategoryMessage ? '' : this.printMessage(message, hasErrors)}
@@ -279,7 +279,7 @@ export default class BusinessSettings extends Component {
               />
             </CardActions>
           </Card> */}
-          <Card style={cardStyle}>
+          <Card style={oldCardStyle}>
             <h2>Go Back</h2>
             <CardActions>
               <Link to='/user/homepage'>
@@ -294,7 +294,7 @@ export default class BusinessSettings extends Component {
         </div>
 
         <div style={pane}>
-          <Card style={cardStyle}>
+          <Card style={oldCardStyle}>
             <h2>Categories & Items</h2>
             {this.printCategoriesAndItems(categories)}
           </Card>

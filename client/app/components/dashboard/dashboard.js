@@ -9,6 +9,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import WidgetsGrid from '../reactGridLayout/WidgetsGrid';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import Receipt from '../mods/receipt';
+
 import {dashReceipt, receiptStyle, receiptHeader, receiptBody, receiptFooter} from '../../styles/cardStyle';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 

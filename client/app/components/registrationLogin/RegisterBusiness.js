@@ -8,7 +8,7 @@ import LoginPopup from './loginPopUp';
 import axios from 'axios';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
-import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
+import {oldOuterBox, oldCardStyle, flexColumn, column} from '../../styles/cardStyle';
 
 
 class RegisterPopup extends Component {
@@ -78,8 +78,8 @@ class RegisterPopup extends Component {
       return <Redirect to='/business/settings' />
 
     return (
-      <div style={outerBox}>
-        <Card style={cardStyle}>
+      <div style={oldOuterBox}>
+        <Card style={oldCardStyle}>
           <CardHeader
             title="Register Business"
             actAsExpander={false}

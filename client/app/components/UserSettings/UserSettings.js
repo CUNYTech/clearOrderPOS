@@ -10,7 +10,7 @@ import ChangePassword from './ChangePassword'
 import AddBusiness from './AddBusiness';
 import UserHomepage from '../UserHomepage/UserHomepage';
 
-import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
+import {oldOuterBox, oldCardStyle, flexColumn, column} from '../../styles/cardStyle';
 
 class UserSettings extends Component {
 
@@ -74,8 +74,8 @@ class UserSettings extends Component {
         state: { message: 'Your info has been changed! Please log in again' }
       }}/>
     return(
-      <div style={outerBox}>
-        <Card style={cardStyle}>
+      <div style={oldOuterBox}>
+        <Card style={oldCardStyle}>
           <CardHeader
             title="Update User Settings"
             actAsExpander={false}

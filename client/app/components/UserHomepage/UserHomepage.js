@@ -10,9 +10,8 @@ import {Redirect} from 'react-router-dom'
 
 import UserSettings from '../UserSettings/UserSettings';
 import BusinessSettings from '../BusinessSettings/BusinessSettings';
-import Home from '../extra/Home';
 
-import {outerBox, cardStyle, flexColumn, column} from '../../styles/cardStyle';
+import {oldOuterBox, oldCardStyle, flexColumn, column} from '../../styles/cardStyle';
 
 class UserHomepage extends Component {
   constructor() {
@@ -47,8 +46,8 @@ class UserHomepage extends Component {
     if(redirect === true)
       return <Redirect to="/" />
     return (
-      <div style={outerBox} >
-        <Card style={cardStyle}>
+      <div style={oldOuterBox} >
+        <Card style={oldCardStyle}>
           <CardHeader
             title="User Homepage"
             subtitle=""

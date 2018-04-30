@@ -27,6 +27,16 @@ const outerBox = {
   maxHeight: '100%',
 } //widget outerbox
 
+const oldOuterBox ={
+  boxSizing: 'border-box',
+  margin: 'auto',
+  width: '75%',
+  height: 'auto',
+  padding: '20px',
+  overflow: 'auto',
+  maxHeight: '100%',
+}//for nondashboard "widgets"
+
 const cardStyle = {
   position: 'absolute',
   boxSizing: 'border-box',
@@ -40,6 +50,22 @@ const cardStyle = {
   flexDirection: 'column',
   overflow: 'inherit',
 } //widget cardStyle
+
+const oldCardStyle = {
+  boxSizing: 'border-box',
+  border: '5px solid transparent',
+  borderRadius: '15px',
+  height: 'auto',
+  maxHeight: '100%',
+  padding: '20px',
+  textAlign: 'center',
+  backgroundColor: '#C2D0DE',
+  margin: '10px 0px',
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  overflow: 'auto',
+}//for nondashboard "widgets"
 
 const cardContents = {
   position: 'relative',
@@ -55,6 +81,7 @@ const flexColumn = {
 
 const column = {
   textAlign: 'center',
+  margin: 'auto',
 }
 
 const outerBusiness = {
@@ -157,7 +184,9 @@ export {
   aBarStyle,
   dashStyle,
   outerBox,
+  oldOuterBox,
   cardStyle,
+  oldCardStyle,
   cardContents,
   dashReceipt,
   flexColumn,

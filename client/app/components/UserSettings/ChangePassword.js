@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter } from "react-route
 
 import UserSettings from './UserSettings';
 import Axios from 'axios';
-import {outerBox, cardStyle} from '../../styles/cardStyle';
+import {oldOuterBox, oldCardStyle} from '../../styles/cardStyle';
 
 export default class ChangePassword extends Component {
 
@@ -30,7 +30,7 @@ export default class ChangePassword extends Component {
   onSubmit = (event) => {
     const {old_password, new_password, confirm_password} = this.state;
     event.preventDefault();
-    
+
     Axios.post('/user/change_password', {old_password, new_password, confirm_password})
       .then((response) =>{
         console.log(response);
@@ -63,8 +63,8 @@ export default class ChangePassword extends Component {
   render() {
     const {old_password, new_password, confirm_password, hasErrors, message } = this.state;
     return (
-      <div style={outerBox}>
-        <Card style={cardStyle}>
+      <div style={oldOuterBox}>
+        <Card style={oldCardStyle}>
           <CardHeader
             title="Change Password"
             actAsExpander={false}
@@ -104,7 +104,7 @@ export default class ChangePassword extends Component {
               <br /> <br />
             </div>
             <RaisedButton type="submit" label="Confirm"  primary={true}/>
-            
+
             <CardActions>
             <Link to='/user/settings' >
               <RaisedButton label="Cancel" secondary={true} />

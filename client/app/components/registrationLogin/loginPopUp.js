@@ -15,7 +15,7 @@ import EmployeePopup from "./RegisterEmployee";
 import RegisterPopup from "./RegisterBusiness";
 import UserHomepage from "../UserHomepage/UserHomepage";
 
-import {outerBox, cardStyle} from '../../styles/cardStyle';
+import {oldOuterBox, oldCardStyle} from '../../styles/cardStyle';
 
 export class LoginPopup extends Component {
   constructor(props){
@@ -95,11 +95,11 @@ export class LoginPopup extends Component {
       return <Redirect to="/user/homepage" />
 
     return (
-      <div style={outerBox}>
+      <div style={oldOuterBox}>
         <Card
           expanded={this.state.expanded}
           onExpandChange={this.handleExpandChange}
-          style={cardStyle}
+          style={oldCardStyle}
           >
           <CardHeader
             title="Serve+ Login"
