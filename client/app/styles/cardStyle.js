@@ -14,7 +14,7 @@ const dashStyle = {
   backgroundColor: '#C2D0DE',
   margin: '0px',
   width: '100%',
-  overflow: 'auto',
+  overflow: 'hidden',
 }
 
 const outerBox = {
@@ -49,6 +49,7 @@ const cardStyle = {
   display: 'flex',
   flexDirection: 'column',
   overflow: 'inherit',
+  paddingBottom: '50px'
 } //widget cardStyle
 
 const oldCardStyle = {

@@ -127,7 +127,7 @@ export default class BusinessSettings extends Component {
 
   removeItem(event) {
     const item_name = event.currentTarget.name;
-    const item_category = event.currentTarget.getAttribute('category');
+    const item_category = event.currentTarget.value;
 
     this.setState({isCategoryMessage : true})
     axios.post('/business/remove_item', { item_category, item_name })
@@ -153,7 +153,7 @@ export default class BusinessSettings extends Component {
             <div key={index}><h1>{category.category}<IconButton name={category.category} onClick={this.categoryRemove}>
               <ActionClear /></IconButton></h1>{
               category.items.map((item, subIndex) => {
-                return (<div key={subIndex}><p>{item.name}<IconButton name={item.name} category={category.category} onClick={this.removeItem}>
+                return (<div key={subIndex}><p>{item.name +' $' + item.price}<IconButton name={item.name} value={category.category} onClick={this.removeItem}>
                   <ActionClear /></IconButton></p></div>)
               })
             }
