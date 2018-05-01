@@ -12,7 +12,7 @@
   "scripts": {
     "start": "webpack -p --progress --profile --colors && node server",
     "start:dev": "node server",
-	"build" : "webpack --progress -p --config ./config/webpack.dev.js"
+    "build": "webpack --progress -p --config ./config/webpack.dev.js"
   },
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
