@@ -59,23 +59,6 @@ export default class Header extends Component {
 
           </IconMenu>}
         />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/screen" component={Screen} />
-          <Route path="/login" component={LoginPopup} />
-
-          <Route path="/user/register" component={RegisterEmployee} />
-          <Route path="/user/homepage" component={UserHomepage} />
-          <Route path="/user/settings" component={UserSettings} />
-          <Route path="/user/password" component={ChangePassword} />
-          <Route path="/user/add_business" component={AddBusiness} />
-
-          <Route path="/business/register" component={RegisterBusiness} />
-          <Route path="/business/settings" component={BusinessSettings} />
-
-          <Route path="/extra" component={Extra} />
-          <Route path="/dashboard" component={DashBoard} />
-        </Switch>
       </div>
     );
   }

@@ -14,6 +14,11 @@ import { BrowserRouter } from 'react-router-dom';
 // react-grid-layout related imports
 //for <Provider store={store} to be used below.
 
+const config = {
+  google: {
+    families: ['Open Sans Condensed:300,700'],
+  }
+};
 import {colorOne, colorTwo, colorThree, colorFour} from './styles/colorPalette';
 
 //colors

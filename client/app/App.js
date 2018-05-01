@@ -41,9 +41,10 @@ import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
+import AppDrawerTabletView from './components/AppDrawer/AppDrawerTabletView';
+import AppDrawerRoutes from './components/AppDrawer/AppDrawerRoutes';
 
 import Responsive from 'react-responsive';
-
 const Desktop = props => <Responsive {...props} minWidth={992} />;
 const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991}/>;
 const Mobile = props => <Responsive {...props} maxWidth={767} />;
@@ -69,11 +70,12 @@ class App extends Component {
         <Default>
           { (matches) => {
             if(matches) {return <Header />;}
-            else { return null; }
+            else { return <AppDrawerTabletView />;}
           }}
         </Default>
-        <div className="main">
 
+        <div className="main">
+          <AppDrawerRoutes />
         </div>
         <Default>
         { (matches) => {
