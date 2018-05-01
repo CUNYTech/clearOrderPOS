@@ -40,7 +40,7 @@ export default class WidgetsGrid extends Component {
     }
     this.addItem = this.addItem.bind(this);
   }
-  
+
   addItem = (event) => {
     event.preventDefault();
     const item_name = event.currentTarget.value;
@@ -110,15 +110,17 @@ export default class WidgetsGrid extends Component {
          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
          onResize={this.onResize.bind(this)}
        >
-         {/* <div key="burger" data-grid={{x: 0, y: 0, w: 6, h: 3 }}> <BurgerMaker /> </div>
-         <div key="pizza" data-grid={{x: 6, y: 0, w: 6, h: 3 }}> <PizzaMaker /> </div> */}
-         {/* <div key="b" data-grid={{x: 3, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         <div key="burger" data-grid={{x: 0, y: 0, w: 6, h: 3 }}> <BurgerMaker /> </div>
+         <div key="pizza" data-grid={{x: 6, y: 0, w: 6, h: 3 }}> <PizzaMaker /> </div> 
+         {/*
+         <div key="b" data-grid={{x: 3, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
          <div key="c" data-grid={{x: 6, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
          <div key="d" data-grid={{x: 9, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
          <div key="e" data-grid={{x: 0, y: 9, w: 3, h: 1 }}> <FirstWidget /> </div>
          <div key="f" data-grid={{x: 3, y: 9, w: 3, h: 1 }}> <FirstWidget /> </div>
          <div key="g" data-grid={{x: 6, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
-         <div key="h" data-grid={{x: 9, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div> */}
+         <div key="h" data-grid={{x: 9, y: 8, w: 3, h: 1 }}> <FirstWidget /> </div>
+         */}
         {categories.length > 0 ?
           Object.keys(categories).map((category, index) => {
           return(
@@ -131,7 +133,7 @@ export default class WidgetsGrid extends Component {
                     {Object.keys(categories[index].items).map((item, subIndex) => {
                         return(
                           <div key={subIndex}>
-                          <RaisedButton value={categories[index].items[subIndex].name} name={categories[index].items[subIndex].price} 
+                          <RaisedButton value={categories[index].items[subIndex].name} name={categories[index].items[subIndex].price}
                             onClick={this.addItem} style={buttonStyle} primary={true} label={categories[index].items[subIndex].name + ' $' + categories[index].items[subIndex].price} />
                           <Divider style={dividePad} />
                           </div>
@@ -145,7 +147,6 @@ export default class WidgetsGrid extends Component {
           )
         })
       : <div key='dummy'></div>}
-
        </ResponsiveReactGridLayout>
        </div>
      );

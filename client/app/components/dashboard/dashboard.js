@@ -64,7 +64,7 @@ const mods = {
 }
 
 
-export default class dashBoard extends Component {
+export default class DashBoard extends Component {
   constructor(){
     super();
     this.state = {
@@ -276,7 +276,7 @@ export default class dashBoard extends Component {
           </div>
           <div style={receiptFooter}>
             <CardText>
-              
+
             </CardText>
           </div>
           <div>

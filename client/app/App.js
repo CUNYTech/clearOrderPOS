@@ -14,7 +14,7 @@ import Home from './components/Home/Home';
 import Screen from './components/extra/Screen';
 import UserHomepage from './components/UserHomepage/UserHomepage';
 import Extra from './components/extra/Extra.js';
-import dashBoard from './components/dashboard/dashboard';
+import DashBoard from './components/dashboard/dashboard';
 
 //Login Related
 import { LoginPopup, RegisterBusinessButton, RegisterEmployeeButton} from './components/registrationLogin/loginPopUp';
@@ -56,45 +56,7 @@ class App extends Component {
     isAuth : false
   }
 
-  componentDidMount() {
-    // axios.post('/user-auth', { })
-    // .then((response) => {
-    //   this.setState({
-    //     isAuth : true
-    //   })
-    // })
-    // .catch((error) => {
-    //   this.setState({
-    //     isAuth : false
-    //   })
-    // })
-    /*
-      <Mobile>
-        { (matches) => {
-          if(matches) {return null;}
-          else { return <div className="footer"> <Footer /> </div>; }
-        }}
-      </Mobile>
-      <Default>
-        { (matches) => {
-          if(matches) { return
-              <div>
-                <AppBar
-                  showMenuIconButton={false}
-                  title="Serve+"
-                  style={aBarStyle}
-                  iconElementRight={
-                    <Link to="/user/homepage">
-                      <MenuItem primaryText="My Homepage" style={{color: 'white'}} />
-                    </Link>}
-                />
-            </div>;
-          } else { return <h3>NOT Default</h3>; }
-          }
-        }
-      </Default>
-    */
-  }
+  componentDidMount() {}
 
   render() {
 
@@ -111,23 +73,7 @@ class App extends Component {
           }}
         </Default>
         <div className="main">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/screen" component={Screen} />
-            <Route path="/login" component={LoginPopup} />
 
-            <Route path="/user/register" component={RegisterEmployee}/>
-            <Route path="/user/homepage" component={UserHomepage} />
-            <Route path="/user/settings" component={UserSettings} />
-            <Route path="/user/password" component={ChangePassword}/>
-            <Route path="/user/add_business" component={AddBusiness}/>
-
-            <Route path="/business/register" component={RegisterBusiness} />
-            <Route path="/business/settings" component={BusinessSettings} />
-
-            <Route path="/extra" component={Extra} />
-            <Route path="/dashboard" component={dashBoard} />
-          </Switch>
         </div>
         <Default>
         { (matches) => {
