@@ -15,12 +15,7 @@ export default class AppDrawerTabletView extends Component {
           <h1 style={{color: 'white', }}>Serve+</h1>
         </InlineBlock>
         <InlineBlock>
-          <Clock style={{color: 'black', textAlign: 'right'}}/>
-        </InlineBlock>
-        <InlineBlock>
-          <div style={{color:'white', textAlign: 'right'}}>
-            Serve a dick up your ass
-          </div>
+          <Clock />
         </InlineBlock>
       </div>
     );
